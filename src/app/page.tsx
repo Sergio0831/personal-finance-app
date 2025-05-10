@@ -1,3 +1,10 @@
+import { Button } from '@/components/ui/button';
+
 export default function Home() {
-  return <h1 className="text-4xl font-bold">Personal Finance App</h1>;
+  return (
+    <div className="bg-white">
+      <h1 className="text-preset-1">Personal Finance App</h1>
+      <Button variant="secondary">Placeholder</Button>
+    </div>
+  );
 }
