@@ -1,6 +1,6 @@
 'use client';
 
-import { login } from '@/lib/auth/actions';
+import { login } from '@/features/auth/actions';
 import { Button } from './ui/button';
 
 const GitHubSignIn = () => {

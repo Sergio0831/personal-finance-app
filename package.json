@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.config.ts"
+    "codegen": "graphql-codegen --config codegen.config.ts",
+    "codegen:watch": "graphql-codegen --config codegen.config.ts --watch",
+    "postinstall": "prisma generate"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.13.8",
@@ -22,6 +27,7 @@
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "graphql": "^16.11.0",
@@ -32,15 +38,16 @@
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.6",
     "@graphql-codegen/client-preset": "^4.8.1",
+    "@graphql-codegen/schema-ast": "^4.1.0",
     "@graphql-codegen/typescript": "^4.1.6",
     "@graphql-codegen/typescript-operations": "^4.6.1",
     "@graphql-codegen/typescript-react-apollo": "^4.3.2",
-    "@graphql-codegen/typescript-resolvers": "^4.5.1",
     "@parcel/watcher": "^2.5.1",
     "@tailwindcss/postcss": "^4.1.6",
     "@types/node": "^20",

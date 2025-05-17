@@ -1,4 +1,4 @@
-import { auth } from '@/lib/auth/auth';
+import { auth } from '@/features/auth/auth';
 import { PrismaClient } from '@/generated/prisma';
 import { type Session } from '@auth/core/types';
 

@@ -1,0 +1,24 @@
+type Mutation {
+  ok: Boolean
+  registerUser(email: String!, name: String!, password: String!): User
+}
+
+type Post {
+  content: String
+  id: ID
+  published: Boolean
+  title: String
+}
+
+type Query {
+  ok: Boolean
+  posts: [Post!]
+  user: User
+}
+
+type User {
+  email: String
+  id: ID
+  image: String
+  name: String
+}

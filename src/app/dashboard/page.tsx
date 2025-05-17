@@ -1,4 +1,4 @@
-import User from '@/components/User';
+import User from '@/features/user/components/User';
 
 const Dashboard = () => {
   return (

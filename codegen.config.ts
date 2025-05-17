@@ -4,15 +4,13 @@ import { printSchema } from 'graphql';
 
 const config: CodegenConfig = {
   schema: printSchema(schema),
-  documents: ['./src/graphql/queries.ts'],
+  documents: ['./src/graphql/**/*.graphql'],
   generates: {
-    './src/generated/graphql/graphql-types.ts': {
-      plugins: [
-        'typescript',
-        'typescript-resolvers',
-        'typescript-operations',
-        'typescript-react-apollo',
-      ],
+    './src/graphql/generated/output.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
+    },
+    './src/graphql/generated/schema.graphql': {
+      plugins: ['schema-ast'],
     },
   },
   ignoreNoDocuments: true,
