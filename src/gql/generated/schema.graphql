@@ -1,6 +1,5 @@
 type Mutation {
-  ok: Boolean
-  registerUser(email: String!, name: String!, password: String!): User
+  registerUser(input: RegisterUserInput!): User
 }
 
 type Post {
@@ -11,9 +10,14 @@ type Post {
 }
 
 type Query {
-  ok: Boolean
   posts: [Post!]
   user: User
+}
+
+input RegisterUserInput {
+  email: String!
+  name: String!
+  password: String!
 }
 
 type User {

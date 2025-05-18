@@ -4,7 +4,9 @@ export default auth(() => {});
 
 // Optionally, don't invoke Middleware on some paths
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+	matcher: [
+		'/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'
+	]
 };
 
 // import NextAuth from 'next-auth';

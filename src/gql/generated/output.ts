@@ -19,15 +19,12 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  ok?: Maybe<Scalars['Boolean']['output']>;
   registerUser?: Maybe<User>;
 };
 
 
 export type MutationRegisterUserArgs = {
-  email: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+  input: RegisterUserInput;
 };
 
 export type Post = {
@@ -40,9 +37,14 @@ export type Post = {
 
 export type Query = {
   __typename?: 'Query';
-  ok?: Maybe<Scalars['Boolean']['output']>;
   posts?: Maybe<Array<Post>>;
   user?: Maybe<User>;
+};
+
+export type RegisterUserInput = {
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type User = {
@@ -53,59 +55,12 @@ export type User = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
-export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPostsQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'Post', id?: string | null, title?: string | null, content?: string | null, published?: boolean | null }> | null };
-
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: string | null, name?: string | null, email?: string | null, image?: string | null } | null };
 
 
-export const GetPostsDocument = gql`
-    query GetPosts {
-  posts {
-    id
-    title
-    content
-    published
-  }
-}
-    `;
-
-/**
- * __useGetPostsQuery__
- *
- * To run a query within a React component, call `useGetPostsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPostsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetPostsQuery(baseOptions?: Apollo.QueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
-      }
-export function useGetPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
-        }
-export function useGetPostsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
-        }
-export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>;
-export type GetPostsLazyQueryHookResult = ReturnType<typeof useGetPostsLazyQuery>;
-export type GetPostsSuspenseQueryHookResult = ReturnType<typeof useGetPostsSuspenseQuery>;
-export type GetPostsQueryResult = Apollo.QueryResult<GetPostsQuery, GetPostsQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser {
   user {
