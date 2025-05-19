@@ -2,9 +2,9 @@
 	"client": {
 		"service": {
 			"name": "backend",
-			"localSchemaFile": "./src/gql/generated/schema.graphql"
+			"localSchemaFile": "./src/graphql/generated/schema.graphql"
 		},
-		"includes": ["./src/gql/queries/**/*.ts"],
+		"includes": ["./src/graphql/**/*.ts"],
 		"excludes": ["**/node_modules", "**/__tests__"]
 	}
 }

@@ -1,3 +1,4 @@
+import prisma from '../../lib/clients/prisma-client';
 import { builder } from '../builder';
 
 builder.prismaObject('Post', {
@@ -13,8 +14,8 @@ builder.queryType({
 	fields: t => ({
 		posts: t.prismaField({
 			type: ['Post'],
-			resolve: async (query, _parent, _args, ctx) => {
-				return ctx.prisma.post.findMany({ ...query });
+			resolve: async query => {
+				return prisma.post.findMany({ ...query });
 			}
 		})
 	})

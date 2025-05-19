@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { type PropsWithChildren } from 'react';
 
@@ -39,9 +41,8 @@ const AuthWrapper = ({
 				</div>
 				<div>
 					<p className='text-preset-4'>{authMessage}</p>
-					<Link href={backButtonHref} className='w-full'>
+					<Link href={backButtonHref}>
 						<Button
-							asChild
 							variant='link'
 							className='text-preset-4 font-bold'
 						>

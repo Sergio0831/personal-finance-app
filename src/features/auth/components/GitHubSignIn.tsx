@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 const GitHubSignIn = () => {
 	return (
-		<Button variant='primary' size='lg' onClick={() => login()}>
+		<Button variant='link' size='lg' onClick={() => login()}>
 			GitHub
 		</Button>
 	);

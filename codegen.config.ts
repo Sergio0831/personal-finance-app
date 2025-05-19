@@ -1,20 +1,20 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 import { printSchema } from 'graphql';
 
-import { schema } from './src/gql/schema';
+import { schema } from './src/graphql/schema';
 
 const config: CodegenConfig = {
 	schema: printSchema(schema),
-	documents: ['./src/gql/queries/**/*.ts', './src/gql/mutations/**/*.ts'],
+	documents: ['./src/graphql/**/*.ts'],
 	generates: {
-		'./src/gql/generated/output.ts': {
+		'./src/graphql/generated/output.ts': {
 			plugins: [
 				'typescript',
 				'typescript-operations',
 				'typescript-react-apollo'
 			]
 		},
-		'./src/gql/generated/schema.graphql': {
+		'./src/graphql/generated/schema.graphql': {
 			plugins: ['schema-ast']
 		}
 	},

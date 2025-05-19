@@ -2,12 +2,10 @@
 
 @plugin 'tailwindcss-animate';
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
 	--white: hsl(0, 0%, 100%);
-	--beige-100: hsl(23, 6%, 57%);
-	--beige-500: hsl(30, 36%, 96%);
+	--beige-100: hsl(30, 36%, 96%);
+	--beige-500: hsl(23, 6%, 57%);
 	--grey-100: hsl(0, 0%, 95%);
 	--grey-300: hsl(0, 0%, 70%);
 	--grey-500: hsl(0, 0%, 41%);
@@ -36,16 +34,20 @@
 	--card-foreground: var(--color-grey-900);
 
 	--input: var(--beige-500);
+
+	--radius: 0.25rem;
 }
 
 @theme inline {
 	--font-primary: var(--font-public-sans);
 
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
+	--color-gray-900: var(--grey-900);
+	--color-gray-500: var(--grey-500);
 
-	--color-card: var(--card);
-	--color-card-foreground: var(--card-foreground);
+	--color-background: var(--color-beige-100);
+	--color-foreground: var(--color-gray-900);
+
+	--color-card: var(--color-white);
 
 	--color-popover: hsl(var(--popover));
 	--color-popover-foreground: hsl(var(--popover-foreground));
