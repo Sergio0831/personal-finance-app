@@ -1,3 +1,4 @@
+import { GraphQLError } from 'graphql';
 import { z } from 'zod';
 
 import { getUserByEmail } from '../../features/auth/api';
@@ -63,7 +64,7 @@ builder.mutationType({
 				const existingUser = await getUserByEmail(email);
 
 				if (existingUser) {
-					throw new Error('User already exists');
+					throw new GraphQLError('User already exists');
 				}
 
 				const hashedPassword = await hashPassword(password);

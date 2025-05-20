@@ -1,12 +1,12 @@
 'use client';
 
-import { login } from '@/features/auth/actions';
-
 import { Button } from '@/components/ui/button';
+
+import { socialLogin } from '../actions';
 
 const GitHubSignIn = () => {
 	return (
-		<Button variant='link' size='lg' onClick={() => login()}>
+		<Button variant='link' size='lg' onClick={() => socialLogin()}>
 			GitHub
 		</Button>
 	);

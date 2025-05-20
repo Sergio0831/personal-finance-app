@@ -43,6 +43,7 @@
 
 	--color-gray-900: var(--grey-900);
 	--color-gray-500: var(--grey-500);
+	--color-red: var(--red);
 
 	--color-background: var(--color-beige-100);
 	--color-foreground: var(--color-gray-900);
@@ -64,7 +65,7 @@
 	--color-accent: hsl(var(--accent));
 	--color-accent-foreground: hsl(var(--accent-foreground));
 
-	--color-destructive: var(--destructive);
+	--color-destructive: var(--red);
 	--color-destructive-foreground: var(--destructive-foreground);
 
 	--color-border: hsl(var(--border));

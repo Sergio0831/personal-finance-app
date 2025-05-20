@@ -1,12 +1,7 @@
-import GitHubSignIn from '@/features/auth/components/GitHubSignIn';
+import LoginForm from '@/features/auth/components/LoginForm';
 
 const Login = () => {
-	return (
-		<div className=''>
-			<h1>Login Page</h1>;
-			<GitHubSignIn />
-		</div>
-	);
+	return <LoginForm />;
 };
 
 export default Login;

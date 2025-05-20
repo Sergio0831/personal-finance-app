@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -14,72 +15,40 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-import { useRegisterUserMutation } from '@/graphql/generated/output';
-
-import { RegisterSchema, RegisterSchemaType } from '../schemas';
+import { login } from '../actions';
+import { LoginSchema, LoginSchemaType } from '../schemas';
 
 import AuthWrapper from './AuthWrapper';
 
-const RegisterForm = () => {
-	const form = useForm<RegisterSchemaType>({
-		resolver: zodResolver(RegisterSchema),
+const LoginForm = () => {
+	const [isPending, setTransition] = useTransition();
+
+	const form = useForm<LoginSchemaType>({
+		resolver: zodResolver(LoginSchema),
 		defaultValues: {
-			name: '',
 			email: '',
 			password: ''
 		}
 	});
 
-	const [register, { loading }] = useRegisterUserMutation({
-		onCompleted: () => {
-			console.log('Registration successful');
-		},
-		onError: error => {
-			console.log('Registration failed', error.message);
-			form.setError('email', {
-				message: error.message
+	const onSubmit = (values: LoginSchemaType) => {
+		setTransition(() => {
+			login(values).then(data => {
+				form.setError('email', { message: data?.error });
+				if (!data?.error) form.reset();
 			});
-		}
-	});
-
-	const onSubmit = (data: RegisterSchemaType) => {
-		register({
-			variables: {
-				input: data
-			}
 		});
 	};
 
 	return (
 		<AuthWrapper
-			authMessage='Already have an account?'
-			backButtonLabel='Login'
-			backButtonHref='/login'
-			heading='Sign Up'
+			authMessage='Need to create an account?'
+			backButtonLabel='Sign Up'
+			backButtonHref='/register'
+			heading='Login'
 		>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<FormField
-						control={form.control}
-						name='name'
-						render={({ field }) => (
-							<FormItem>
-								<div>
-									<FormLabel htmlFor={field.name}>
-										Name
-									</FormLabel>
-									<FormMessage />
-								</div>
-								<FormControl>
-									<Input
-										disabled={loading}
-										aria-label={field.name}
-										{...field}
-									/>
-								</FormControl>
-							</FormItem>
-						)}
-					/>
 					<FormField
 						control={form.control}
 						name='email'
@@ -93,10 +62,10 @@ const RegisterForm = () => {
 								</div>
 								<FormControl>
 									<Input
+										disabled={isPending}
 										aria-label={field.name}
 										id={field.name}
 										error={form.formState.errors.email}
-										disabled={loading}
 										{...field}
 									/>
 								</FormControl>
@@ -112,13 +81,15 @@ const RegisterForm = () => {
 									<FormLabel htmlFor={field.name}>
 										Create Password
 									</FormLabel>
-									<FormMessage />
+									<FormMessage id={field.name} />
 								</div>
 								<FormControl>
 									<Input
 										type='password'
-										disabled={loading}
+										disabled={isPending}
 										aria-label={field.name}
+										id={field.name}
+										error={form.formState.errors.password}
 										{...field}
 									/>
 								</FormControl>
@@ -126,7 +97,7 @@ const RegisterForm = () => {
 						)}
 					/>
 					<Button className='w-full' variant='primary' size='lg'>
-						Create Account
+						Login
 					</Button>
 				</form>
 			</Form>
@@ -134,4 +105,4 @@ const RegisterForm = () => {
 	);
 };
 
-export default RegisterForm;
+export default LoginForm;
