@@ -53,13 +53,10 @@ const LoginForm = () => {
 						control={form.control}
 						name='email'
 						render={({ field }) => (
-							<FormItem>
-								<div>
-									<FormLabel htmlFor={field.name}>
-										Email
-									</FormLabel>
-									<FormMessage id={field.name} />
-								</div>
+							<FormItem className='mb-4'>
+								<FormLabel htmlFor={field.name}>
+									Email
+								</FormLabel>
 								<FormControl>
 									<Input
 										disabled={isPending}
@@ -69,6 +66,7 @@ const LoginForm = () => {
 										{...field}
 									/>
 								</FormControl>
+								<FormMessage id={field.name} />
 							</FormItem>
 						)}
 					/>
@@ -76,13 +74,10 @@ const LoginForm = () => {
 						control={form.control}
 						name='password'
 						render={({ field }) => (
-							<FormItem>
-								<div>
-									<FormLabel htmlFor={field.name}>
-										Create Password
-									</FormLabel>
-									<FormMessage id={field.name} />
-								</div>
+							<FormItem className='mb-8'>
+								<FormLabel htmlFor={field.name}>
+									Create Password
+								</FormLabel>
 								<FormControl>
 									<Input
 										type='password'
@@ -93,12 +88,11 @@ const LoginForm = () => {
 										{...field}
 									/>
 								</FormControl>
+								<FormMessage id={field.name} />
 							</FormItem>
 						)}
 					/>
-					<Button className='w-full' variant='primary' size='lg'>
-						Login
-					</Button>
+					<Button className='w-full'>Login</Button>
 				</form>
 			</Form>
 		</AuthWrapper>

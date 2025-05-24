@@ -1,0 +1,12 @@
+client:
+    service:
+        name: backend
+        localSchemaFile: ./src/graphql/generated/schema.graphql
+        skipSSLValidation: true
+    includes:
+        - ./src/graphql/queries/*.ts
+        - ./src/graphql/mutations/*.ts
+    excludes:
+        - '**/node_modules'
+        - '**/__tests__'
+        - ./src/graphql/generated/output.ts

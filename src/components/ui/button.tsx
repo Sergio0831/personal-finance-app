@@ -5,32 +5,30 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-	'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-bold ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer',
+	'inline-flex items-center justify-center gap-2 whitespace-nowrap text-preset-4 font-bold transition-colors ring-offset-card  focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer',
 	{
 		variants: {
 			variant: {
-				default:
-					'bg-primary text-primary-foreground hover:bg-primary/90',
-				primary: 'bg-foreground text-white hover:bg-gray-500',
-				destructive:
-					'bg-destructive text-destructive-foreground hover:bg-red-500',
-				outline:
-					'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+				primary:
+					'bg-foreground text-white hover:bg-gray-500 focus-visible:bg-gray-500',
 				secondary:
-					'bg-background text-foreground border border-transparent hover:bg-transparent hover:border-foreground',
-				ghost: 'hover:bg-accent hover:text-accent-foreground',
-				link: 'text-primary underline-offset-4 hover:underline'
+					'bg-background text-foreground border border-transparent hover:bg-transparent hover:border-foreground focus-visible:bg-transparent focus-visible:border-foreground',
+				outline:
+					'bg-transparent border border-foreground hover:bg-background focus-visible:bg-background hover:border-transparent focus-visible:border-transparent',
+				destructive:
+					'bg-destructive text-destructive-foreground hover:bg-red-400 focus-visible:bg-red-400',
+				link: 'text-foreground underline-offset-4 underline hover:text-muted focus-visible:text-muted'
 			},
 			size: {
-				default: 'p-4',
 				sm: 'h-9 rounded-md px-3',
 				lg: 'h-11 rounded-md px-8',
-				icon: 'h-10 w-10'
+				icon: 'h-10 w-10',
+				link: ''
 			}
 		},
 		defaultVariants: {
-			variant: 'default',
-			size: 'default'
+			variant: 'primary',
+			size: 'lg'
 		}
 	}
 );

@@ -105,7 +105,11 @@ const FormLabel = forwardRef<
 	return (
 		<LabelPrimitive.Label
 			ref={ref}
-			className={cn(error && 'text-destructive', className)}
+			className={cn(
+				error ? 'text-destructive' : 'text-muted',
+				'block text-sm font-bold',
+				className
+			)}
 			htmlFor={formItemId}
 			{...props}
 		/>
@@ -136,23 +140,6 @@ const FormControl = forwardRef<
 });
 FormControl.displayName = 'FormControl';
 
-const FormDescription = forwardRef<
-	HTMLParagraphElement,
-	HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => {
-	const { formDescriptionId } = useFormField();
-
-	return (
-		<p
-			ref={ref}
-			id={formDescriptionId}
-			className={cn('text-muted-foreground text-sm', className)}
-			{...props}
-		/>
-	);
-});
-FormDescription.displayName = 'FormDescription';
-
 const FormMessage = forwardRef<
 	HTMLParagraphElement,
 	HTMLAttributes<HTMLParagraphElement>
@@ -168,7 +155,7 @@ const FormMessage = forwardRef<
 		<p
 			ref={ref}
 			id={formMessageId}
-			className={cn('text-destructive text-sm font-medium', className)}
+			className={cn('text-destructive text-right text-sm', className)}
 			{...props}
 		>
 			{body}
@@ -183,7 +170,6 @@ export {
 	FormItem,
 	FormLabel,
 	FormControl,
-	FormDescription,
 	FormMessage,
 	FormField
 };

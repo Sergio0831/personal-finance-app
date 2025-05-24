@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { type PropsWithChildren } from 'react';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
 	Card,
 	CardContent,
@@ -31,23 +31,26 @@ const AuthWrapper = ({
 	return (
 		<Card className='max-w-[26.375rem]'>
 			<CardHeader>
-				<CardTitle>{heading}</CardTitle>
+				<CardTitle className='text-preset-1'>{heading}</CardTitle>
 			</CardHeader>
 			<CardContent>{children}</CardContent>
-			<CardFooter>
-				<div>
-					<p>Or log in with:</p>
+			<CardFooter className='grid'>
+				<div className='my-8 space-y-4'>
+					<p className='text-muted text-center text-sm'>
+						Or log in with:
+					</p>
 					<GitHubSignIn />
 				</div>
-				<div>
-					<p className='text-preset-4'>{authMessage}</p>
-					<Link href={backButtonHref}>
-						<Button
-							variant='link'
-							className='text-preset-4 font-bold'
-						>
-							{backButtonLabel}
-						</Button>
+				<div className='flex items-center justify-center gap-2'>
+					<p className='text-preset-4 text-muted'>{authMessage}</p>
+					<Link
+						href={backButtonHref}
+						className={buttonVariants({
+							variant: 'link',
+							size: 'link'
+						})}
+					>
+						{backButtonLabel}
 					</Link>
 				</div>
 			</CardFooter>

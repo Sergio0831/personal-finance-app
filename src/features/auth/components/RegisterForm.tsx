@@ -63,13 +63,8 @@ const RegisterForm = () => {
 						control={form.control}
 						name='name'
 						render={({ field }) => (
-							<FormItem>
-								<div>
-									<FormLabel htmlFor={field.name}>
-										Name
-									</FormLabel>
-									<FormMessage />
-								</div>
+							<FormItem className='mb-4'>
+								<FormLabel htmlFor={field.name}>Name</FormLabel>
 								<FormControl>
 									<Input
 										disabled={loading}
@@ -77,6 +72,7 @@ const RegisterForm = () => {
 										{...field}
 									/>
 								</FormControl>
+								<FormMessage />
 							</FormItem>
 						)}
 					/>
@@ -84,13 +80,10 @@ const RegisterForm = () => {
 						control={form.control}
 						name='email'
 						render={({ field }) => (
-							<FormItem>
-								<div>
-									<FormLabel htmlFor={field.name}>
-										Email
-									</FormLabel>
-									<FormMessage id={field.name} />
-								</div>
+							<FormItem className='mb-4'>
+								<FormLabel htmlFor={field.name}>
+									Email
+								</FormLabel>
 								<FormControl>
 									<Input
 										aria-label={field.name}
@@ -100,6 +93,7 @@ const RegisterForm = () => {
 										{...field}
 									/>
 								</FormControl>
+								<FormMessage id={field.name} />
 							</FormItem>
 						)}
 					/>
@@ -107,21 +101,20 @@ const RegisterForm = () => {
 						control={form.control}
 						name='password'
 						render={({ field }) => (
-							<FormItem>
-								<div>
-									<FormLabel htmlFor={field.name}>
-										Create Password
-									</FormLabel>
-									<FormMessage />
-								</div>
+							<FormItem className='mb-8'>
+								<FormLabel htmlFor={field.name}>
+									Create Password
+								</FormLabel>
 								<FormControl>
 									<Input
 										type='password'
 										disabled={loading}
 										aria-label={field.name}
+										id={field.name}
 										{...field}
 									/>
 								</FormControl>
+								<FormMessage />
 							</FormItem>
 						)}
 					/>
