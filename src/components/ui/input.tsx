@@ -17,7 +17,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 					error
 						? 'border-destructive'
 						: 'border-input hover:border-muted focus-visible:border-input-active',
-					'text-preset-4 bg-card flex h-11 w-full rounded-md border px-3 py-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
+					'text-preset-4 bg-card flex h-11 w-full rounded-md border px-5 py-3 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
 					className
 				)}
 				ref={ref}

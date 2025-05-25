@@ -17,7 +17,8 @@ const buttonVariants = cva(
 					'bg-transparent border border-foreground hover:bg-background focus-visible:bg-background hover:border-transparent focus-visible:border-transparent',
 				destructive:
 					'bg-destructive text-destructive-foreground hover:bg-red-400 focus-visible:bg-red-400',
-				link: 'text-foreground underline-offset-4 underline hover:text-muted focus-visible:text-muted'
+				link: 'text-foreground underline-offset-4 underline hover:text-muted focus-visible:text-muted',
+				ghost: 'bg-transparent text-foreground hover:text-muted focus-visible:text-muted'
 			},
 			size: {
 				sm: 'h-9 rounded-md px-3',

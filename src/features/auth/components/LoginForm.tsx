@@ -5,20 +5,14 @@ import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 
 import { login } from '../actions';
 import { LoginSchema, LoginSchemaType } from '../schemas';
 
 import AuthWrapper from './AuthWrapper';
+import InputWithLabel from './InputWithLabel';
+import PasswordInputWithLabel from './PasswordInputWithLabel';
 
 const LoginForm = () => {
 	const [isPending, setTransition] = useTransition();
@@ -49,48 +43,18 @@ const LoginForm = () => {
 		>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<FormField
-						control={form.control}
-						name='email'
-						render={({ field }) => (
-							<FormItem className='mb-4'>
-								<FormLabel htmlFor={field.name}>
-									Email
-								</FormLabel>
-								<FormControl>
-									<Input
-										disabled={isPending}
-										aria-label={field.name}
-										id={field.name}
-										error={form.formState.errors.email}
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage id={field.name} />
-							</FormItem>
-						)}
+					<InputWithLabel<LoginSchemaType>
+						label='Email'
+						nameInSchema='email'
+						disabled={isPending}
+						error={form.formState.errors.email}
+						type='email'
 					/>
-					<FormField
-						control={form.control}
-						name='password'
-						render={({ field }) => (
-							<FormItem className='mb-8'>
-								<FormLabel htmlFor={field.name}>
-									Create Password
-								</FormLabel>
-								<FormControl>
-									<Input
-										type='password'
-										disabled={isPending}
-										aria-label={field.name}
-										id={field.name}
-										error={form.formState.errors.password}
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage id={field.name} />
-							</FormItem>
-						)}
+					<PasswordInputWithLabel<LoginSchemaType>
+						label='Password'
+						nameInSchema='password'
+						disabled={isPending}
+						error={form.formState.errors.email}
 					/>
 					<Button className='w-full'>Login</Button>
 				</form>

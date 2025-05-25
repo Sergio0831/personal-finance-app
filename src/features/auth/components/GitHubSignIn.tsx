@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 import { socialLogin } from '../actions';
 
-import GitHubIcon from '@/assets/icons/icon-github.svg';
+import { GitHubIcon } from '@/assets/icons';
 
 const GitHubSignIn = () => {
 	return (

@@ -116,6 +116,6 @@
 
 @layer base {
 	body {
-		@apply text-foreground bg-background font-primary;
+		@apply text-foreground bg-background font-primary h-dvh;
 	}
 }

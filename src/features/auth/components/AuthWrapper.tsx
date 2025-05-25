@@ -29,13 +29,13 @@ const AuthWrapper = ({
 	authMessage
 }: PropsWithChildren<AuthWrapperProps>) => {
 	return (
-		<Card className='max-w-[26.375rem]'>
+		<Card className='w-full max-w-[35rem]'>
 			<CardHeader>
 				<CardTitle className='text-preset-1'>{heading}</CardTitle>
 			</CardHeader>
 			<CardContent>{children}</CardContent>
 			<CardFooter className='grid'>
-				<div className='my-8 space-y-4'>
+				<div className='my-6 space-y-4'>
 					<p className='text-muted text-center text-sm'>
 						Or log in with:
 					</p>

@@ -4,21 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 
 import { useRegisterUserMutation } from '@/graphql/generated/output';
 
 import { RegisterSchema, RegisterSchemaType } from '../schemas';
 
 import AuthWrapper from './AuthWrapper';
+import InputWithLabel from './InputWithLabel';
+import PasswordInputWithLabel from './PasswordInputWithLabel';
 
 const RegisterForm = () => {
 	const form = useForm<RegisterSchemaType>({
@@ -35,7 +29,6 @@ const RegisterForm = () => {
 			console.log('Registration successful');
 		},
 		onError: error => {
-			console.log('Registration failed', error.message);
 			form.setError('email', {
 				message: error.message
 			});
@@ -59,64 +52,26 @@ const RegisterForm = () => {
 		>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<FormField
-						control={form.control}
-						name='name'
-						render={({ field }) => (
-							<FormItem className='mb-4'>
-								<FormLabel htmlFor={field.name}>Name</FormLabel>
-								<FormControl>
-									<Input
-										disabled={loading}
-										aria-label={field.name}
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
+					<InputWithLabel<RegisterSchemaType>
+						label='Name'
+						nameInSchema='name'
+						disabled={loading}
+						error={form.formState.errors.email}
+						type='text'
 					/>
-					<FormField
-						control={form.control}
-						name='email'
-						render={({ field }) => (
-							<FormItem className='mb-4'>
-								<FormLabel htmlFor={field.name}>
-									Email
-								</FormLabel>
-								<FormControl>
-									<Input
-										aria-label={field.name}
-										id={field.name}
-										error={form.formState.errors.email}
-										disabled={loading}
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage id={field.name} />
-							</FormItem>
-						)}
+					<InputWithLabel<RegisterSchemaType>
+						label='Email'
+						nameInSchema='email'
+						disabled={loading}
+						error={form.formState.errors.email}
+						type='email'
 					/>
-					<FormField
-						control={form.control}
-						name='password'
-						render={({ field }) => (
-							<FormItem className='mb-8'>
-								<FormLabel htmlFor={field.name}>
-									Create Password
-								</FormLabel>
-								<FormControl>
-									<Input
-										type='password'
-										disabled={loading}
-										aria-label={field.name}
-										id={field.name}
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
+					<PasswordInputWithLabel<RegisterSchemaType>
+						label='Create Password'
+						nameInSchema='password'
+						disabled={loading}
+						error={form.formState.errors.email}
+						createPassword
 					/>
 					<Button className='w-full' variant='primary' size='lg'>
 						Create Account

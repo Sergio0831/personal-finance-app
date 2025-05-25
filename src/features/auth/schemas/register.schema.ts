@@ -9,7 +9,7 @@ export const RegisterSchema = z.object({
 	password: z
 		.string()
 		.min(1, 'Password is required')
-		.min(6, 'Minimum 6 characters riequred')
+		.min(6, 'Passwords must be at least 6 characters')
 });
 
 export type RegisterSchemaType = z.infer<typeof RegisterSchema>;
