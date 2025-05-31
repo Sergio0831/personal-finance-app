@@ -4,3 +4,4 @@ export * from './RegisterForm';
 export * from './LoginForm';
 export * from './InputWithLabel';
 export * from './PasswordInputWithLabel';
+export * from './AuthIllustration';

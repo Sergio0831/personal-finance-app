@@ -1,13 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 
-import { LogoLarge } from '@/assets/icons';
+import Logo from '@/components/Logo';
 
 const AuthIllustration = () => {
 	return (
-		<div className='relative grid h-full content-between p-10'>
-			<LogoLarge className='z-10 h-[1.375rem] w-[7.625rem]' />
+		<div className='bg-foreground relative grid justify-center overflow-hidden rounded-b-md px-10 py-6 md:h-full md:content-between md:rounded-md md:p-10'>
+			<Logo className='z-10' />
 			<Image
-				className='rounded-xl'
+				className='hidden md:block'
 				src='/images/illustration.png'
 				fill={true}
 				alt='Login and Signup Illustration'
@@ -16,7 +18,7 @@ const AuthIllustration = () => {
 				placeholder='blur'
 				blurDataURL='/images/illustration.png'
 			/>
-			<div className='z-10 text-white'>
+			<div className='z-10 hidden text-white md:block'>
 				<h1 className='text-preset-1 mb-6'>
 					Keep track of your money and save for your future
 				</h1>
