@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import Logo from '@/components/Logo';
+import LogoMobile from '@/components/LogoMobile';
 import {
 	Sidebar,
 	SidebarContent,
@@ -18,7 +19,6 @@ import {
 } from '@/components/ui/sidebar';
 
 import {
-	MinimizeMenu,
 	NavBills,
 	NavBudgets,
 	NavOverview,
@@ -58,20 +58,26 @@ const DashboardSidebar = () => {
 	const path = usePathname();
 
 	return (
-		<Sidebar>
-			<SidebarHeader className='mb-6 py-10 pl-8'>
-				<Logo />
+		<Sidebar collapsible='icon'>
+			<SidebarHeader className='relative mb-6 hidden py-10 pl-8'>
+				<LogoMobile className='absolute opacity-0 transition-opacity group-data-[collapsible=icon]:opacity-100' />
+				<Logo className='absolute opacity-100 transition-opacity group-data-[collapsible=icon]:opacity-0' />
 			</SidebarHeader>
-			<SidebarContent className='mb-6'>
+			<SidebarContent className='md:mb-6'>
 				<SidebarGroup>
 					<SidebarGroupContent>
-						<SidebarMenu>
+						<SidebarMenu className=''>
 							{sidebarNav.map(item => (
 								<SidebarMenuItem key={item.href}>
-									<SidebarMenuButton asChild isActive={path === item.href}>
-										<Link href={item.href}>
+									<SidebarMenuButton
+										className='transition-colors'
+										asChild
+										isActive={path === item.href}
+										tooltip={item.label}
+									>
+										<Link href={item.href} className=''>
 											<item.icon />
-											<span>{item.label}</span>
+											<span className='hidden sm:block'>{item.label}</span>
 										</Link>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
@@ -80,11 +86,12 @@ const DashboardSidebar = () => {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
-			<SidebarFooter>
-				<SidebarTrigger>
-					<MinimizeMenu />
-					<span>Minimize Menu</span>
-				</SidebarTrigger>
+			<SidebarFooter className='hidden pb-6'>
+				<SidebarMenu>
+					<SidebarMenuItem>
+						<SidebarTrigger />
+					</SidebarMenuItem>
+				</SidebarMenu>
 			</SidebarFooter>
 		</Sidebar>
 	);

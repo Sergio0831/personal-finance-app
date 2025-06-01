@@ -9,6 +9,7 @@ import NavTransactions from './icon-nav-transactions.svg';
 import ShowPassword from './icon-show-password.svg';
 import Illustration from './illustration-authentication.svg';
 import LogoLarge from './logo-large.svg';
+import LogoSmall from './logo-small.svg';
 
 export {
 	GitHubIcon,
@@ -16,6 +17,7 @@ export {
 	ShowPassword,
 	Illustration,
 	LogoLarge,
+	LogoSmall,
 	NavOverview,
 	NavTransactions,
 	NavBudgets,
