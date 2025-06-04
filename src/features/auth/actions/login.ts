@@ -2,8 +2,8 @@
 
 import { AuthError } from 'next-auth';
 
+import { signIn } from '../../../auth';
 import { getUserByEmail } from '../api';
-import { signIn } from '../auth';
 import { LoginSchema, LoginSchemaType } from '../schemas';
 
 export const login = async (values: LoginSchemaType) => {

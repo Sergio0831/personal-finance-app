@@ -4,8 +4,8 @@ import GitHub from 'next-auth/providers/github';
 
 import { LoginSchema } from '@/features/auth/schemas';
 
-import { getUserByEmail } from './api';
-import { verifyPassword } from './utils';
+import { getUserByEmail } from './features/auth/api';
+import { verifyPassword } from './features/auth/utils';
 
 export const authConfig = {
 	providers: [
@@ -24,10 +24,7 @@ export const authConfig = {
 
 					if (!user || !user.password) return null;
 
-					const passwordMatch = await verifyPassword(
-						password,
-						user.password
-					);
+					const passwordMatch = await verifyPassword(password, user.password);
 
 					if (passwordMatch) return user;
 				}

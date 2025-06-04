@@ -1,4 +1,4 @@
-import { handlers } from '@/features/auth/auth';
+import { handlers } from '../../../../auth';
 
 // Referring to the auth.ts file
 export const { GET, POST } = handlers;

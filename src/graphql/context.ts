@@ -1,6 +1,6 @@
 import { type Session } from '@auth/core/types';
 
-import { auth } from '@/features/auth/auth';
+import { auth } from '../auth';
 
 export type GraphQLContext = {
 	session: Session | null;
