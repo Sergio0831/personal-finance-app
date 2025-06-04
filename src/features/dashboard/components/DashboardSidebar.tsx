@@ -86,7 +86,7 @@ const DashboardSidebar = () => {
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
-			<SidebarFooter className='hidden pb-6'>
+			<SidebarFooter className='hidden pb-20'>
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarTrigger />
