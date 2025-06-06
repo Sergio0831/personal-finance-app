@@ -29,8 +29,9 @@ const RegisterForm = () => {
 			console.log('Registration successful');
 		},
 		onError: error => {
+			console.error('GraphQL mutation error:', error);
 			form.setError('email', {
-				message: error.message
+				message: error.message || 'Unexpected error during registration'
 			});
 		}
 	});
