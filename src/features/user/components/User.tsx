@@ -1,17 +1,18 @@
 'use client';
 
-import Image from 'next/image';
+import { signOut } from 'next-auth/react';
 
-import { logout } from '@/features/auth/actions';
-
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 
 import { useGetUserQuery } from '@/graphql/generated/output';
 
+import { GeneratedAvatar } from './generated-avatar';
+
 const User = () => {
 	const { data, loading } = useGetUserQuery();
 
-	if (loading) {
+	if (loading || !data?.user) {
 		return <div>Loading...</div>;
 	}
 
@@ -21,18 +22,14 @@ const User = () => {
 			<p>ID: {data?.user?.id}</p>
 			<p>Name: {data?.user?.name}</p>
 			<p>Email: {data?.user?.email}</p>
-			{data?.user?.image ? (
-				<Image
-					src={data?.user?.image}
-					width={60}
-					height={60}
-					className='rounded-full'
-					alt='User Image'
-				/>
+			{data.user.image ? (
+				<Avatar>
+					<AvatarImage src={data.user.image} alt='User Avatar' />
+				</Avatar>
 			) : (
-				<div>No image available</div>
+				<GeneratedAvatar seed={data.user.name || 'user'} variant='initials' />
 			)}
-			<Button onClick={logout}>Log Out</Button>
+			<Button onClick={() => signOut()}>Log Out</Button>
 		</div>
 	);
 };

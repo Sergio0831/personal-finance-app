@@ -20,6 +20,13 @@ export const authRoutes: string[] = ['/login', '/register'];
 export const apiAuthPrefix: string = '/api/auth';
 
 /**
+ * The prefix for GraphQL routes
+ * Prefix used for API purposes
+ * @type {string}
+ */
+export const apiPrefix: string = '/api/graphql';
+
+/**
  * Default redirect path after logging in
  * @type {string}
  */

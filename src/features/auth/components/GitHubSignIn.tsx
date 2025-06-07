@@ -8,11 +8,7 @@ import { GitHubIcon } from '@/assets/icons';
 
 const GitHubSignIn = () => {
 	return (
-		<Button
-			variant='outline'
-			className='w-full'
-			onClick={() => socialLogin()}
-		>
+		<Button variant='outline' className='w-full' onClick={() => socialLogin()}>
 			<GitHubIcon />
 			GitHub
 		</Button>

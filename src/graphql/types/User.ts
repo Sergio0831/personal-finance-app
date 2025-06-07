@@ -7,6 +7,8 @@ import { hashPassword } from '../../features/auth/utils/hashPassword';
 import prisma from '../../lib/clients/prisma-client';
 import { builder } from '../builder';
 
+import { budgets, pots, transactions } from '@/data';
+
 // Input type for registering a new user
 const RegisterUserInput = builder.inputType('RegisterUserInput', {
 	fields: t => ({
@@ -74,7 +76,19 @@ builder.mutationType({
 					data: {
 						name,
 						email,
-						password: hashedPassword
+						password: hashedPassword,
+						balance: 4836,
+						income: 3814.25,
+						expenses: 1700.5,
+						budgets: {
+							create: budgets
+						},
+						pots: {
+							create: pots
+						},
+						transactions: {
+							create: transactions
+						}
 					}
 				});
 				return user;

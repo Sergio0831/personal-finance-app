@@ -149,19 +149,50 @@ exports.Prisma.SessionScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.VerificationTokenScalarFieldEnum = {
+  identifier: 'identifier',
+  token: 'token',
+  expires: 'expires'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',
-  password: 'password'
+  password: 'password',
+  balance: 'balance',
+  income: 'income',
+  expenses: 'expenses'
 };
 
-exports.Prisma.VerificationTokenScalarFieldEnum = {
-  identifier: 'identifier',
-  token: 'token',
-  expires: 'expires'
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  avatar: 'avatar',
+  name: 'name',
+  category: 'category',
+  date: 'date',
+  amount: 'amount',
+  recurring: 'recurring',
+  userId: 'userId'
+};
+
+exports.Prisma.BudgetScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  maximum: 'maximum',
+  theme: 'theme',
+  userId: 'userId'
+};
+
+exports.Prisma.PotScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  target: 'target',
+  total: 'total',
+  theme: 'theme',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -178,14 +209,28 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Category = exports.$Enums.Category = {
+  General: 'General',
+  DiningOut: 'DiningOut',
+  Groceries: 'Groceries',
+  Entertainment: 'Entertainment',
+  Transportation: 'Transportation',
+  Shopping: 'Shopping',
+  Lifestyle: 'Lifestyle',
+  PersonalCare: 'PersonalCare',
+  Education: 'Education',
+  Bills: 'Bills'
+};
 
 exports.Prisma.ModelName = {
   Post: 'Post',
   Account: 'Account',
   Session: 'Session',
+  VerificationToken: 'VerificationToken',
   User: 'User',
-  VerificationToken: 'VerificationToken'
+  Transaction: 'Transaction',
+  Budget: 'Budget',
+  Pot: 'Pot'
 };
 
 /**
