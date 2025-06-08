@@ -13,7 +13,7 @@ type GeneratedAvatarProps = {
 	variant?: 'botttsNeutral' | 'initials';
 };
 
-export const GeneratedAvatar = ({
+const GeneratedAvatar = ({
 	className,
 	seed,
 	variant
@@ -39,3 +39,5 @@ export const GeneratedAvatar = ({
 		</Avatar>
 	);
 };
+
+export default GeneratedAvatar;

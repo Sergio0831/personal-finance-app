@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
-import { login } from '../actions';
+import { login } from '../actions/login';
 import { LoginSchema, LoginSchemaType } from '../schemas';
 
 import AuthWrapper from './AuthWrapper';

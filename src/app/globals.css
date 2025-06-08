@@ -58,8 +58,8 @@
 	--sidebar-border: var(--grey-900);
 	--sidebar-ring: var(--green);
 
-	--popover: var(--grey-300);
-	--popover-foreground: var(--grey-900);
+	--popover: var(--grey-900);
+	--popover-foreground: var(--white);
 
 	--radius: 0.25rem;
 }

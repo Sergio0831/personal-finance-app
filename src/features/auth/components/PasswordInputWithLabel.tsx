@@ -1,3 +1,5 @@
+'use client';
+
 import { type InputHTMLAttributes, useState } from 'react';
 import { type FieldError, useFormContext } from 'react-hook-form';
 
@@ -61,20 +63,12 @@ const PasswordInputWithLabel = <T,>({
 								variant='ghost'
 								type='button'
 								onClick={toggleVisibility}
-								aria-label={
-									isVisible
-										? 'Hide password'
-										: 'Show password'
-								}
+								aria-label={isVisible ? 'Hide password' : 'Show password'}
 								aria-pressed={isVisible}
 								aria-controls='password'
 								className='absolute inset-y-0 end-0 pr-5 pl-4'
 							>
-								{isVisible ? (
-									<HidePassword />
-								) : (
-									<ShowPassword />
-								)}
+								{isVisible ? <HidePassword /> : <ShowPassword />}
 							</Button>
 						</div>
 					</FormControl>

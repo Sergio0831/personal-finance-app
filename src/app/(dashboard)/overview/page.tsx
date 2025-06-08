@@ -1,12 +1,7 @@
-import UserButton from '@/features/user/components/user-button';
+import { PageHeader } from '@/components/layout';
 
 const Overview = () => {
-	return (
-		<div className='flex items-center justify-between py-2'>
-			<h1 className='text-preset-1'>Overview</h1>
-			<UserButton />
-		</div>
-	);
+	return <PageHeader title='Overview' />;
 };
 
 export default Overview;

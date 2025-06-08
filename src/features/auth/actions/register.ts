@@ -2,8 +2,8 @@
 
 import prisma from '@/lib/clients/prisma-client';
 
-import { getUserByEmail } from '../api';
 import { RegisterSchema, RegisterSchemaType } from '../schemas';
+import { getUserByEmail } from '../utils';
 import { hashPassword } from '../utils';
 
 import { budgets, pots, transactions } from '@/data';

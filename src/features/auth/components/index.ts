@@ -1,7 +1,17 @@
-export * from './AuthWrapper';
-export * from './GitHubSignIn';
-export * from './RegisterForm';
-export * from './LoginForm';
-export * from './InputWithLabel';
-export * from './PasswordInputWithLabel';
-export * from './AuthIllustration';
+import AuthIllustration from './AuthIllustration';
+import AuthWrapper from './AuthWrapper';
+import GitHubSignIn from './GitHubSignIn';
+import InputWithLabel from './InputWithLabel';
+import LoginForm from './LoginForm';
+import PasswordInputWithLabel from './PasswordInputWithLabel';
+import RegisterForm from './RegisterForm';
+
+export {
+	AuthWrapper,
+	GitHubSignIn,
+	RegisterForm,
+	LoginForm,
+	InputWithLabel,
+	PasswordInputWithLabel,
+	AuthIllustration
+};

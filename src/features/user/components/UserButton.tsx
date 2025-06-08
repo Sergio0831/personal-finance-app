@@ -10,7 +10,7 @@ import {
 	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
-import UserAvatar from './user-avatar';
+import UserAvatar from './UserAvatar';
 
 const UserButton = () => {
 	return (
@@ -19,7 +19,7 @@ const UserButton = () => {
 				<UserAvatar />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
-				<Button onClick={() => signOut()}>
+				<Button size='sm' onClick={() => signOut()} asChild>
 					<DropdownMenuItem>Logout</DropdownMenuItem>
 				</Button>
 			</DropdownMenuContent>

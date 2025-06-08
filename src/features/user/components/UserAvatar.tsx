@@ -5,7 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 import { useGetUserQuery } from '@/graphql/generated/output';
 
-import { GeneratedAvatar } from './generated-avatar';
+import GeneratedAvatar from './GeneratedAvatar';
 
 const UserAvatar = () => {
 	const { data, loading } = useGetUserQuery();

@@ -4,6 +4,7 @@ import { type ReactNode } from 'react';
 import DesktopSidebar from '@/features/dashboard/components/DesktopSidebar';
 import MobileSidebar from '@/features/dashboard/components/MobileSidebar';
 
+import PageWrapper from '@/components/layout/PageWrapper';
 import { SidebarProvider } from '@/components/ui/sidebar';
 
 const DashboardLayout = async ({
@@ -16,7 +17,7 @@ const DashboardLayout = async ({
 		<SidebarProvider defaultOpen={defaultOpen}>
 			<DesktopSidebar />
 			<MobileSidebar />
-			<main className='h-14 w-full px-4 py-6 sm:px-10 sm:py-8'>{children}</main>
+			<PageWrapper>{children}</PageWrapper>
 		</SidebarProvider>
 	);
 };

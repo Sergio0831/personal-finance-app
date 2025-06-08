@@ -43,7 +43,6 @@ const MobileSidebar = ({
 											className='transition-colors'
 											asChild
 											isActive={path === item.href}
-											tooltip={item.label}
 										>
 											<Link href={item.href} className=''>
 												<item.icon />
