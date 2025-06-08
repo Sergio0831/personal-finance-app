@@ -4,8 +4,7 @@ import GitHub from 'next-auth/providers/github';
 
 import { LoginSchema } from '@/features/auth/schemas';
 
-import { getUserByEmail } from './features/auth/utils';
-import { verifyPassword } from './features/auth/utils';
+import { getUserByEmail, verifyPassword } from './features/auth/utils';
 
 export const authConfig = {
 	providers: [
