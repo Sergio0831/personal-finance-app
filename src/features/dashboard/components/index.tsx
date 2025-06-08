@@ -1,1 +1,2 @@
-export * from './DashboardSidebar';
+export * from './DesktopSidebar';
+export * from './MobileSidebar';

@@ -19,7 +19,7 @@ async function main() {
 	console.log('✅ Data cleared.');
 
 	for (const username of DEFAULT_USERS) {
-		const email = `${username}@example.com`;
+		const email = `${username.toLowerCase()}@example.com`;
 
 		const existing = await prisma.user.findUnique({ where: { email } });
 		if (existing) {

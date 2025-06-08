@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
 import { type ReactNode } from 'react';
 
-import DashboardSidebar from '@/features/dashboard/components/DashboardSidebar';
+import DesktopSidebar from '@/features/dashboard/components/DesktopSidebar';
+import MobileSidebar from '@/features/dashboard/components/MobileSidebar';
 
 import { SidebarProvider } from '@/components/ui/sidebar';
 
@@ -13,8 +14,9 @@ const DashboardLayout = async ({
 
 	return (
 		<SidebarProvider defaultOpen={defaultOpen}>
-			<DashboardSidebar />
-			<main className='px-4 py-6 sm:px-10 sm:py-8'>{children}</main>
+			<DesktopSidebar />
+			<MobileSidebar />
+			<main className='h-14 w-full px-4 py-6 sm:px-10 sm:py-8'>{children}</main>
 		</SidebarProvider>
 	);
 };

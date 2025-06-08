@@ -11,8 +11,6 @@ import {
 	TooltipTrigger
 } from '@/components/ui/tooltip';
 
-import { useIsMobile } from '@/hooks/useIsMobile';
-
 import { cn } from '@/lib/utils';
 
 import { MinimizeMenu } from '@/assets/icons';
@@ -27,9 +25,6 @@ type SidebarContextProps = {
 	state: 'expanded' | 'collapsed';
 	open: boolean;
 	setOpen: (open: boolean) => void;
-	openMobile: boolean;
-	setOpenMobile: (open: boolean) => void;
-	isMobile: boolean;
 	toggleSidebar: () => void;
 };
 
@@ -57,9 +52,6 @@ function SidebarProvider({
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
 }) {
-	const isMobile = useIsMobile();
-	const [openMobile, setOpenMobile] = React.useState(false);
-
 	// This is the internal state of the sidebar.
 	// We use openProp and setOpenProp for control from outside the component.
 	const [_open, _setOpen] = React.useState(defaultOpen);
@@ -81,8 +73,8 @@ function SidebarProvider({
 
 	// Helper to toggle the sidebar.
 	const toggleSidebar = React.useCallback(() => {
-		return isMobile ? setOpenMobile(open => !open) : setOpen(open => !open);
-	}, [isMobile, setOpen, setOpenMobile]);
+		return setOpen(open => !open);
+	}, [setOpen]);
 
 	// Adds a keyboard shortcut to toggle the sidebar.
 	React.useEffect(() => {
@@ -109,12 +101,9 @@ function SidebarProvider({
 			state,
 			open,
 			setOpen,
-			isMobile,
-			openMobile,
-			setOpenMobile,
 			toggleSidebar
 		}),
-		[state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+		[state, open, setOpen, toggleSidebar]
 	);
 
 	return (
@@ -154,43 +143,11 @@ function Sidebar({
 	variant?: 'sidebar' | 'floating' | 'inset';
 	collapsible?: 'offcanvas' | 'icon' | 'none';
 }) {
-	const { isMobile, state } = useSidebar();
-
-	if (collapsible === 'none') {
-		return (
-			<div
-				data-slot='sidebar'
-				className={cn(
-					'bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col',
-					className
-				)}
-				{...props}
-			>
-				{children}
-			</div>
-		);
-	}
-
-	if (isMobile) {
-		return (
-			<div
-				data-slot='sidebar'
-				data-sidebar='sidebar'
-				data-mobile='true'
-				className={cn(
-					'bg-sidebar text-sidebar-foreground fixed bottom-0 left-0 z-50 h-13 w-full rounded-t-md px-4 pt-2 sm:h-[4.625rem] sm:px-10',
-					className
-				)}
-				{...props}
-			>
-				<div className='flex h-full w-full flex-col'>{children}</div>
-			</div>
-		);
-	}
+	const { state } = useSidebar();
 
 	return (
 		<div
-			className='group peer text-sidebar-foreground'
+			className='group peer text-sidebar-foreground hidden md:block'
 			data-state={state}
 			data-collapsible={state === 'collapsed' ? collapsible : ''}
 			data-variant={variant}
@@ -357,7 +314,7 @@ function SidebarMenuButton({
 	tooltip?: string | React.ComponentProps<typeof TooltipContent>;
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
 	const Comp = asChild ? Slot : 'button';
-	const { isMobile, state } = useSidebar();
+	const { state } = useSidebar();
 
 	const button = (
 		<Comp
@@ -386,7 +343,7 @@ function SidebarMenuButton({
 			<TooltipContent
 				side='right'
 				align='center'
-				hidden={state !== 'collapsed' || isMobile}
+				hidden={state !== 'collapsed'}
 				{...tooltip}
 			/>
 		</Tooltip>

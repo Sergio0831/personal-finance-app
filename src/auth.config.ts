@@ -1,4 +1,4 @@
-import type { NextAuthConfig } from 'next-auth';
+import { AuthError, type NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GitHub from 'next-auth/providers/github';
 
@@ -15,21 +15,41 @@ export const authConfig = {
 		}),
 		Credentials({
 			authorize: async credentials => {
-				const validateFields = LoginSchema.safeParse(credentials);
+				if (!credentials) throw new AuthError('No credentials provided');
 
-				if (validateFields.success) {
-					const { email, password } = validateFields.data;
+				const validation = LoginSchema.safeParse(credentials);
 
-					const user = await getUserByEmail(email);
-
-					if (!user || !user.password) return null;
-
-					const passwordMatch = await verifyPassword(password, user.password);
-
-					if (passwordMatch) return user;
+				if (!validation.success) {
+					throw new AuthError('Invalid credentials format', {
+						cause: validation.error
+					});
 				}
 
-				return null;
+				const validateFields = LoginSchema.safeParse(credentials);
+
+				if (!validateFields.success) {
+					throw new Error('CredentialsSignin: Invalid input');
+				}
+
+				const { email, password } = validateFields.data;
+				const user = await getUserByEmail(email);
+
+				if (!user || !user.password) {
+					throw new Error('CredentialsSignin: No user found');
+				}
+
+				const passwordMatch = await verifyPassword(password, user.password);
+
+				if (!passwordMatch) {
+					throw new Error('CredentialsSignin: Incorrect password');
+				}
+
+				// Return user object with required fields
+				return {
+					id: user.id,
+					email: user.email,
+					name: user.name ?? user.email
+				};
 			}
 		})
 	]

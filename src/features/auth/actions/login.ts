@@ -6,8 +6,6 @@ import { signIn } from '../../../auth';
 import { getUserByEmail } from '../api';
 import { LoginSchema, LoginSchemaType } from '../schemas';
 
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
-
 export const login = async (values: LoginSchemaType) => {
 	const validatedFields = LoginSchema.safeParse(values);
 
@@ -31,7 +29,7 @@ export const login = async (values: LoginSchemaType) => {
 		await signIn('credentials', {
 			email,
 			password,
-			redirectTo: DEFAULT_LOGIN_REDIRECT
+			redirect: false
 		});
 	} catch (error) {
 		if (error instanceof AuthError) {

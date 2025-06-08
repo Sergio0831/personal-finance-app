@@ -18,43 +18,9 @@ import {
 	SidebarTrigger
 } from '@/components/ui/sidebar';
 
-import {
-	NavBills,
-	NavBudgets,
-	NavOverview,
-	NavPots,
-	NavTransactions
-} from '@/assets/icons';
+import { sidebarItems } from '@/data/sidebar-items.data';
 
-const sidebarNav = [
-	{
-		icon: NavOverview,
-		label: 'Overview',
-		href: '/overview'
-	},
-	{
-		icon: NavTransactions,
-		label: 'Transactions',
-		href: '/transactions'
-	},
-	{
-		icon: NavBudgets,
-		label: 'Budgets',
-		href: '/budgets'
-	},
-	{
-		icon: NavPots,
-		label: 'Pots',
-		href: '/pots'
-	},
-	{
-		icon: NavBills,
-		label: 'Recurring Bills',
-		href: '/recurring-bills'
-	}
-];
-
-const DashboardSidebar = () => {
+const DesktopSidebar = () => {
 	const path = usePathname();
 
 	return (
@@ -67,7 +33,7 @@ const DashboardSidebar = () => {
 				<SidebarGroup>
 					<SidebarGroupContent>
 						<SidebarMenu className=''>
-							{sidebarNav.map(item => (
+							{sidebarItems.map(item => (
 								<SidebarMenuItem key={item.href}>
 									<SidebarMenuButton
 										className='transition-colors'
@@ -97,4 +63,4 @@ const DashboardSidebar = () => {
 	);
 };
 
-export default DashboardSidebar;
+export default DesktopSidebar;

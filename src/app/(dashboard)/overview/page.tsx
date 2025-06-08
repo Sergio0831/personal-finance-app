@@ -1,16 +1,12 @@
-import { logout } from '@/features/auth/actions';
-import User from '@/features/user/components/User';
+import UserButton from '@/features/user/components/user-button';
 
-import { Button } from '@/components/ui/button';
-
-const Dashboard = () => {
+const Overview = () => {
 	return (
-		<div>
-			<h1>Dashboard Page</h1>;
-			<User />
-			<Button onClick={logout} />
+		<div className='flex items-center justify-between py-2'>
+			<h1 className='text-preset-1'>Overview</h1>
+			<UserButton />
 		</div>
 	);
 };
 
-export default Dashboard;
+export default Overview;
