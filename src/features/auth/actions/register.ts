@@ -3,8 +3,7 @@
 import prisma from '@/lib/clients/prisma-client';
 
 import { RegisterSchema, RegisterSchemaType } from '../schemas';
-import { getUserByEmail } from '../utils';
-import { hashPassword } from '../utils';
+import { getUserByEmail, hashPassword } from '../utils';
 
 import { budgets, pots, transactions } from '@/data';
 
