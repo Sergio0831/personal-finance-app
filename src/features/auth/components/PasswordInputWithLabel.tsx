@@ -34,7 +34,7 @@ const PasswordInputWithLabel = <T,>({
 	...props
 }: PasswordInputWithLabelProps<T>) => {
 	const [isVisible, setIsVisible] = useState(false);
-	const form = useFormContext();
+	const { control } = useFormContext();
 
 	const showPasswordHint = createPassword && !error;
 
@@ -42,7 +42,7 @@ const PasswordInputWithLabel = <T,>({
 
 	return (
 		<FormField
-			control={form.control}
+			control={control}
 			name={nameInSchema}
 			render={({ field }) => (
 				<FormItem className='mb-8'>

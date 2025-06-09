@@ -1,3 +1,5 @@
+'use client';
+
 import { type InputHTMLAttributes } from 'react';
 import { type FieldError, useFormContext } from 'react-hook-form';
 
@@ -26,11 +28,11 @@ const InputWithLabel = <T,>({
 	disabled,
 	...props
 }: InputWithLabelProps<T>) => {
-	const form = useFormContext();
+	const { control } = useFormContext();
 
 	return (
 		<FormField
-			control={form.control}
+			control={control}
 			name={nameInSchema}
 			render={({ field }) => (
 				<FormItem className='mb-4'>

@@ -36,9 +36,12 @@ const AuthWrapper = ({
 			<CardContent>{children}</CardContent>
 			<CardFooter className='grid'>
 				<div className='my-6 space-y-4'>
-					<p className='text-muted text-center text-sm'>
-						Or log in with:
-					</p>
+					<div className='after:border-muted-foreground relative text-center after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t'>
+						<span className='text-muted text-preset-4 bg-card relative z-10 px-3 text-center'>
+							Or log in with:
+						</span>
+					</div>
+					{/* GitHub Sign In Button */}
 					<GitHubSignIn />
 				</div>
 				<div className='flex items-center justify-center gap-2'>

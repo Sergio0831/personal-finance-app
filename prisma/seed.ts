@@ -6,7 +6,7 @@ import { budgets, pots, transactions } from '@/data';
 
 const prisma = new PrismaClient();
 
-const DEFAULT_USERS = ['John', 'Maria'];
+const DEFAULT_USERS = ['john', 'maria'];
 
 async function main() {
 	console.log('🧹 Clearing existing data...');
