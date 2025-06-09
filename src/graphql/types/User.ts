@@ -1,4 +1,5 @@
-import prisma from '../../lib/clients/prisma-client';
+import prisma from '@/lib/clients/prisma-client';
+
 import { builder } from '../builder';
 
 // User type definition

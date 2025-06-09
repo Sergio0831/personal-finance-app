@@ -3,7 +3,7 @@
 import prisma from '@/lib/clients/prisma-client';
 
 import { RegisterSchema, RegisterSchemaType } from '../schemas';
-import { getUserByEmail, hashPassword } from '../utils';
+import { hashPassword } from '../utils';
 
 import { budgets, pots, transactions } from '@/data';
 
@@ -16,7 +16,7 @@ export const register = async (values: RegisterSchemaType) => {
 
 	const { name, email, password } = validatedFields.data;
 
-	const existingUser = await getUserByEmail(email);
+	const existingUser = await prisma.user.findUnique({ where: { email } });
 
 	if (existingUser) {
 		return { error: 'User already exists' };

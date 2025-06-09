@@ -2,9 +2,11 @@
 
 import { AuthError } from 'next-auth';
 
-import { signIn } from '../../../auth';
+import prisma from '@/lib/clients/prisma-client';
+
 import { LoginSchema, LoginSchemaType } from '../schemas';
-import { getUserByEmail } from '../utils';
+
+import { signIn } from '@/auth';
 
 export const login = async (values: LoginSchemaType) => {
 	const validatedFields = LoginSchema.safeParse(values);
@@ -18,7 +20,7 @@ export const login = async (values: LoginSchemaType) => {
 	const { email, password } = validatedFields.data;
 
 	try {
-		const existingUser = await getUserByEmail(email);
+		const existingUser = await prisma.user.findUnique({ where: { email } });
 		if (!existingUser?.email) {
 			return { error: "You havent't register yet!" };
 		}

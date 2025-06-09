@@ -4,7 +4,8 @@ import GitHub from 'next-auth/providers/github';
 
 import { LoginSchema } from '@/features/auth/schemas';
 
-import { getUserByEmail, verifyPassword } from './features/auth/utils';
+import { verifyPassword } from './features/auth/utils';
+import prisma from './lib/clients/prisma-client';
 
 export const authConfig = {
 	providers: [
@@ -31,7 +32,7 @@ export const authConfig = {
 				}
 
 				const { email, password } = validateFields.data;
-				const user = await getUserByEmail(email);
+				const user = await prisma.user.findUnique({ where: { email } });
 
 				if (!user || !user.password) {
 					throw new Error('CredentialsSignin: No user found');
