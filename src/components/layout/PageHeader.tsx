@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import { UserButton } from '@/features/user/components';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/clsx';
 
 type PageHeaderProps = ComponentProps<'header'> & {
 	title: string;

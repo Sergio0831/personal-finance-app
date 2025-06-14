@@ -1,36 +1,42 @@
 /* eslint-disable */
-import type { Prisma, Post, Account, Session, VerificationToken, User, Transaction, Budget, Pot } from "./prisma/index.js";
+import type { Prisma, User, Session, Account, Verification, Transaction, Budget, Pot } from "./prisma/index.js";
 export default interface PrismaTypes {
-    Post: {
-        Name: "Post";
-        Shape: Post;
-        Include: never;
-        Select: Prisma.PostSelect;
-        OrderBy: Prisma.PostOrderByWithRelationInput;
-        WhereUnique: Prisma.PostWhereUniqueInput;
-        Where: Prisma.PostWhereInput;
+    User: {
+        Name: "User";
+        Shape: User;
+        Include: Prisma.UserInclude;
+        Select: Prisma.UserSelect;
+        OrderBy: Prisma.UserOrderByWithRelationInput;
+        WhereUnique: Prisma.UserWhereUniqueInput;
+        Where: Prisma.UserWhereInput;
         Create: {};
         Update: {};
-        RelationName: never;
-        ListRelations: never;
-        Relations: {};
-    };
-    Account: {
-        Name: "Account";
-        Shape: Account;
-        Include: Prisma.AccountInclude;
-        Select: Prisma.AccountSelect;
-        OrderBy: Prisma.AccountOrderByWithRelationInput;
-        WhereUnique: Prisma.AccountWhereUniqueInput;
-        Where: Prisma.AccountWhereInput;
-        Create: {};
-        Update: {};
-        RelationName: "user";
-        ListRelations: never;
+        RelationName: "sessions" | "accounts" | "transactions" | "budgets" | "pots";
+        ListRelations: "sessions" | "accounts" | "transactions" | "budgets" | "pots";
         Relations: {
-            user: {
-                Shape: User;
-                Name: "User";
+            sessions: {
+                Shape: Session[];
+                Name: "Session";
+                Nullable: false;
+            };
+            accounts: {
+                Shape: Account[];
+                Name: "Account";
+                Nullable: false;
+            };
+            transactions: {
+                Shape: Transaction[];
+                Name: "Transaction";
+                Nullable: false;
+            };
+            budgets: {
+                Shape: Budget[];
+                Name: "Budget";
+                Nullable: false;
+            };
+            pots: {
+                Shape: Pot[];
+                Name: "Pot";
                 Nullable: false;
             };
         };
@@ -55,59 +61,39 @@ export default interface PrismaTypes {
             };
         };
     };
-    VerificationToken: {
-        Name: "VerificationToken";
-        Shape: VerificationToken;
+    Account: {
+        Name: "Account";
+        Shape: Account;
+        Include: Prisma.AccountInclude;
+        Select: Prisma.AccountSelect;
+        OrderBy: Prisma.AccountOrderByWithRelationInput;
+        WhereUnique: Prisma.AccountWhereUniqueInput;
+        Where: Prisma.AccountWhereInput;
+        Create: {};
+        Update: {};
+        RelationName: "user";
+        ListRelations: never;
+        Relations: {
+            user: {
+                Shape: User;
+                Name: "User";
+                Nullable: false;
+            };
+        };
+    };
+    Verification: {
+        Name: "Verification";
+        Shape: Verification;
         Include: never;
-        Select: Prisma.VerificationTokenSelect;
-        OrderBy: Prisma.VerificationTokenOrderByWithRelationInput;
-        WhereUnique: Prisma.VerificationTokenWhereUniqueInput;
-        Where: Prisma.VerificationTokenWhereInput;
+        Select: Prisma.VerificationSelect;
+        OrderBy: Prisma.VerificationOrderByWithRelationInput;
+        WhereUnique: Prisma.VerificationWhereUniqueInput;
+        Where: Prisma.VerificationWhereInput;
         Create: {};
         Update: {};
         RelationName: never;
         ListRelations: never;
         Relations: {};
-    };
-    User: {
-        Name: "User";
-        Shape: User;
-        Include: Prisma.UserInclude;
-        Select: Prisma.UserSelect;
-        OrderBy: Prisma.UserOrderByWithRelationInput;
-        WhereUnique: Prisma.UserWhereUniqueInput;
-        Where: Prisma.UserWhereInput;
-        Create: {};
-        Update: {};
-        RelationName: "accounts" | "sessions" | "transactions" | "budgets" | "pots";
-        ListRelations: "accounts" | "sessions" | "transactions" | "budgets" | "pots";
-        Relations: {
-            accounts: {
-                Shape: Account[];
-                Name: "Account";
-                Nullable: false;
-            };
-            sessions: {
-                Shape: Session[];
-                Name: "Session";
-                Nullable: false;
-            };
-            transactions: {
-                Shape: Transaction[];
-                Name: "Transaction";
-                Nullable: false;
-            };
-            budgets: {
-                Shape: Budget[];
-                Name: "Budget";
-                Nullable: false;
-            };
-            pots: {
-                Shape: Pot[];
-                Name: "Pot";
-                Nullable: false;
-            };
-        };
     };
     Transaction: {
         Name: "Transaction";

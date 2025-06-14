@@ -1,4 +1,4 @@
-import AuthIllustration from '@/features/auth/components/AuthIllustration';
+import { AuthIllustration } from '@/features/auth/components';
 
 type Props = {
 	children: React.ReactNode;

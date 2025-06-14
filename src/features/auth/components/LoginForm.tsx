@@ -1,16 +1,19 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
-import { login } from '../actions/login';
+import { signInWithCredentials } from '../actions/sign-in';
 import { LoginSchema, LoginSchemaType } from '../schemas';
 
+import AuthAlert from './AuthAlert';
 import AuthWrapper from './AuthWrapper';
 import InputWithLabel from './InputWithLabel';
 import PasswordInputWithLabel from './PasswordInputWithLabel';
@@ -18,6 +21,7 @@ import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 
 const LoginForm = () => {
 	const [isPending, setTransition] = useTransition();
+	const [error, setError] = useState<string | null>(null);
 	const router = useRouter();
 
 	const form = useForm<LoginSchemaType>({
@@ -28,14 +32,16 @@ const LoginForm = () => {
 		}
 	});
 
-	const onSubmit = (values: LoginSchemaType) => {
-		setTransition(() => {
-			login(values).then(data => {
-				form.setError('email', { message: data?.error });
-				if (!data?.error) {
-					router.push(DEFAULT_LOGIN_REDIRECT);
-				}
-			});
+	const onSubmit = (formValues: LoginSchemaType) => {
+		setTransition(async () => {
+			const { error } = await signInWithCredentials(formValues);
+
+			if (error) {
+				setError(error);
+			} else {
+				toast.success('Login successful. Good to have you back.');
+				router.push(DEFAULT_LOGIN_REDIRECT);
+			}
 		});
 	};
 
@@ -54,15 +60,18 @@ const LoginForm = () => {
 						disabled={isPending}
 						error={form.formState.errors.email}
 						type='email'
+						name='email'
 					/>
 					<PasswordInputWithLabel<LoginSchemaType>
 						label='Password'
 						nameInSchema='password'
 						disabled={isPending}
-						error={form.formState.errors.email}
+						error={form.formState.errors.password}
+						name='password'
 					/>
+					{!!error && <AuthAlert error={error} />}
 					<Button className='w-full' disabled={isPending} type='submit'>
-						Login
+						{isPending ? <Loader2 className='size-4 animate-spin' /> : 'Login'}
 					</Button>
 				</form>
 			</Form>

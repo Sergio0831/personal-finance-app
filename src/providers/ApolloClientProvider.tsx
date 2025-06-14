@@ -3,7 +3,7 @@
 import { ApolloProvider } from '@apollo/client';
 import { PropsWithChildren } from 'react';
 
-import apolloClient from '@/lib/clients/apollo-client';
+import apolloClient from '@/lib/apollo-client';
 
 const ApolloClientProvider = ({ children }: PropsWithChildren) => {
 	return <ApolloProvider client={apolloClient}>{children}</ApolloProvider>;

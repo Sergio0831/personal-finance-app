@@ -1,6 +1,6 @@
 import { type HTMLAttributes, forwardRef } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/clsx';
 
 const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
@@ -47,11 +47,7 @@ CardContent.displayName = 'CardContent';
 
 const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
-		<div
-			ref={ref}
-			className={cn('flex items-center', className)}
-			{...props}
-		/>
+		<div ref={ref} className={cn('flex items-center', className)} {...props} />
 	)
 );
 CardFooter.displayName = 'CardFooter';

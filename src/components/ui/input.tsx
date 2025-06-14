@@ -1,7 +1,7 @@
 import { type ComponentProps, forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/clsx';
 
 export interface InputProps extends ComponentProps<'input'> {
 	error?: FieldError;

@@ -1,4 +1,4 @@
-import { hashPassword } from '@/features/auth/utils';
+import { hashPassword } from '@/lib/argon2';
 
 import { Prisma, PrismaClient } from '@/generated/prisma';
 
@@ -36,6 +36,7 @@ async function main() {
 			balance: 4836,
 			income: 3814.25,
 			expenses: 1700.5,
+
 			budgets: {
 				create: budgets
 			},

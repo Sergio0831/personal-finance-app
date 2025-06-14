@@ -13,7 +13,7 @@ import {
 	SidebarMenuItem
 } from '@/components/ui/sidebar';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/clsx';
 
 import { sidebarItems } from '@/data/sidebar-items.data';
 

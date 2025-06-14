@@ -1,16 +1,20 @@
-import { type Session } from '@auth/core/types';
+import { headers } from 'next/headers';
 
-import { auth } from '../auth';
+import { auth } from '@/lib/auth';
+
+type User = (typeof auth.$Infer.Session)['user'];
 
 export type GraphQLContext = {
-	session: Session | null;
+	user: User | null;
 };
 
 export async function createContext(): Promise<GraphQLContext> {
-	const session = await auth();
+	const session = await auth.api.getSession({
+		headers: await headers()
+	});
 
 	return {
-		session
+		user: session?.user || null
 	};
 }
 

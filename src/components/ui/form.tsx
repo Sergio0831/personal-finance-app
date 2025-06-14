@@ -20,7 +20,7 @@ import {
 	useFormContext
 } from 'react-hook-form';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/clsx';
 
 const Form = FormProvider;
 
@@ -85,11 +85,7 @@ const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
 		return (
 			<FormItemContext.Provider value={{ id }}>
-				<div
-					ref={ref}
-					className={cn('space-y-1', className)}
-					{...props}
-				/>
+				<div ref={ref} className={cn('space-y-1', className)} {...props} />
 			</FormItemContext.Provider>
 		);
 	}

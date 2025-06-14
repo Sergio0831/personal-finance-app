@@ -5,7 +5,7 @@ import ZodPlugin from '@pothos/plugin-zod';
 
 import PrismaTypes from '@/generated/pothos-types';
 
-import prisma from '../lib/clients/prisma-client';
+import { prisma } from '../lib/prisma-client';
 
 import { Context } from './context';
 

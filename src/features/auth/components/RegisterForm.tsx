@@ -1,22 +1,26 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
-import { register } from '../actions/register';
+import { signUpWithCredentials } from '../actions/sign-up';
 import { RegisterSchema, RegisterSchemaType } from '../schemas';
 
+import AuthAlert from './AuthAlert';
 import AuthWrapper from './AuthWrapper';
 import InputWithLabel from './InputWithLabel';
 import PasswordInputWithLabel from './PasswordInputWithLabel';
 
 const RegisterForm = () => {
 	const [isPending, setTransition] = useTransition();
+	const [error, setError] = useState<string | null>(null);
 	const router = useRouter();
 
 	const form = useForm<RegisterSchemaType>({
@@ -28,16 +32,16 @@ const RegisterForm = () => {
 		}
 	});
 
-	const onSubmit = (values: RegisterSchemaType) => {
-		setTransition(() => {
-			register(values).then(data => {
-				form.setError('email', { message: data.error });
+	const onSubmit = (formValues: RegisterSchemaType) => {
+		setTransition(async () => {
+			const { error } = await signUpWithCredentials(formValues);
 
-				if (!data.error) {
-					form.reset();
-					router.push('/login');
-				}
-			});
+			if (error) {
+				setError(error);
+			} else {
+				toast.success('Registration complete. You can login.');
+				router.push('/login');
+			}
 		});
 	};
 
@@ -54,8 +58,9 @@ const RegisterForm = () => {
 						label='Name'
 						nameInSchema='name'
 						disabled={isPending}
-						error={form.formState.errors.email}
+						error={form.formState.errors.name}
 						type='text'
+						name='name'
 					/>
 					<InputWithLabel<RegisterSchemaType>
 						label='Email'
@@ -63,16 +68,28 @@ const RegisterForm = () => {
 						disabled={isPending}
 						error={form.formState.errors.email}
 						type='email'
+						name='email'
 					/>
 					<PasswordInputWithLabel<RegisterSchemaType>
 						label='Create Password'
 						nameInSchema='password'
 						disabled={isPending}
-						error={form.formState.errors.email}
+						error={form.formState.errors.password}
 						createPassword
+						name='password'
 					/>
-					<Button className='w-full' disabled={isPending} type='submit'>
-						Create Account
+					{!!error && <AuthAlert error={error} />}
+					<Button
+						className='w-full'
+						disabled={isPending}
+						type='submit'
+						aria-label='Create account'
+					>
+						{isPending ? (
+							<Loader2 className='size-4 animate-spin' />
+						) : (
+							'Create account'
+						)}
 					</Button>
 				</form>
 			</Form>

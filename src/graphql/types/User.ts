@@ -1,4 +1,4 @@
-import prisma from '@/lib/clients/prisma-client';
+import { prisma } from '@/lib/prisma-client';
 
 import { builder } from '../builder';
 
@@ -19,11 +19,11 @@ builder.queryType({
 			type: 'User',
 			nullable: true,
 			resolve: async (query, _parent, _args, ctx) => {
-				if (!ctx.session?.user?.email) return null;
+				if (!ctx.user?.email) return null;
 
 				return prisma.user.findUnique({
 					...query,
-					where: { email: ctx.session.user.email }
+					where: { email: ctx.user.email }
 				});
 			}
 		})

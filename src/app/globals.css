@@ -60,7 +60,11 @@
 	--sidebar-ring: var(--green);
 
 	--popover: var(--grey-900);
-	--popover-foreground: var(--white);
+	--popover-foregorund: var(--white);
+
+	--toast: hsl(176, 74%, 92%);
+	--toast-foreground: var(--green);
+	--toast-border: hsl(176, 45%, 80%);
 
 	--radius: 0.25rem;
 }

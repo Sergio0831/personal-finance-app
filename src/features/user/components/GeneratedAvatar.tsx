@@ -5,7 +5,7 @@ import { createAvatar } from '@dicebear/core';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/clsx';
 
 type GeneratedAvatarProps = {
 	className?: string;

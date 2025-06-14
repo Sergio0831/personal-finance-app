@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 
+import { Toaster } from '@/components/ui/sonner';
+
 import ApolloClientProvider from '@/providers/ApolloClientProvider';
 
 import './globals.css';
@@ -40,6 +42,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={`${publicSans.variable} antialiased`}>
 				<ApolloClientProvider>{children}</ApolloClientProvider>
+				<Toaster position='top-center' richColors />
 			</body>
 		</html>
 	);

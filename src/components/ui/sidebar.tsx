@@ -11,7 +11,7 @@ import {
 	TooltipTrigger
 } from '@/components/ui/tooltip';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/clsx';
 
 import { MinimizeMenu } from '@/assets/icons';
 
@@ -341,6 +341,7 @@ function SidebarMenuButton({
 		<Tooltip>
 			<TooltipTrigger asChild>{button}</TooltipTrigger>
 			<TooltipContent
+				sideOffset={10}
 				side='right'
 				align='center'
 				hidden={state !== 'collapsed'}

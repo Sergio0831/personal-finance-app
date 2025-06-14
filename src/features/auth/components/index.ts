@@ -1,3 +1,4 @@
+import AuthAlert from './AuthAlert';
 import AuthIllustration from './AuthIllustration';
 import AuthWrapper from './AuthWrapper';
 import GitHubSignIn from './GitHubSignIn';
@@ -13,5 +14,6 @@ export {
 	LoginForm,
 	InputWithLabel,
 	PasswordInputWithLabel,
-	AuthIllustration
+	AuthIllustration,
+	AuthAlert
 };
