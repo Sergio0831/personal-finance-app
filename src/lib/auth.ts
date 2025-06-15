@@ -4,6 +4,7 @@ import { nextCookies } from 'better-auth/next-js';
 
 import { hashPassword, verifyPassword } from './argon2';
 import { prisma } from './prisma-client';
+import { budgets, pots, transactions } from '@/data';
 
 export const auth = betterAuth({
 	database: prismaAdapter(prisma, {
@@ -30,5 +31,32 @@ export const auth = betterAuth({
 			generateId: false
 		}
 	},
+
+	account: {
+		accountLinking: {
+			enabled: false
+		}
+	},
+
+	databaseHooks: {
+		user: {
+			create: {
+				after: async user => {
+					await prisma.user.update({
+						where: { id: user.id },
+						data: {
+							balance: 4836,
+							income: 3814.25,
+							expenses: 1700.5,
+							budgets: { create: budgets },
+							pots: { create: pots },
+							transactions: { create: transactions }
+						}
+					});
+				}
+			}
+		}
+	},
+
 	plugins: [nextCookies()]
 });

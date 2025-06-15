@@ -18,7 +18,8 @@ const GitHubSignIn = () => {
 
 		await signIn.social({
 			provider: 'github',
-			callbackURL: DEFAULT_LOGIN_REDIRECT
+			callbackURL: DEFAULT_LOGIN_REDIRECT,
+			errorCallbackURL: '/login/error'
 		});
 
 		setIsPending(false);

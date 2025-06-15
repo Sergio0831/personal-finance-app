@@ -1,9 +1,15 @@
 /**
- * An array of public routes
- * These routes do not require authentication
+ * An array of protected routes
+ * These routes will redirect not logged in user to /   login page
  * @type {string[]}
  */
-export const publicRoutes: string[] = ['/'];
+export const protectedRoutes: string[] = [
+	'/overview',
+	'/transactions',
+	'/budgets',
+	'/pots',
+	'/recurring-bills'
+];
 
 /**
  * An array of authentication routes

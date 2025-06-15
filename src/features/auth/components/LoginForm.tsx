@@ -60,17 +60,19 @@ const LoginForm = () => {
 						disabled={isPending}
 						error={form.formState.errors.email}
 						type='email'
-						name='email'
 					/>
 					<PasswordInputWithLabel<LoginSchemaType>
 						label='Password'
 						nameInSchema='password'
 						disabled={isPending}
 						error={form.formState.errors.password}
-						name='password'
 					/>
 					{!!error && <AuthAlert error={error} />}
-					<Button className='w-full' disabled={isPending} type='submit'>
+					<Button
+						className='w-full text-white'
+						disabled={isPending}
+						type='submit'
+					>
 						{isPending ? <Loader2 className='size-4 animate-spin' /> : 'Login'}
 					</Button>
 				</form>

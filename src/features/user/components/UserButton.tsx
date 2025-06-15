@@ -12,6 +12,7 @@ import {
 	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
+import apolloClient from '@/lib/apollo-client';
 import { signOut } from '@/lib/auth-client';
 
 import UserAvatar from './UserAvatar';
@@ -32,6 +33,7 @@ const UserButton = () => {
 				onSuccess: () => {
 					toast.success('You have logged out. See you soon!');
 					router.push('/login');
+					apolloClient.clearStore();
 				},
 				onError: () => {}
 			}

@@ -60,7 +60,6 @@ const RegisterForm = () => {
 						disabled={isPending}
 						error={form.formState.errors.name}
 						type='text'
-						name='name'
 					/>
 					<InputWithLabel<RegisterSchemaType>
 						label='Email'
@@ -68,7 +67,6 @@ const RegisterForm = () => {
 						disabled={isPending}
 						error={form.formState.errors.email}
 						type='email'
-						name='email'
 					/>
 					<PasswordInputWithLabel<RegisterSchemaType>
 						label='Create Password'
@@ -76,11 +74,10 @@ const RegisterForm = () => {
 						disabled={isPending}
 						error={form.formState.errors.password}
 						createPassword
-						name='password'
 					/>
 					{!!error && <AuthAlert error={error} />}
 					<Button
-						className='w-full'
+						className='w-full text-white'
 						disabled={isPending}
 						type='submit'
 						aria-label='Create account'

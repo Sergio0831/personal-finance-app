@@ -33,7 +33,8 @@ export async function signInWithCredentials(formValues: LoginSchemaType) {
 	} catch (error) {
 		if (error instanceof APIError) {
 			return {
-				error: error.message || 'An error occurred during sign-in'
+				error:
+					error.message || 'An error occurred during sign-in. Please try again.'
 			};
 		}
 

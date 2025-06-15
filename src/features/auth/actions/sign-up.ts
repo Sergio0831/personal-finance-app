@@ -34,7 +34,9 @@ export async function signUpWithCredentials(formValues: RegisterSchemaType) {
 	} catch (error) {
 		if (error instanceof APIError) {
 			return {
-				error: error.message || 'An error occurred during sign-in'
+				error:
+					error.message ||
+					'An error occurred during registration. Please try again.'
 			};
 		}
 
