@@ -15,36 +15,79 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: { input: any; output: any; }
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  registerUser?: Maybe<User>;
-};
+export enum Category {
+  Bills = 'Bills',
+  DiningOut = 'DiningOut',
+  Education = 'Education',
+  Entertainment = 'Entertainment',
+  General = 'General',
+  Groceries = 'Groceries',
+  Lifestyle = 'Lifestyle',
+  PersonalCare = 'PersonalCare',
+  Shopping = 'Shopping',
+  Transportation = 'Transportation'
+}
 
-
-export type MutationRegisterUserArgs = {
-  input: RegisterUserInput;
-};
-
-export type Post = {
-  __typename?: 'Post';
-  content?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  published?: Maybe<Scalars['Boolean']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  endCursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  posts?: Maybe<Array<Post>>;
+  recentTransactions?: Maybe<Array<Transaction>>;
+  transaction?: Maybe<Transaction>;
+  transactions?: Maybe<QueryTransactionsConnection>;
   user?: Maybe<User>;
 };
 
-export type RegisterUserInput = {
-  email: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+
+export type QueryTransactionArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryTransactionsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Category>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  recurring?: InputMaybe<Scalars['Boolean']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTransactionsConnection = {
+  __typename?: 'QueryTransactionsConnection';
+  edges?: Maybe<Array<Maybe<QueryTransactionsConnectionEdge>>>;
+  pageInfo: PageInfo;
+};
+
+export type QueryTransactionsConnectionEdge = {
+  __typename?: 'QueryTransactionsConnectionEdge';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Transaction>;
+};
+
+export type Transaction = {
+  __typename?: 'Transaction';
+  amount?: Maybe<Scalars['Float']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
+  category?: Maybe<Category>;
+  date?: Maybe<Scalars['Date']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  recurring?: Maybe<Scalars['Boolean']['output']>;
+  user?: Maybe<User>;
+  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type User = {
@@ -55,52 +98,12 @@ export type User = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
-export type RegisterUserMutationVariables = Exact<{
-  input: RegisterUserInput;
-}>;
-
-
-export type RegisterUserMutation = { __typename?: 'Mutation', registerUser?: { __typename?: 'User', id?: string | null } | null };
-
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: string | null, name?: string | null, email?: string | null, image?: string | null } | null };
 
 
-export const RegisterUserDocument = gql`
-    mutation RegisterUser($input: RegisterUserInput!) {
-  registerUser(input: $input) {
-    id
-  }
-}
-    `;
-export type RegisterUserMutationFn = Apollo.MutationFunction<RegisterUserMutation, RegisterUserMutationVariables>;
-
-/**
- * __useRegisterUserMutation__
- *
- * To run a mutation, you first call `useRegisterUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRegisterUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [registerUserMutation, { data, loading, error }] = useRegisterUserMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useRegisterUserMutation(baseOptions?: Apollo.MutationHookOptions<RegisterUserMutation, RegisterUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RegisterUserMutation, RegisterUserMutationVariables>(RegisterUserDocument, options);
-      }
-export type RegisterUserMutationHookResult = ReturnType<typeof useRegisterUserMutation>;
-export type RegisterUserMutationResult = Apollo.MutationResult<RegisterUserMutation>;
-export type RegisterUserMutationOptions = Apollo.BaseMutationOptions<RegisterUserMutation, RegisterUserMutationVariables>;
 export const GetUserDocument = gql`
     query GetUser {
   user {

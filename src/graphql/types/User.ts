@@ -1,5 +1,6 @@
-import { prisma } from '@/lib/prisma-client';
+import { GraphQLError } from 'graphql';
 
+import { prisma } from '../../lib/prisma-client';
 import { builder } from '../builder';
 
 // User type definition
@@ -19,12 +20,30 @@ builder.queryType({
 			type: 'User',
 			nullable: true,
 			resolve: async (query, _parent, _args, ctx) => {
-				if (!ctx.user?.email) return null;
+				if (!ctx.user?.email) {
+					throw new GraphQLError(
+						'You must be logged in to perform this action',
+						{
+							extensions: {
+								code: 'UNAUTHORIZED'
+							}
+						}
+					);
+				}
 
-				return prisma.user.findUnique({
+				const user = prisma.user.findUnique({
 					...query,
 					where: { email: ctx.user.email }
 				});
+
+				if (!user)
+					throw new GraphQLError('User does not exist', {
+						extensions: {
+							code: 'NOT_FOUND'
+						}
+					});
+
+				return user;
 			}
 		})
 	})

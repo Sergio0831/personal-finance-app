@@ -1,23 +1,55 @@
-type Mutation {
-  registerUser(input: RegisterUserInput!): User
+enum Category {
+  Bills
+  DiningOut
+  Education
+  Entertainment
+  General
+  Groceries
+  Lifestyle
+  PersonalCare
+  Shopping
+  Transportation
 }
 
-type Post {
-  content: String
-  id: ID
-  published: Boolean
-  title: String
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
 }
 
 type Query {
-  posts: [Post!]
+  recentTransactions: [Transaction!]
+  transaction(id: ID!): Transaction
+  transactions(after: String, before: String, category: Category, first: Int, last: Int, recurring: Boolean, search: String, sort: String): QueryTransactionsConnection
   user: User
 }
 
-input RegisterUserInput {
-  email: String!
-  name: String!
-  password: String!
+type QueryTransactionsConnection {
+  edges: [QueryTransactionsConnectionEdge]
+  pageInfo: PageInfo!
+}
+
+type QueryTransactionsConnectionEdge {
+  cursor: String!
+  node: Transaction
+}
+
+type Transaction {
+  amount: Float
+  avatar: String
+  category: Category
+  date: Date
+  id: ID
+  name: String
+  recurring: Boolean
+  user: User
+  userId: String
 }
 
 type User {
