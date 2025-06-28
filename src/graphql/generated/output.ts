@@ -15,7 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: { input: any; output: any; }
 };
 
@@ -32,19 +32,11 @@ export enum Category {
   Transportation = 'Transportation'
 }
 
-export type PageInfo = {
-  __typename?: 'PageInfo';
-  endCursor?: Maybe<Scalars['String']['output']>;
-  hasNextPage: Scalars['Boolean']['output'];
-  hasPreviousPage: Scalars['Boolean']['output'];
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
 export type Query = {
   __typename?: 'Query';
-  recentTransactions?: Maybe<Array<Transaction>>;
+  recentTransactions: Array<Transaction>;
   transaction?: Maybe<Transaction>;
-  transactions?: Maybe<QueryTransactionsConnection>;
+  transactions: Array<Transaction>;
   user?: Maybe<User>;
 };
 
@@ -55,39 +47,20 @@ export type QueryTransactionArgs = {
 
 
 export type QueryTransactionsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  category?: InputMaybe<Category>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
   recurring?: InputMaybe<Scalars['Boolean']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type QueryTransactionsConnection = {
-  __typename?: 'QueryTransactionsConnection';
-  edges?: Maybe<Array<Maybe<QueryTransactionsConnectionEdge>>>;
-  pageInfo: PageInfo;
-};
-
-export type QueryTransactionsConnectionEdge = {
-  __typename?: 'QueryTransactionsConnectionEdge';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Transaction>;
 };
 
 export type Transaction = {
   __typename?: 'Transaction';
-  amount?: Maybe<Scalars['Float']['output']>;
-  avatar?: Maybe<Scalars['String']['output']>;
-  category?: Maybe<Category>;
-  date?: Maybe<Scalars['Date']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  recurring?: Maybe<Scalars['Boolean']['output']>;
-  user?: Maybe<User>;
-  userId?: Maybe<Scalars['String']['output']>;
+  amount: Scalars['Float']['output'];
+  avatar: Scalars['String']['output'];
+  category: Category;
+  date: Scalars['Date']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  recurring: Scalars['Boolean']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
 };
 
 export type User = {
@@ -98,12 +71,62 @@ export type User = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type GetAllTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllTransactionsQuery = { __typename?: 'Query', transactions: Array<{ __typename?: 'Transaction', id: string, avatar: string, name: string, category: Category, date: any, amount: number, userId: string }> };
+
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: string | null, name?: string | null, email?: string | null, image?: string | null } | null };
 
 
+export const GetAllTransactionsDocument = gql`
+    query GetAllTransactions {
+  transactions {
+    id
+    avatar
+    name
+    category
+    date
+    amount
+    userId
+  }
+}
+    `;
+
+/**
+ * __useGetAllTransactionsQuery__
+ *
+ * To run a query within a React component, call `useGetAllTransactionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllTransactionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllTransactionsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllTransactionsQuery, GetAllTransactionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllTransactionsQuery, GetAllTransactionsQueryVariables>(GetAllTransactionsDocument, options);
+      }
+export function useGetAllTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllTransactionsQuery, GetAllTransactionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllTransactionsQuery, GetAllTransactionsQueryVariables>(GetAllTransactionsDocument, options);
+        }
+export function useGetAllTransactionsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetAllTransactionsQuery, GetAllTransactionsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllTransactionsQuery, GetAllTransactionsQueryVariables>(GetAllTransactionsDocument, options);
+        }
+export type GetAllTransactionsQueryHookResult = ReturnType<typeof useGetAllTransactionsQuery>;
+export type GetAllTransactionsLazyQueryHookResult = ReturnType<typeof useGetAllTransactionsLazyQuery>;
+export type GetAllTransactionsSuspenseQueryHookResult = ReturnType<typeof useGetAllTransactionsSuspenseQuery>;
+export type GetAllTransactionsQueryResult = Apollo.QueryResult<GetAllTransactionsQuery, GetAllTransactionsQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser {
   user {

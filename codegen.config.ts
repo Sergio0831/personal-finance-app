@@ -12,7 +12,12 @@ const config: CodegenConfig = {
 				'typescript',
 				'typescript-operations',
 				'typescript-react-apollo'
-			]
+			],
+			config: {
+				scalars: {
+					date: 'Date'
+				}
+			}
 		},
 		'./src/graphql/generated/schema.graphql': {
 			plugins: ['schema-ast']

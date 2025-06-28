@@ -15,6 +15,22 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
+"@apollo/client-integration-nextjs@^0.12.2":
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/@apollo/client-integration-nextjs/-/client-integration-nextjs-0.12.2.tgz#26c4f544c4a2ff91bdffeeaeac2289e514741234"
+  integrity sha512-Nsoe/onkEqCfIcQfoklnimRGibtaYXmkst6moXJw9Jl0sFqxpEyNMv3xvdPXItN6lZABBeKM8N+u+/7iqyZDig==
+  dependencies:
+    "@apollo/client-react-streaming" "0.12.2"
+
+"@apollo/client-react-streaming@0.12.2":
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/@apollo/client-react-streaming/-/client-react-streaming-0.12.2.tgz#c4436ab00be1f8012d2b6a0307f28187ab7a3458"
+  integrity sha512-zVc6QmvvR+9DZaLPUES1Rp63MC2VAnvHJC7gNVagH5kI3IZgeJGNgxKX/RMpYJ2+a2EclOG50czFCD7XkXe24w==
+  dependencies:
+    "@types/react-dom" "^19.0.0"
+    "@wry/equality" "^0.5.6"
+    ts-invariant "^0.10.3"
+
 "@apollo/client@^3.13.8":
   version "3.13.8"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.13.8.tgz#ef1d49a5b134c69a55e3f137164a8e323aef4e2a"
@@ -2559,11 +2575,6 @@
   dependencies:
     "@prisma/generator-helper" "^6.6.0"
 
-"@pothos/plugin-relay@^4.4.2":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@pothos/plugin-relay/-/plugin-relay-4.4.2.tgz#6d47a35a57d22d4cc4f553bb83533f7515c7782c"
-  integrity sha512-tfFJiEwIqU2g46E8PTIX9vw4uxkj5FlQLDrQo3Gik1F5/Zo7EpAs/iK5wpAgUd2bRveQnLbsb1IhtZxKp0BqcA==
-
 "@pothos/plugin-zod@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@pothos/plugin-zod/-/plugin-zod-4.2.1.tgz#5830f6ab2b56c9d0fb62a72506fe4df50efaecbd"
@@ -3220,6 +3231,18 @@
     postcss "^8.4.41"
     tailwindcss "4.1.10"
 
+"@tanstack/react-table@^8.21.3":
+  version "8.21.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.21.3.tgz#2c38c747a5731c1a07174fda764b9c2b1fb5e91b"
+  integrity sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==
+  dependencies:
+    "@tanstack/table-core" "8.21.3"
+
+"@tanstack/table-core@8.21.3":
+  version "8.21.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.21.3.tgz#2977727d8fc8dfa079112d9f4d4c019110f1732c"
+  integrity sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==
+
 "@trivago/prettier-plugin-sort-imports@^5.2.2":
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/@trivago/prettier-plugin-sort-imports/-/prettier-plugin-sort-imports-5.2.2.tgz#38983f0b83490a0a7d974a6f1e409fb4bf678d02"
@@ -3282,6 +3305,11 @@
   version "18.3.7"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.7.tgz#b89ddf2cd83b4feafcc4e2ea41afdfb95a0d194f"
   integrity sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==
+
+"@types/react-dom@^19.0.0":
+  version "19.1.6"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.1.6.tgz#4af629da0e9f9c0f506fc4d1caa610399c595d64"
+  integrity sha512-4hOiT/dwO8Ko0gV1m/TJZYk3y0KBnY9vzDh7W+DH17b2HFSOGgdj33dhihPeuy3l0q23+4e+hoXHV6hCC4dCXw==
 
 "@types/react@^18":
   version "18.3.23"

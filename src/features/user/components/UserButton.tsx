@@ -1,5 +1,6 @@
 'use client';
 
+import { useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -12,7 +13,6 @@ import {
 	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
-import apolloClient from '@/lib/apollo-client';
 import { signOut } from '@/lib/auth-client';
 
 import UserAvatar from './UserAvatar';
@@ -20,6 +20,7 @@ import UserAvatar from './UserAvatar';
 const UserButton = () => {
 	const [isPending, setIsPending] = useState(false);
 	const router = useRouter();
+	const client = useApolloClient();
 
 	const handleSignOut = async () => {
 		await signOut({
@@ -30,10 +31,11 @@ const UserButton = () => {
 				onResponse: () => {
 					setIsPending(false);
 				},
-				onSuccess: () => {
+				onSuccess: async () => {
+					await client.clearStore();
 					toast.success('You have logged out. See you soon!');
+
 					router.push('/login');
-					apolloClient.clearStore();
 				},
 				onError: () => {}
 			}

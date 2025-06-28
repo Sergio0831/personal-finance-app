@@ -1,8 +1,7 @@
 import SchemaBuilder from '@pothos/core';
 import PrismaPlugin from '@pothos/plugin-prisma';
-import RelayPlugin from '@pothos/plugin-relay';
 import ZodPlugin from '@pothos/plugin-zod';
-import { GraphQLDate } from 'graphql-scalars';
+import { GraphQLDateTime } from 'graphql-scalars';
 
 import PrismaTypes from '@/generated/pothos-types';
 
@@ -21,8 +20,7 @@ export const builder = new SchemaBuilder<{
 		};
 	};
 }>({
-	plugins: [PrismaPlugin, RelayPlugin, ZodPlugin],
-	relay: {},
+	plugins: [PrismaPlugin, ZodPlugin],
 	prisma: {
 		client: prisma
 	}
@@ -33,6 +31,6 @@ export const CategoryEnumType = builder.enumType('Category', {
 });
 
 builder.queryType({});
-builder.addScalarType('Date', GraphQLDate);
+builder.addScalarType('Date', GraphQLDateTime, {});
 
 // builder.mutationType({});

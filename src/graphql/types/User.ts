@@ -20,20 +20,12 @@ builder.queryType({
 			type: 'User',
 			nullable: true,
 			resolve: async (query, _parent, _args, ctx) => {
-				if (!ctx.user?.email) {
-					throw new GraphQLError(
-						'You must be logged in to perform this action',
-						{
-							extensions: {
-								code: 'UNAUTHORIZED'
-							}
-						}
-					);
-				}
-
 				const user = prisma.user.findUnique({
 					...query,
-					where: { email: ctx.user.email }
+					where: {
+						id: ctx.user.id,
+						email: ctx.user.email
+					}
 				});
 
 				if (!user)

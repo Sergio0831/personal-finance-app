@@ -3,18 +3,18 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 
-import { useGetUserQuery } from '@/graphql/generated/output';
+import { useSession } from '@/lib/auth-client';
 
 import GeneratedAvatar from './GeneratedAvatar';
 
 const UserAvatar = () => {
-	const { data, loading } = useGetUserQuery();
+	const { data, isPending } = useSession();
 
-	const user = data?.user;
-
-	if (loading || !user) {
+	if (isPending || !data?.user) {
 		return <Skeleton className='h-10 w-10 rounded-full' />;
 	}
+
+	const user = data.user;
 
 	return user.image ? (
 		<Avatar>

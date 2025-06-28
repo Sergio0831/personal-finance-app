@@ -11,7 +11,10 @@ type PageHeaderProps = ComponentProps<'header'> & {
 const PageHeader = ({ className, title }: PageHeaderProps) => {
 	return (
 		<header
-			className={cn('flex items-center justify-between sm:py-2', className)}
+			className={cn(
+				'mb-8 flex items-center justify-between sm:py-2',
+				className
+			)}
 		>
 			<h1 className='text-preset-1 select-none'>{title}</h1>
 			<UserButton />

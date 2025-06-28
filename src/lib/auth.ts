@@ -45,9 +45,6 @@ export const auth = betterAuth({
 					await prisma.user.update({
 						where: { id: user.id },
 						data: {
-							balance: 4836,
-							income: 3814.25,
-							expenses: 1700.5,
 							budgets: { create: budgets },
 							pots: { create: pots },
 							transactions: { create: transactions }
