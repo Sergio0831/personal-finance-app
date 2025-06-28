@@ -1,8 +1,12 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
+import Image from 'next/image';
 
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar } from '@/components/ui/avatar';
+
+import { cn } from '@/lib/clsx';
+import { formatAmount, formatDate } from '@/lib/format';
 
 import { Category } from '@/generated/prisma';
 
@@ -22,9 +26,23 @@ export const columns: ColumnDef<Transaction>[] = [
 			return (
 				<div className='flex items-center gap-4 md:px-4'>
 					<Avatar>
-						<AvatarImage src={row.original.avatar} alt={row.original.name} />
+						<Image
+							src={
+								row.original.avatar
+									? row.original.avatar
+									: '/images/avatars/bytewise.jpg'
+							}
+							width={40}
+							height={40}
+							alt={row.original.name}
+						/>
 					</Avatar>
-					<span className='text-preset-4 font-bold'>{row.original.name}</span>
+					<div>
+						<span className='text-preset-4 font-bold'>{row.original.name}</span>
+						<span className='text-preset-5 text-muted block sm:hidden'>
+							{row.original.category}
+						</span>
+					</div>
 				</div>
 			);
 		}
@@ -34,7 +52,7 @@ export const columns: ColumnDef<Transaction>[] = [
 		header: () => <div className='text-center'>Category</div>,
 		cell: ({ row }) => {
 			return (
-				<div className='text-preset-5 text-muted text-center'>
+				<div className='text-preset-5 text-muted hidden text-center sm:block'>
 					{row.original.category}
 				</div>
 			);
@@ -44,17 +62,10 @@ export const columns: ColumnDef<Transaction>[] = [
 		accessorKey: 'date',
 		header: () => <div className='text-center'>Transaction Date</div>,
 		cell: ({ row }) => {
-			const isoDate = row.original.date!;
-			const date = new Date(isoDate);
-
-			const formattedDate = new Intl.DateTimeFormat('en-GB', {
-				day: '2-digit',
-				month: 'short',
-				year: 'numeric'
-			}).format(date);
+			const formattedDate = formatDate(row.original.date!);
 
 			return (
-				<div className='text-preset-5 text-muted text-center'>
+				<div className='text-preset-5 text-muted hidden text-center sm:block'>
 					{!row.original.date ? '29 Aug 2024' : formattedDate}
 				</div>
 			);
@@ -65,14 +76,25 @@ export const columns: ColumnDef<Transaction>[] = [
 		header: () => <div className='text-right md:px-4'>Amount</div>,
 		cell: ({ row }) => {
 			const amount = parseFloat(row.getValue('amount'));
-			const formatted = new Intl.NumberFormat('en-US', {
-				style: 'currency',
-				currency: 'USD'
-			}).format(amount);
+			const formatted = formatAmount(amount);
+			const isPositive = amount > 0;
+			const displayAmount = isPositive ? `+${formatted}` : formatted;
+
+			const formattedDate = formatDate(row.original.date!);
 
 			return (
-				<div className='text-preset-4 text-right font-bold md:px-4'>
-					{formatted}
+				<div className='text-right md:px-4'>
+					<span
+						className={cn(
+							'text-sm font-bold',
+							isPositive ? 'text-accent' : 'text-foreground'
+						)}
+					>
+						{displayAmount}
+					</span>
+					<span className='text-preset-5 text-muted block sm:hidden'>
+						{!row.original.date ? '29 Aug 2024' : formattedDate}
+					</span>
 				</div>
 			);
 		}

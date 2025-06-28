@@ -1,3 +1,5 @@
+import CaretLeft from './icon-caret-left.svg';
+import CaretRight from './icon-caret-right.svg';
 import GitHubIcon from './icon-github.svg';
 import HidePassword from './icon-hide-password.svg';
 import MinimizeMenu from './icon-minimize-menu.svg';
@@ -23,5 +25,7 @@ export {
 	NavBudgets,
 	NavPots,
 	NavBills,
-	MinimizeMenu
+	MinimizeMenu,
+	CaretLeft,
+	CaretRight
 };

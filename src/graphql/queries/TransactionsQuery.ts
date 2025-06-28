@@ -4,12 +4,11 @@ export const GET_ALL_TRANSACTIONS = gql`
 	query GetAllTransactions {
 		transactions {
 			id
-			avatar
 			name
+			avatar
+			amount
 			category
 			date
-			amount
-			userId
 		}
 	}
 `;

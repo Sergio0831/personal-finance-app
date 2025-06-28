@@ -34,7 +34,7 @@ export enum Category {
 
 export type Query = {
   __typename?: 'Query';
-  recentTransactions: Array<Transaction>;
+  recentTransactions?: Maybe<Array<Transaction>>;
   transaction?: Maybe<Transaction>;
   transactions: Array<Transaction>;
   user?: Maybe<User>;
@@ -74,7 +74,7 @@ export type User = {
 export type GetAllTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllTransactionsQuery = { __typename?: 'Query', transactions: Array<{ __typename?: 'Transaction', id: string, avatar: string, name: string, category: Category, date: any, amount: number, userId: string }> };
+export type GetAllTransactionsQuery = { __typename?: 'Query', transactions: Array<{ __typename?: 'Transaction', id: string, name: string, avatar: string, amount: number, category: Category, date: any }> };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -86,12 +86,11 @@ export const GetAllTransactionsDocument = gql`
     query GetAllTransactions {
   transactions {
     id
-    avatar
     name
+    avatar
+    amount
     category
     date
-    amount
-    userId
   }
 }
     `;

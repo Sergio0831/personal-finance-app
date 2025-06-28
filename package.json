@@ -24,6 +24,7 @@
 		"@node-rs/argon2": "^2.0.2",
 		"@pothos/core": "^4.6.2",
 		"@pothos/plugin-prisma": "^4.8.1",
+		"@pothos/plugin-relay": "^4.5.0",
 		"@pothos/plugin-zod": "^4.2.1",
 		"@prisma/client": "^6.7.0",
 		"@radix-ui/react-avatar": "^1.1.10",

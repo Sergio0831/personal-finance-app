@@ -28,7 +28,7 @@ builder.queryType({
 				return prisma.transaction.findMany({
 					...query,
 					where: {
-						userId: ctx.user.id,
+						userId: ctx.user?.id,
 						...(typeof args.recurring === 'boolean' && {
 							recurring: args.recurring
 						})
@@ -54,11 +54,10 @@ builder.queryType({
 		}),
 		recentTransactions: t.prismaField({
 			type: ['Transaction'],
-			nullable: false,
-			resolve: query => {
+			resolve: (query, _parent, _args, ctx) => {
 				return prisma.transaction.findMany({
 					...query,
-
+					where: { userId: ctx.user.id },
 					orderBy: { date: 'desc' },
 					take: 5
 				});

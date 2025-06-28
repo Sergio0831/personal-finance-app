@@ -4,6 +4,7 @@ import {
 	ColumnDef,
 	flexRender,
 	getCoreRowModel,
+	getPaginationRowModel,
 	useReactTable
 } from '@tanstack/react-table';
 
@@ -15,6 +16,8 @@ import {
 	TableHeader,
 	TableRow
 } from '@/components/ui/table';
+
+import TablePagination from './TablePagination';
 
 interface TransactionsTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -28,53 +31,56 @@ const TransactionsTable = <TData, TValue>({
 	const table = useReactTable({
 		data: data ?? [],
 		columns,
-		getCoreRowModel: getCoreRowModel()
+		getCoreRowModel: getCoreRowModel(),
+		getPaginationRowModel: getPaginationRowModel()
 	});
 
 	return (
-		<Table>
-			<TableHeader>
-				{table.getHeaderGroups().map(headerGroup => (
-					<TableRow key={headerGroup.id}>
-						{' '}
-						{headerGroup.headers.map(header => {
-							return (
-								<TableHead key={header.id}>
-									{header.isPlaceholder
-										? null
-										: flexRender(
-												header.column.columnDef.header,
-												header.getContext()
-											)}
-								</TableHead>
-							);
-						})}
-					</TableRow>
-				))}
-			</TableHeader>
-			<TableBody>
-				{table.getRowModel().rows?.length ? (
-					table.getRowModel().rows.map(row => (
-						<TableRow
-							key={row.id}
-							data-state={row.getIsSelected() && 'selected'}
-						>
-							{row.getVisibleCells().map(cell => (
-								<TableCell key={cell.id}>
-									{flexRender(cell.column.columnDef.cell, cell.getContext())}
-								</TableCell>
-							))}
+		<div className='mb-13 grid w-full gap-y-6 overflow-x-auto rounded-xl bg-white p-6 sm:mb-18 sm:p-8 md:mb-0'>
+			<Table>
+				<TableHeader className='hidden sm:table-header-group'>
+					{table.getHeaderGroups().map(headerGroup => (
+						<TableRow key={headerGroup.id}>
+							{headerGroup.headers.map(header => {
+								return (
+									<TableHead key={header.id}>
+										{header.isPlaceholder
+											? null
+											: flexRender(
+													header.column.columnDef.header,
+													header.getContext()
+												)}
+									</TableHead>
+								);
+							})}
 						</TableRow>
-					))
-				) : (
-					<TableRow>
-						<TableCell colSpan={columns.length} className='h-24 text-center'>
-							No results.
-						</TableCell>
-					</TableRow>
-				)}
-			</TableBody>
-		</Table>
+					))}
+				</TableHeader>
+				<TableBody>
+					{table.getRowModel().rows?.length ? (
+						table.getRowModel().rows.map(row => (
+							<TableRow
+								key={row.id}
+								data-state={row.getIsSelected() && 'selected'}
+							>
+								{row.getVisibleCells().map(cell => (
+									<TableCell key={cell.id}>
+										{flexRender(cell.column.columnDef.cell, cell.getContext())}
+									</TableCell>
+								))}
+							</TableRow>
+						))
+					) : (
+						<TableRow>
+							<TableCell colSpan={columns.length} className='h-24 text-center'>
+								No results.
+							</TableCell>
+						</TableRow>
+					)}
+				</TableBody>
+			</Table>
+			<TablePagination table={table} />
+		</div>
 	);
 };
 
