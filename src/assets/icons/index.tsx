@@ -8,6 +8,7 @@ import NavOverview from './icon-nav-overview.svg';
 import NavPots from './icon-nav-pots.svg';
 import NavBills from './icon-nav-recurring-bills.svg';
 import NavTransactions from './icon-nav-transactions.svg';
+import Search from './icon-search.svg';
 import ShowPassword from './icon-show-password.svg';
 import Illustration from './illustration-authentication.svg';
 import LogoLarge from './logo-large.svg';
@@ -27,5 +28,6 @@ export {
 	NavBills,
 	MinimizeMenu,
 	CaretLeft,
-	CaretRight
+	CaretRight,
+	Search
 };
