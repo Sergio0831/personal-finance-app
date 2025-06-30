@@ -43,7 +43,7 @@
 	--muted-foreground: var(--grey-300);
 	--destructive: var(--red-500);
 	--destructive-foreground: var(--white);
-	--ring: var(--grey-900);
+	--ring: var(--green);
 
 	/* Sidebar background color */
 	--sidebar-background: var(--grey-900);

@@ -7,12 +7,21 @@ import {
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
+	getSortedRowModel,
 	useReactTable
 } from '@tanstack/react-table';
 import { useState } from 'react';
 
+import {
+	Card,
+	CardContent,
+	CardFooter,
+	CardHeader
+} from '@/components/ui/card';
+
 import TableFilter from './TableFilter';
 import TablePagination from './TablePagination';
+import TableSorting from './TableSorting';
 import TableView from './TableView';
 
 interface TransactionsTableProps<TData, TValue> {
@@ -24,7 +33,7 @@ const TransactionsTable = <TData, TValue>({
 	columns,
 	data
 }: TransactionsTableProps<TData, TValue>) => {
-	const [sorting] = useState<SortingState>([]);
+	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
 	const table = useReactTable({
@@ -34,6 +43,8 @@ const TransactionsTable = <TData, TValue>({
 		getPaginationRowModel: getPaginationRowModel(),
 		onColumnFiltersChange: setColumnFilters,
 		getFilteredRowModel: getFilteredRowModel(),
+		getSortedRowModel: getSortedRowModel(),
+		onSortingChange: setSorting,
 		state: {
 			sorting,
 			columnFilters
@@ -41,13 +52,20 @@ const TransactionsTable = <TData, TValue>({
 	});
 
 	return (
-		<div className='mb-13 grid w-full gap-y-6 overflow-x-auto rounded-xl bg-white p-6 sm:mb-18 sm:p-8 md:mb-0'>
-			<div>
+		<Card className='mb-13 grid w-full gap-y-6 overflow-x-auto sm:mb-18 md:mb-0'>
+			<CardHeader className='flex-row justify-between space-y-0'>
 				<TableFilter table={table} />
-			</div>
-			<TableView table={table} columns={columns} />
-			<TablePagination table={table} />
-		</div>
+				<div>
+					<TableSorting table={table} />
+				</div>
+			</CardHeader>
+			<CardContent>
+				<TableView table={table} columns={columns} />
+			</CardContent>
+			<CardFooter className='h-16 items-end justify-between'>
+				<TablePagination table={table} />
+			</CardFooter>
+		</Card>
 	);
 };
 

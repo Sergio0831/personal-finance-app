@@ -2,7 +2,7 @@ import { Table } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 
-import { ELLIPSIS, usePaginationRange } from '@/hooks/usePaginationRange';
+// import { ELLIPSIS, usePaginationRange } from '@/hooks/usePaginationRange';
 
 import { cn } from '@/lib/clsx';
 
@@ -13,10 +13,10 @@ interface TransactionsTableProps<TData> {
 }
 
 const TablePagination = <TData,>({ table }: TransactionsTableProps<TData>) => {
-	const range = usePaginationRange(table);
+	// const range = usePaginationRange(table);
 
 	return (
-		<div className='flex h-16 items-end justify-between'>
+		<>
 			<Button
 				variant='outline'
 				onClick={() => table.previousPage()}
@@ -28,7 +28,7 @@ const TablePagination = <TData,>({ table }: TransactionsTableProps<TData>) => {
 				<span className='sr-only'>Go to previous page</span>
 			</Button>
 			<div className='flex gap-2'>
-				{range.map(page =>
+				{/* {range.map(page =>
 					page === ELLIPSIS ? (
 						<span key={page} className='px-2'>
 							…
@@ -42,14 +42,14 @@ const TablePagination = <TData,>({ table }: TransactionsTableProps<TData>) => {
 							onClick={() => table.setPageIndex(page - 1)}
 							className={cn(
 								page - 1 === table.getState().pagination.pageIndex &&
-									'bg-foreground hover:none text-white'
+									'bg-foreground hover:bg-foreground text-white'
 							)}
 						>
 							{page}
 						</Button>
 					)
-				)}
-				{/* {table.getPageOptions().map(pageSize => (
+				)} */}
+				{table.getPageOptions().map(pageSize => (
 					<Button
 						key={pageSize}
 						value={`${pageSize + 1}`}
@@ -63,7 +63,7 @@ const TablePagination = <TData,>({ table }: TransactionsTableProps<TData>) => {
 					>
 						{pageSize + 1}
 					</Button>
-				))} */}
+				))}
 			</div>
 			<Button
 				variant='outline'
@@ -75,7 +75,7 @@ const TablePagination = <TData,>({ table }: TransactionsTableProps<TData>) => {
 				<CaretRight />
 				<span className='sr-only'>Go to next page</span>
 			</Button>
-		</div>
+		</>
 	);
 };
 

@@ -1,3 +1,4 @@
+import CaretDown from './icon-caret-down.svg';
 import CaretLeft from './icon-caret-left.svg';
 import CaretRight from './icon-caret-right.svg';
 import GitHubIcon from './icon-github.svg';
@@ -29,5 +30,6 @@ export {
 	MinimizeMenu,
 	CaretLeft,
 	CaretRight,
+	CaretDown,
 	Search
 };

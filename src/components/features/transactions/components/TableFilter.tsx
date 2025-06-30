@@ -4,11 +4,11 @@ import { Input } from '@/components/ui/input';
 
 import { Search } from '@/assets/icons';
 
-interface TransactionsTableProps<TData> {
+interface TableFilterProps<TData> {
 	table: Table<TData>;
 }
 
-const TableFilter = <TData,>({ table }: TransactionsTableProps<TData>) => {
+const TableFilter = <TData,>({ table }: TableFilterProps<TData>) => {
 	return (
 		<div className='relative w-full max-w-xs'>
 			<Input

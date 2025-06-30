@@ -21,6 +21,7 @@ type Transaction = {
 export const columns: ColumnDef<Transaction>[] = [
 	{
 		accessorKey: 'name',
+		sortingFn: 'alphanumeric',
 		header: () => <div className='md:px-4'>Recipient / Sender</div>,
 		cell: ({ row }) => {
 			return (
@@ -60,6 +61,7 @@ export const columns: ColumnDef<Transaction>[] = [
 	},
 	{
 		accessorKey: 'date',
+		sortingFn: 'datetime',
 		header: () => <div className='text-center'>Transaction Date</div>,
 		cell: ({ row }) => {
 			const formattedDate = formatDate(row.original.date!);
@@ -73,6 +75,7 @@ export const columns: ColumnDef<Transaction>[] = [
 	},
 	{
 		accessorKey: 'amount',
+		sortingFn: 'basic',
 		header: () => <div className='text-right md:px-4'>Amount</div>,
 		cell: ({ row }) => {
 			const amount = parseFloat(row.getValue('amount'));
