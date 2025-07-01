@@ -4,6 +4,7 @@ import {
 	type ColumnDef,
 	type ColumnFiltersState,
 	type SortingState,
+	Table,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
@@ -20,9 +21,14 @@ import {
 } from '@/components/ui/card';
 
 import TableFilter from './TableFilter';
+import TableFilterByCategory from './TableFilterByCategory';
 import TablePagination from './TablePagination';
 import TableSorting from './TableSorting';
 import TableView from './TableView';
+
+export interface TableProps<TData> {
+	table: Table<TData>;
+}
 
 interface TransactionsTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -45,6 +51,7 @@ const TransactionsTable = <TData, TValue>({
 		getFilteredRowModel: getFilteredRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		onSortingChange: setSorting,
+
 		state: {
 			sorting,
 			columnFilters
@@ -55,8 +62,9 @@ const TransactionsTable = <TData, TValue>({
 		<Card className='mb-13 grid w-full gap-y-6 overflow-x-auto sm:mb-18 md:mb-0'>
 			<CardHeader className='flex-row justify-between space-y-0'>
 				<TableFilter table={table} />
-				<div>
+				<div className='flex items-center gap-x-6'>
 					<TableSorting table={table} />
+					<TableFilterByCategory table={table} />
 				</div>
 			</CardHeader>
 			<CardContent>

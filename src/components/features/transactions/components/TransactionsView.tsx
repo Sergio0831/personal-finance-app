@@ -10,6 +10,7 @@ const TransactionsView = () => {
 	if (loading || !data?.transactions) {
 		return <div>Loading...</div>;
 	}
+
 	return <TransactionsTable columns={columns} data={data.transactions} />;
 };
 

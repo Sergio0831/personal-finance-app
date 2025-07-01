@@ -1,5 +1,3 @@
-import { Table } from '@tanstack/react-table';
-
 import {
 	Select,
 	SelectContent,
@@ -8,11 +6,9 @@ import {
 	SelectValue
 } from '@/components/ui/select';
 
-interface TableSortingProps<TData> {
-	table: Table<TData>;
-}
+import { TableProps } from './TransactionsTable';
 
-const TableSorting = <TData,>({ table }: TableSortingProps<TData>) => {
+const TableSorting = <TData,>({ table }: TableProps<TData>) => {
 	return (
 		<div className='flex items-center gap-x-2'>
 			<span className='text-preset-4 text-muted'>Sort by</span>
@@ -21,13 +17,14 @@ const TableSorting = <TData,>({ table }: TableSortingProps<TData>) => {
 					const [id, dir] = value.split('-');
 					table.setSorting([{ id, desc: dir === 'desc' }]);
 				}}
-				// value={table.getState().sorting[0]?.id}
+				value={
+					table.getState().sorting[0]
+						? `${table.getState().sorting[0].id}-${table.getState().sorting[0].desc ? 'desc' : 'asc'}`
+						: 'date-desc'
+				}
 			>
 				<SelectTrigger className='data-[size=default]:h-[45px]'>
-					<SelectValue
-						defaultValue={table.getState().sorting[0]?.id ?? 'Latest'}
-						placeholder='Latest'
-					/>
+					<SelectValue placeholder='Latest' />
 				</SelectTrigger>
 				<SelectContent>
 					<SelectItem value='date-desc'>Latest</SelectItem>

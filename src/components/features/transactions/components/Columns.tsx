@@ -10,7 +10,7 @@ import { formatAmount, formatDate } from '@/lib/format';
 
 import { Category } from '@/generated/prisma';
 
-type Transaction = {
+export type Transaction = {
 	id: string;
 	avatar?: string;
 	name: string;
@@ -81,9 +81,9 @@ export const columns: ColumnDef<Transaction>[] = [
 			const amount = parseFloat(row.getValue('amount'));
 			const formatted = formatAmount(amount);
 			const isPositive = amount > 0;
-			const displayAmount = isPositive ? `+${formatted}` : formatted;
+			const displayAmount = isPositive ? `+${formatted}` : `-${formatted}`;
 
-			const formattedDate = formatDate(row.original.date!);
+			const formattedDate = formatDate(row.getValue('amount'));
 
 			return (
 				<div className='text-right md:px-4'>

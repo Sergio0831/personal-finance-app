@@ -1,18 +1,13 @@
-import { Table } from '@tanstack/react-table';
-
 import { Button } from '@/components/ui/button';
 
 // import { ELLIPSIS, usePaginationRange } from '@/hooks/usePaginationRange';
 
 import { cn } from '@/lib/clsx';
 
+import { TableProps } from './TransactionsTable';
 import { CaretLeft, CaretRight } from '@/assets/icons';
 
-interface TransactionsTableProps<TData> {
-	table: Table<TData>;
-}
-
-const TablePagination = <TData,>({ table }: TransactionsTableProps<TData>) => {
+const TablePagination = <TData,>({ table }: TableProps<TData>) => {
 	// const range = usePaginationRange(table);
 
 	return (

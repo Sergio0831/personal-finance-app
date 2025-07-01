@@ -1,8 +1,4 @@
-import {
-	type ColumnDef,
-	type Table as TableProps,
-	flexRender
-} from '@tanstack/react-table';
+import { type ColumnDef, flexRender } from '@tanstack/react-table';
 
 import {
 	Table,
@@ -13,8 +9,9 @@ import {
 	TableRow
 } from '@/components/ui/table';
 
-interface TableViewProps<TData, TValue> {
-	table: TableProps<TData>;
+import { TableProps } from './TransactionsTable';
+
+interface TableViewProps<TData, TValue> extends TableProps<TData> {
 	columns: ColumnDef<TData, TValue>[];
 }
 

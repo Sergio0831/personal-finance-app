@@ -1,14 +1,9 @@
-import { Table } from '@tanstack/react-table';
-
 import { Input } from '@/components/ui/input';
 
+import { TableProps } from './TransactionsTable';
 import { Search } from '@/assets/icons';
 
-interface TableFilterProps<TData> {
-	table: Table<TData>;
-}
-
-const TableFilter = <TData,>({ table }: TableFilterProps<TData>) => {
+const TableFilter = <TData,>({ table }: TableProps<TData>) => {
 	return (
 		<div className='relative w-full max-w-xs'>
 			<Input
