@@ -1,3 +1,4 @@
+import { type TableProps } from '@/components/ui/data-table';
 import {
 	Select,
 	SelectContent,
@@ -9,7 +10,6 @@ import {
 import { type Category } from '@/generated/prisma';
 
 import { type Transaction } from './Columns';
-import { type TableProps } from './TransactionsTable';
 
 const categories: Category[] = [
 	'General',
@@ -34,7 +34,7 @@ const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
 	};
 
 	return (
-		<div className='flex items-center gap-x-2'>
+		<div className='flex flex-wrap items-center gap-2'>
 			<span className='text-preset-4 text-muted'>Category</span>
 			<Select
 				value={

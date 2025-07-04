@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 
 import { Toaster } from '@/components/ui/sonner';
@@ -7,25 +6,7 @@ import { Toaster } from '@/components/ui/sonner';
 import ApolloClientProvider from '@/providers/ApolloClientProvider';
 
 import './globals.css';
-
-const publicSans = localFont({
-	variable: '--font-public-sans',
-	src: [
-		{
-			path: '../assets/fonts/PublicSans-VariableFont_wght.woff2',
-			weight: '400 700',
-			style: 'normal'
-		},
-		{
-			path: '../assets/fonts/PublicSans-Italic-VariableFont_wght.woff2',
-			weight: '400 700',
-			style: 'italic'
-		}
-	],
-	fallback: [
-		'system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif'
-	]
-});
+import { publicSans } from '@/ui/fonts';
 
 export const metadata: Metadata = {
 	title: 'Personal Finance App',

@@ -1,4 +1,8 @@
-import { type ColumnDef, flexRender } from '@tanstack/react-table';
+import {
+	type ColumnDef,
+	type Table as ReactTableInstance,
+	flexRender
+} from '@tanstack/react-table';
 
 import {
 	Table,
@@ -9,16 +13,20 @@ import {
 	TableRow
 } from '@/components/ui/table';
 
-import { TableProps } from './TransactionsTable';
+import { cn } from '@/lib/clsx';
 
-interface TableViewProps<TData, TValue> extends TableProps<TData> {
+export interface TableProps<TData> {
+	table: ReactTableInstance<TData>;
+}
+
+export interface DataTableProps<TData, TValue> extends TableProps<TData> {
 	columns: ColumnDef<TData, TValue>[];
 }
 
-const TableView = <TData, TValue>({
+export const DataTable = <TData, TValue>({
 	table,
 	columns
-}: TableViewProps<TData, TValue>) => {
+}: DataTableProps<TData, TValue>) => {
 	return (
 		<Table>
 			<TableHeader className='hidden sm:table-header-group'>
@@ -26,7 +34,10 @@ const TableView = <TData, TValue>({
 					<TableRow key={headerGroup.id}>
 						{headerGroup.headers.map(header => {
 							return (
-								<TableHead key={header.id}>
+								<TableHead
+									key={header.id}
+									className={cn(header.column.columnDef.meta?.className)}
+								>
 									{header.isPlaceholder
 										? null
 										: flexRender(
@@ -47,7 +58,10 @@ const TableView = <TData, TValue>({
 							data-state={row.getIsSelected() && 'selected'}
 						>
 							{row.getVisibleCells().map(cell => (
-								<TableCell key={cell.id}>
+								<TableCell
+									key={cell.id}
+									className={cn(cell.column.columnDef.meta?.className)}
+								>
 									{flexRender(cell.column.columnDef.cell, cell.getContext())}
 								</TableCell>
 							))}
@@ -64,5 +78,3 @@ const TableView = <TData, TValue>({
 		</Table>
 	);
 };
-
-export default TableView;

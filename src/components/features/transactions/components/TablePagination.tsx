@@ -1,14 +1,15 @@
 import { Button } from '@/components/ui/button';
+import { type TableProps } from '@/components/ui/data-table';
 
-// import { ELLIPSIS, usePaginationRange } from '@/hooks/usePaginationRange';
+import { ELLIPSIS, usePaginationRange } from '@/hooks/usePaginationRange';
 
 import { cn } from '@/lib/clsx';
 
-import { TableProps } from './TransactionsTable';
+import { type Transaction } from './Columns';
 import { CaretLeft, CaretRight } from '@/assets/icons';
 
-const TablePagination = <TData,>({ table }: TableProps<TData>) => {
-	// const range = usePaginationRange(table);
+const TablePagination = ({ table }: TableProps<Transaction>) => {
+	const range = usePaginationRange(table);
 
 	return (
 		<>
@@ -23,7 +24,7 @@ const TablePagination = <TData,>({ table }: TableProps<TData>) => {
 				<span className='sr-only'>Go to previous page</span>
 			</Button>
 			<div className='flex gap-2'>
-				{/* {range.map(page =>
+				{range.map(page =>
 					page === ELLIPSIS ? (
 						<span key={page} className='px-2'>
 							…
@@ -43,8 +44,8 @@ const TablePagination = <TData,>({ table }: TableProps<TData>) => {
 							{page}
 						</Button>
 					)
-				)} */}
-				{table.getPageOptions().map(pageSize => (
+				)}
+				{/* {table.getPageOptions().map(pageSize => (
 					<Button
 						key={pageSize}
 						value={`${pageSize + 1}`}
@@ -58,7 +59,7 @@ const TablePagination = <TData,>({ table }: TableProps<TData>) => {
 					>
 						{pageSize + 1}
 					</Button>
-				))}
+				))} */}
 			</div>
 			<Button
 				variant='outline'

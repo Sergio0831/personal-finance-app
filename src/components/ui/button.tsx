@@ -5,21 +5,19 @@ import * as React from 'react';
 import { cn } from '@/lib/clsx';
 
 const buttonVariants = cva(
-	'inline-flex items-center justify-center gap-4 whitespace-nowrap font-bold transition-colors ring-offset-card focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer',
+	'inline-flex items-center justify-center gap-4 whitespace-nowrap font-bold transition-colors ring-offset-card focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer focus-visible:border-ring focus-visible:ring-ring/60 focus-visible:ring-[3px]',
 	{
 		variants: {
 			variant: {
-				primary:
-					'bg-foreground text-white  hover:bg-gray-500 focus-visible:bg-gray-500',
+				primary: 'bg-foreground text-white  hover:bg-gray-500 ',
 				secondary:
-					'bg-background text-foreground border border-transparent hover:bg-transparent hover:border-foreground focus-visible:bg-transparent focus-visible:border-foreground',
+					'bg-background text-foreground border border-transparent hover:bg-transparent hover:border-foreground ',
 				outline:
-					'bg-transparent border border-foreground hover:bg-beige-500 hover:text-white focus-visible:bg-beige-500 hover:border-transparent focus-visible:border-transparent font-normal',
+					'bg-transparent border border-foreground hover:bg-beige-500 hover:text-white  hover:border-transparent  font-normal',
 				destructive:
-					'bg-destructive text-destructive-foreground hover:bg-red-400 focus-visible:bg-red-400',
-				link: 'text-foreground underline-offset-4 underline hover:text-muted focus-visible:text-muted',
-				ghost:
-					'bg-transparent text-foreground hover:text-muted focus-visible:text-muted'
+					'bg-destructive text-destructive-foreground hover:bg-red-400 ',
+				link: 'text-foreground underline-offset-4 underline hover:text-muted ',
+				ghost: 'bg-transparent text-foreground hover:text-muted '
 			},
 			size: {
 				sm: 'h-9 rounded-sm px-3 text-preset-3',

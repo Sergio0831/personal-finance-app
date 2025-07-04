@@ -1,10 +1,9 @@
 'use client';
 
 import {
-	type ColumnDef,
+	ColumnDef,
 	type ColumnFiltersState,
 	type SortingState,
-	Table,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
@@ -19,26 +18,20 @@ import {
 	CardFooter,
 	CardHeader
 } from '@/components/ui/card';
+import { DataTable } from '@/components/ui/data-table';
 
+import { Transaction } from './Columns';
 import TableFilter from './TableFilter';
 import TableFilterByCategory from './TableFilterByCategory';
 import TablePagination from './TablePagination';
 import TableSorting from './TableSorting';
-import TableView from './TableView';
 
-export interface TableProps<TData> {
-	table: Table<TData>;
+interface TransactionsTableProps {
+	data: Transaction[];
+	columns: ColumnDef<Transaction, unknown>[];
 }
 
-interface TransactionsTableProps<TData, TValue> {
-	columns: ColumnDef<TData, TValue>[];
-	data: TData[];
-}
-
-const TransactionsTable = <TData, TValue>({
-	columns,
-	data
-}: TransactionsTableProps<TData, TValue>) => {
+const TransactionsTable = ({ columns, data }: TransactionsTableProps) => {
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -60,7 +53,7 @@ const TransactionsTable = <TData, TValue>({
 
 	return (
 		<Card className='mb-13 grid w-full gap-y-6 overflow-x-auto sm:mb-18 md:mb-0'>
-			<CardHeader className='flex-row justify-between space-y-0'>
+			<CardHeader className='flex-row items-end justify-between space-y-0 gap-x-6'>
 				<TableFilter table={table} />
 				<div className='flex items-center gap-x-6'>
 					<TableSorting table={table} />
@@ -68,7 +61,7 @@ const TransactionsTable = <TData, TValue>({
 				</div>
 			</CardHeader>
 			<CardContent>
-				<TableView table={table} columns={columns} />
+				<DataTable table={table} columns={columns} />
 			</CardContent>
 			<CardFooter className='h-16 items-end justify-between'>
 				<TablePagination table={table} />

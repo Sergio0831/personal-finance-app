@@ -5,7 +5,7 @@ export const transactions = [
 		avatar: '/images/avatars/emma-richardson.jpg',
 		name: 'Emma Richardson',
 		category: Category.General,
-		date: '2024-08-19T14:23:11Z',
+		date: '2024-08-19T21:23:11Z',
 		amount: 75.5,
 		recurring: false
 	},

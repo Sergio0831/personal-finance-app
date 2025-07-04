@@ -53,10 +53,13 @@ export const columns: ColumnDef<Transaction>[] = [
 		header: () => <div className='text-center'>Category</div>,
 		cell: ({ row }) => {
 			return (
-				<div className='text-preset-5 text-muted hidden text-center sm:block'>
+				<div className='text-preset-5 text-muted text-center'>
 					{row.original.category}
 				</div>
 			);
+		},
+		meta: {
+			className: 'hidden sm:table-cell'
 		}
 	},
 	{
@@ -67,10 +70,13 @@ export const columns: ColumnDef<Transaction>[] = [
 			const formattedDate = formatDate(row.original.date!);
 
 			return (
-				<div className='text-preset-5 text-muted hidden text-center sm:block'>
+				<div className='text-preset-5 text-muted text-center'>
 					{!row.original.date ? '29 Aug 2024' : formattedDate}
 				</div>
 			);
+		},
+		meta: {
+			className: 'hidden sm:table-cell'
 		}
 	},
 	{
@@ -83,7 +89,7 @@ export const columns: ColumnDef<Transaction>[] = [
 			const isPositive = amount > 0;
 			const displayAmount = isPositive ? `+${formatted}` : `-${formatted}`;
 
-			const formattedDate = formatDate(row.getValue('amount'));
+			const formattedDate = formatDate(row.getValue('date'));
 
 			return (
 				<div className='text-right md:px-4'>
