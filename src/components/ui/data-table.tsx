@@ -64,7 +64,7 @@ export const DataTable = <TData, TValue>({
                 <TableRow key={skeletonKey}>
                   {columns.map((col, colIndex) => (
                     <TableCell
-                      className={cn(col.meta?.className, 'px-4')}
+                      className={cn(col.meta?.className, 'sm:px-4')}
                       key={`skeleton-cell-${col.id || col.header}-${colIndex}`}
                     >
                       <Skeleton className="h-10 w-full py-4" />

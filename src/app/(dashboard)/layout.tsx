@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers';
 import type { ReactNode } from 'react';
+import DesktopSidebar from '@/components/dashboard/DesktopSidebar';
+import MobileSidebar from '@/components/dashboard/MobileSidebar';
 import PageWrapper from '@/components/layout/PageWrapper';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import DesktopSidebar from '@/features/dashboard/components/DesktopSidebar';
-import MobileSidebar from '@/features/dashboard/components/MobileSidebar';
 
 const DashboardLayout = async ({
   children,

@@ -19,12 +19,11 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
-
+import TableFilter from '../table/TableFilter';
+import TableFilterByCategory from '../table/TableFilterByCategory';
+import TablePagination from '../table/TablePagination';
+import TableSorting from '../table/TableSorting';
 import type { Transaction } from './Columns';
-import TableFilter from './TableFilter';
-import TableFilterByCategory from './TableFilterByCategory';
-import TablePagination from './TablePagination';
-import TableSorting from './TableSorting';
 
 interface TransactionsTableProps {
   data: Transaction[];
@@ -58,7 +57,7 @@ const TransactionsTable = ({
 
   return (
     <Card className="mb-13 grid w-full gap-y-6 overflow-x-auto sm:mb-18 md:mb-0">
-      <CardHeader className="flex-row items-end justify-between gap-x-6 space-y-0">
+      <CardHeader className="flex-row justify-between gap-x-6 space-y-0 sm:items-end">
         <TableFilter table={table} />
         <div className="flex items-center gap-x-6">
           <TableSorting table={table} />

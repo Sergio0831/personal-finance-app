@@ -12,7 +12,7 @@ import {
   Value,
   Viewport,
 } from '@radix-ui/react-select';
-import type * as React from 'react';
+import type React from 'react';
 import { CaretDown } from '@/assets/icons';
 import { cn } from '@/lib/clsx';
 

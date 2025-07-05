@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { UserButton } from '@/features/user/components';
+import { UserButton } from '@/components/user';
 
 import { cn } from '@/lib/clsx';
 

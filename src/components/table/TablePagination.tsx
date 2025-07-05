@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import type { TableProps } from '@/components/ui/data-table';
 import { ELLIPSIS, usePaginationRange } from '@/hooks/usePaginationRange';
 import { cn } from '@/lib/clsx';
-import type { Transaction } from './Columns';
+import type { Transaction } from '../transactions/Columns';
 
 const TablePagination = ({ table }: TableProps<Transaction>) => {
   const range = usePaginationRange(table);

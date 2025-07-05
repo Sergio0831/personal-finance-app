@@ -1,35 +1,18 @@
-import CaretDown from './icon-caret-down.svg';
-import CaretLeft from './icon-caret-left.svg';
-import CaretRight from './icon-caret-right.svg';
-import GitHubIcon from './icon-github.svg';
-import HidePassword from './icon-hide-password.svg';
-import MinimizeMenu from './icon-minimize-menu.svg';
-import NavBudgets from './icon-nav-budgets.svg';
-import NavOverview from './icon-nav-overview.svg';
-import NavPots from './icon-nav-pots.svg';
-import NavBills from './icon-nav-recurring-bills.svg';
-import NavTransactions from './icon-nav-transactions.svg';
-import Search from './icon-search.svg';
-import ShowPassword from './icon-show-password.svg';
-import Illustration from './illustration-authentication.svg';
-import LogoLarge from './logo-large.svg';
-import LogoSmall from './logo-small.svg';
-
-export {
-	GitHubIcon,
-	HidePassword,
-	ShowPassword,
-	Illustration,
-	LogoLarge,
-	LogoSmall,
-	NavOverview,
-	NavTransactions,
-	NavBudgets,
-	NavPots,
-	NavBills,
-	MinimizeMenu,
-	CaretLeft,
-	CaretRight,
-	CaretDown,
-	Search
-};
+export { default as CaretDown } from './icon-caret-down.svg';
+export { default as CaretLeft } from './icon-caret-left.svg';
+export { default as CaretRight } from './icon-caret-right.svg';
+export { default as FilterMobile } from './icon-filter-mobile.svg';
+export { default as GitHubIcon } from './icon-github.svg';
+export { default as HidePassword } from './icon-hide-password.svg';
+export { default as MinimizeMenu } from './icon-minimize-menu.svg';
+export { default as NavBudgets } from './icon-nav-budgets.svg';
+export { default as NavOverview } from './icon-nav-overview.svg';
+export { default as NavPots } from './icon-nav-pots.svg';
+export { default as NavBills } from './icon-nav-recurring-bills.svg';
+export { default as NavTransactions } from './icon-nav-transactions.svg';
+export { default as Search } from './icon-search.svg';
+export { default as ShowPassword } from './icon-show-password.svg';
+export { default as SortMobile } from './icon-sort-mobile.svg';
+export { default as Illustration } from './illustration-authentication.svg';
+export { default as LogoLarge } from './logo-large.svg';
+export { default as LogoSmall } from './logo-small.svg';
