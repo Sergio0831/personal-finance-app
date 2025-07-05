@@ -3,31 +3,30 @@ import PrismaPlugin from '@pothos/plugin-prisma';
 import ZodPlugin from '@pothos/plugin-zod';
 import { GraphQLDateTime } from 'graphql-scalars';
 
-import PrismaTypes from '@/generated/pothos-types';
-
+import type PrismaTypes from '@/generated/pothos-types';
 import { Category } from '../generated/prisma';
 import { prisma } from '../lib/prisma-client';
 
-import { Context } from './context';
+import type { Context } from './context';
 
 export const builder = new SchemaBuilder<{
-	PrismaTypes: PrismaTypes;
-	Context: Context;
-	Scalars: {
-		Date: {
-			Input: Date;
-			Output: Date;
-		};
-	};
+  PrismaTypes: PrismaTypes;
+  Context: Context;
+  Scalars: {
+    Date: {
+      Input: Date;
+      Output: Date;
+    };
+  };
 }>({
-	plugins: [PrismaPlugin, ZodPlugin],
-	prisma: {
-		client: prisma
-	}
+  plugins: [PrismaPlugin, ZodPlugin],
+  prisma: {
+    client: prisma,
+  },
 });
 
 export const CategoryEnumType = builder.enumType('Category', {
-	values: Object.values(Category)
+  values: Object.values(Category),
 });
 
 builder.queryType({});

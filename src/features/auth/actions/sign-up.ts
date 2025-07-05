@@ -5,41 +5,41 @@ import { headers } from 'next/headers';
 
 import { auth } from '@/lib/auth';
 
-import { RegisterSchema, RegisterSchemaType } from '../schemas';
+import { RegisterSchema, type RegisterSchemaType } from '../schemas';
 
 export async function signUpWithCredentials(formValues: RegisterSchemaType) {
-	const validatedFields = RegisterSchema.safeParse(formValues);
+  const validatedFields = RegisterSchema.safeParse(formValues);
 
-	if (!validatedFields.success) {
-		return {
-			error: 'Invalid fields!'
-		};
-	}
+  if (!validatedFields.success) {
+    return {
+      error: 'Invalid fields!',
+    };
+  }
 
-	const { name, email, password } = validatedFields.data;
+  const { name, email, password } = validatedFields.data;
 
-	try {
-		await auth.api.signUpEmail({
-			headers: await headers(),
-			body: {
-				name,
-				email,
-				password
-			}
-		});
+  try {
+    await auth.api.signUpEmail({
+      headers: await headers(),
+      body: {
+        name,
+        email,
+        password,
+      },
+    });
 
-		return {
-			error: null
-		};
-	} catch (error) {
-		if (error instanceof APIError) {
-			return {
-				error:
-					error.message ||
-					'An error occurred during registration. Please try again.'
-			};
-		}
+    return {
+      error: null,
+    };
+  } catch (error) {
+    if (error instanceof APIError) {
+      return {
+        error:
+          error.message ||
+          'An error occurred during registration. Please try again.',
+      };
+    }
 
-		return { error: 'Internal Server Error' };
-	}
+    return { error: 'Internal Server Error' };
+  }
 }

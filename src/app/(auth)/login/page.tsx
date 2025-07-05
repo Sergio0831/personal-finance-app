@@ -1,7 +1,7 @@
 import { LoginForm } from '@/features/auth/components';
 
 const Login = () => {
-	return <LoginForm />;
+  return <LoginForm />;
 };
 
 export default Login;

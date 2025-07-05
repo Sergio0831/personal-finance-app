@@ -1,0 +1,110 @@
+'use client';
+
+import type { ColumnDef } from '@tanstack/react-table';
+import Image from 'next/image';
+
+import { Avatar } from '@/components/ui/avatar';
+import type { Category } from '@/generated/prisma';
+import { cn } from '@/lib/clsx';
+import { formatAmount, formatDate } from '@/lib/format';
+
+export type Transaction = {
+  id: string;
+  avatar?: string;
+  name: string;
+  category?: Category;
+  date: Date;
+  amount: number;
+};
+
+export const columns: ColumnDef<Transaction>[] = [
+  {
+    accessorKey: 'name',
+    sortingFn: 'alphanumeric',
+    header: () => <div className="md:px-4">Recipient / Sender</div>,
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center gap-4 md:px-4">
+          <Avatar>
+            <Image
+              alt={row.original.name}
+              height={40}
+              src={
+                row.original.avatar
+                  ? row.original.avatar
+                  : '/images/avatars/bytewise.jpg'
+              }
+              width={40}
+            />
+          </Avatar>
+          <div>
+            <span className="font-bold text-preset-4">{row.original.name}</span>
+            <span className="block text-muted text-preset-5 sm:hidden">
+              {row.original.category}
+            </span>
+          </div>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'category',
+    header: () => <div className="text-center">Category</div>,
+    cell: ({ row }) => {
+      return (
+        <div className="text-center text-muted text-preset-5">
+          {row.original.category}
+        </div>
+      );
+    },
+    meta: {
+      className: 'hidden sm:table-cell',
+    },
+  },
+  {
+    accessorKey: 'date',
+    sortingFn: 'datetime',
+    header: () => <div className="text-center">Transaction Date</div>,
+    cell: ({ row }) => {
+      const formattedDate = formatDate(row.getValue('date'));
+
+      return (
+        <div className="text-center text-muted text-preset-5">
+          {row.original.date ? formattedDate : '29 Aug 2024'}
+        </div>
+      );
+    },
+    meta: {
+      className: 'hidden sm:table-cell',
+    },
+  },
+  {
+    accessorKey: 'amount',
+    sortingFn: 'basic',
+    header: () => <div className="text-right md:px-4">Amount</div>,
+    cell: ({ row }) => {
+      const amount = Number.parseFloat(row.getValue('amount'));
+      const formatted = formatAmount(amount);
+      const isPositive = amount > 0;
+      const displayAmount = isPositive ? `+${formatted}` : `-${formatted}`;
+
+      const formattedDate = formatDate(row.getValue('date'));
+
+      return (
+        <div className="text-right md:px-4">
+          <span
+            className={cn(
+              'font-bold text-sm',
+              isPositive ? 'text-accent' : 'text-foreground'
+            )}
+          >
+            {displayAmount}
+          </span>
+          <span className="block text-muted text-preset-5 sm:hidden">
+            {row.original.date ? formattedDate : '29 Aug 2024'}
+          </span>
+        </div>
+      );
+    },
+  },
+];

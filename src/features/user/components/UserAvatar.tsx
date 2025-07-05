@@ -8,21 +8,21 @@ import { useSession } from '@/lib/auth-client';
 import GeneratedAvatar from './GeneratedAvatar';
 
 const UserAvatar = () => {
-	const { data, isPending } = useSession();
+  const { data, isPending } = useSession();
 
-	if (isPending || !data?.user) {
-		return <Skeleton className='h-10 w-10 rounded-full' />;
-	}
+  if (isPending || !data?.user) {
+    return <Skeleton className="h-10 w-10 rounded-full" />;
+  }
 
-	const user = data.user;
+  const user = data.user;
 
-	return user.image ? (
-		<Avatar>
-			<AvatarImage src={user.image} alt='User Avatar' />
-		</Avatar>
-	) : (
-		<GeneratedAvatar seed={user.name || 'user'} variant='initials' />
-	);
+  return user.image ? (
+    <Avatar>
+      <AvatarImage alt="User Avatar" src={user.image} />
+    </Avatar>
+  ) : (
+    <GeneratedAvatar seed={user.name || 'user'} variant="initials" />
+  );
 };
 
 export default UserAvatar;

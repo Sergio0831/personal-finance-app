@@ -1,11 +1,9 @@
-import { type SVGProps } from 'react';
-
+import type { SVGProps } from 'react';
+import { LogoSmall } from '@/assets/icons';
 import { cn } from '@/lib/clsx';
 
-import { LogoSmall } from '@/assets/icons';
-
 const LogoMobile = ({ className }: SVGProps<SVGElement>) => {
-	return <LogoSmall className={cn('h-[1.375rem] w-[0.875rem]', className)} />;
+  return <LogoSmall className={cn('h-[1.375rem] w-[0.875rem]', className)} />;
 };
 
 export default LogoMobile;

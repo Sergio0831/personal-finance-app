@@ -4,11 +4,11 @@
  * @type {string[]}
  */
 export const protectedRoutes: string[] = [
-	'/overview',
-	'/transactions',
-	'/budgets',
-	'/pots',
-	'/recurring-bills'
+  '/overview',
+  '/transactions',
+  '/budgets',
+  '/pots',
+  '/recurring-bills',
 ];
 
 /**

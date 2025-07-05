@@ -1,13 +1,13 @@
-import TransactionsView from '@/components/features/transactions/components/TransactionsView';
 import { PageHeader } from '@/components/layout';
+import { TransactionsView } from '@/components/transactions';
 
-const TransactionsPage = async () => {
-	return (
-		<>
-			<PageHeader title='Transactions' />
-			<TransactionsView />
-		</>
-	);
+const TransactionsPage = () => {
+  return (
+    <>
+      <PageHeader title="Transactions" />
+      <TransactionsView />
+    </>
+  );
 };
 
 export default TransactionsPage;

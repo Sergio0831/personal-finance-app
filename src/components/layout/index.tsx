@@ -1,4 +1,2 @@
-import PageHeader from './PageHeader';
-import PageWrapper from './PageWrapper';
-
-export { PageHeader, PageWrapper };
+export { default as PageHeader } from './PageHeader';
+export { default as PageWrapper } from './PageWrapper';
