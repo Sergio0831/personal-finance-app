@@ -13,8 +13,8 @@ export async function hashPassword(password: string) {
 }
 
 export async function verifyPassword(data: { password: string; hash: string }) {
-  const { password, hash: passworHash } = data;
+  const { password, hash: passwordHash } = data;
 
-  const result = await verify(passworHash, password, opts);
+  const result = await verify(passwordHash, password, opts);
   return result;
 }

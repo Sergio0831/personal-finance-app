@@ -7,23 +7,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import type { Category } from '@/generated/prisma';
+import { Category } from '@/generated/prisma';
 
 import type { Transaction } from './Columns';
 
-const categories: Category[] = [
-  'General',
-  'DiningOut',
-  'Groceries',
-  'Entertainment',
-  'Transportation',
-  'Shopping',
-  'Lifestyle',
-  'PersonalCare',
-  'Education',
-  'Bills',
-];
-
+// Consider deriving from schema or making configurable
+const categories: Category[] = Object.values(Category);
 const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
   const handleChange = (value: string) => {
     if (value === 'all') {

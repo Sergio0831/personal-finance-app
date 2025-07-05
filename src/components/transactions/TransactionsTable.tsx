@@ -29,9 +29,14 @@ import TableSorting from './TableSorting';
 interface TransactionsTableProps {
   data: Transaction[];
   columns: ColumnDef<Transaction, unknown>[];
+  isLoading?: boolean;
 }
 
-const TransactionsTable = ({ columns, data }: TransactionsTableProps) => {
+const TransactionsTable = ({
+  columns,
+  data,
+  isLoading,
+}: TransactionsTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -61,7 +66,7 @@ const TransactionsTable = ({ columns, data }: TransactionsTableProps) => {
         </div>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} table={table} />
+        <DataTable columns={columns} isLoading={isLoading} table={table} />
       </CardContent>
       <CardFooter className="h-16 items-end justify-between">
         <TablePagination table={table} />

@@ -49,7 +49,7 @@ const TablePagination = ({ table }: TableProps<Transaction>) => {
           <Button
             className={cn(
               pageSize === table.getState().pagination.pageIndex &&
-                'hover:none bg-foreground text-white'
+                'bg-foreground text-white hover:bg-foreground'
             )}
             key={pageSize}
             onClick={() => table.setPageIndex(pageSize)}

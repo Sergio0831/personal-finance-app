@@ -4,9 +4,8 @@ import { createContext } from '@/graphql/context';
 import { schema } from '@/graphql/schema';
 
 interface NextContext {
-  params: Promise<Record<string, string>>;
+  params: Record<string, string>;
 }
-
 const { handleRequest } = createYoga<NextContext>({
   schema,
   context: createContext,

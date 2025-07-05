@@ -4,13 +4,14 @@ import { UserButton } from '@/features/user/components';
 
 import { cn } from '@/lib/clsx';
 
-type PageHeaderProps = ComponentProps<'header'> & {
+interface PageHeaderProps extends ComponentProps<'header'> {
   title: string;
-};
+}
 
-const PageHeader = ({ className, title }: PageHeaderProps) => {
+const PageHeader = ({ className, title, ...rest }: PageHeaderProps) => {
   return (
     <header
+      {...rest}
       className={cn(
         'mb-8 flex items-center justify-between sm:py-2',
         className

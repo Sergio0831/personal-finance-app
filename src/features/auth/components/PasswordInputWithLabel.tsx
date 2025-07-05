@@ -57,7 +57,7 @@ const PasswordInputWithLabel = <T,>({
                 {...props}
               />
               <Button
-                aria-controls="password"
+                aria-controls={field.name}
                 aria-label={isVisible ? 'Hide password' : 'Show password'}
                 aria-pressed={isVisible}
                 className="absolute inset-y-0 end-0 pr-5 pl-4"

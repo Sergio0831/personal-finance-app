@@ -32,10 +32,13 @@ const RegisterForm = () => {
     },
   });
 
-  const onSubmit = (formValues: RegisterSchemaType) => {
-    setTransition(async () => {
-      const { error: signUpError } = await signUpWithCredentials(formValues);
+  const onSubmit = async (formValues: RegisterSchemaType) => {
+    // clear existing error with a low-priority update
+    setTransition(() => setError(null));
 
+    const { error: signUpError } = await signUpWithCredentials(formValues);
+
+    setTransition(() => {
       if (signUpError) {
         setError(signUpError);
       } else {
@@ -44,7 +47,6 @@ const RegisterForm = () => {
       }
     });
   };
-
   return (
     <AuthWrapper
       authMessage="Already have an account?"
