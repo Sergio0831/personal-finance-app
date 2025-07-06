@@ -3,11 +3,29 @@ import { prisma } from '../../lib/prisma-client';
 import { builder } from '../builder';
 import { Transaction } from './Transaction';
 
+const AmountSummary = builder.objectRef<{ count: number; total: number }>(
+  'AmountSummary'
+);
+
+AmountSummary.implement({
+  fields: (t) => ({
+    count: t.int({
+      nullable: false,
+      resolve: (parent) => parent.count,
+    }),
+    total: t.float({
+      nullable: false,
+      resolve: (parent) => parent.total,
+    }),
+  }),
+});
+
 const RecurringBills = builder.objectRef<{
   recurringBills: TransactionType[];
   totalBills: number;
-  totalUpcoming: number;
-  dueSoon: number;
+  paidBills: { count: number; total: number };
+  totalUpcoming: { count: number; total: number };
+  dueSoon: { count: number; total: number };
 }>('RecurringBills');
 
 RecurringBills.implement({
@@ -21,11 +39,18 @@ RecurringBills.implement({
       nullable: false,
       resolve: (parent) => parent.totalBills,
     }),
-    totalUpcoming: t.float({
+    paidBills: t.field({
+      type: AmountSummary,
+      nullable: false,
+      resolve: (parent) => parent.paidBills,
+    }),
+    totalUpcoming: t.field({
+      type: AmountSummary,
       nullable: false,
       resolve: (parent) => parent.totalUpcoming,
     }),
-    dueSoon: t.float({
+    dueSoon: t.field({
+      type: AmountSummary,
       nullable: false,
       resolve: (parent) => parent.dueSoon,
     }),
@@ -55,19 +80,28 @@ builder.queryType({
           0
         );
 
-        const paidBills = recurringBills
-          .filter((tx) => tx.date < now)
-          .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
+        const paid = recurringBills.filter((tx) => tx.date < now);
+        const paidBills = {
+          count: paid.length,
+          total: paid.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
+        };
 
-        const totalUpcoming = totalBills - paidBills;
+        const upcoming = recurringBills.filter((tx) => tx.date >= now);
+        const totalUpcoming = {
+          count: upcoming.length,
+          total: upcoming.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
+        };
 
-        const dueSoon = recurringBills
-          .filter((tx) => tx.date > now && tx.date <= in7Days)
-          .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
+        const soon = upcoming.filter((tx) => tx.date <= in7Days);
+        const dueSoon = {
+          count: soon.length,
+          total: soon.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
+        };
 
         return {
           recurringBills,
           totalBills,
+          paidBills,
           totalUpcoming,
           dueSoon,
         };

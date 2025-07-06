@@ -1,7 +1,13 @@
 import { PageHeader } from '@/components/layout';
+import { RecurringBillsView } from '@/components/recurring-bills';
 
-const RecurringBillsPage = async () => {
-	return <PageHeader title='Recurring Bills' />;
+const RecurringBillsPage = () => {
+  return (
+    <>
+      <PageHeader title="Recurring Bills" />
+      <RecurringBillsView />
+    </>
+  );
 };
 
 export default RecurringBillsPage;

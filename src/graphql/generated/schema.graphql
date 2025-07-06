@@ -1,3 +1,8 @@
+type AmountSummary {
+  count: Int!
+  total: Float!
+}
+
 enum Category {
   Bills
   DiningOut
@@ -24,10 +29,11 @@ type Query {
 }
 
 type RecurringBills {
-  dueSoon: Float!
+  dueSoon: AmountSummary!
+  paidBills: AmountSummary!
   recurringBills: [Transaction!]!
   totalBills: Float!
-  totalUpcoming: Float!
+  totalUpcoming: AmountSummary!
 }
 
 type Transaction {

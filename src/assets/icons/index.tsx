@@ -10,6 +10,7 @@ export { default as NavOverview } from './icon-nav-overview.svg';
 export { default as NavPots } from './icon-nav-pots.svg';
 export { default as NavBills } from './icon-nav-recurring-bills.svg';
 export { default as NavTransactions } from './icon-nav-transactions.svg';
+export { default as RecurringBillsIcon } from './icon-recurring-bills.svg';
 export { default as Search } from './icon-search.svg';
 export { default as ShowPassword } from './icon-show-password.svg';
 export { default as SortMobile } from './icon-sort-mobile.svg';

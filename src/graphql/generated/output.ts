@@ -19,6 +19,12 @@ export type Scalars = {
   Date: { input: any; output: any; }
 };
 
+export type AmountSummary = {
+  __typename?: 'AmountSummary';
+  count: Scalars['Int']['output'];
+  total: Scalars['Float']['output'];
+};
+
 export enum Category {
   Bills = 'Bills',
   DiningOut = 'DiningOut',
@@ -42,10 +48,11 @@ export type Query = {
 
 export type RecurringBills = {
   __typename?: 'RecurringBills';
-  dueSoon: Scalars['Float']['output'];
+  dueSoon: AmountSummary;
+  paidBills: AmountSummary;
   recurringBills: Array<Transaction>;
   totalBills: Scalars['Float']['output'];
-  totalUpcoming: Scalars['Float']['output'];
+  totalUpcoming: AmountSummary;
 };
 
 export type Transaction = {
@@ -69,6 +76,11 @@ export type User = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type GetAllRecurringBillsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllRecurringBillsQuery = { __typename?: 'Query', recurringBills: { __typename?: 'RecurringBills', totalBills: number, recurringBills: Array<{ __typename?: 'Transaction', id: string, avatar: string, name: string, date: any, amount: number }>, paidBills: { __typename?: 'AmountSummary', count: number, total: number }, totalUpcoming: { __typename?: 'AmountSummary', count: number, total: number }, dueSoon: { __typename?: 'AmountSummary', count: number, total: number } } };
+
 export type GetAllTransactionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -80,6 +92,64 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: string | null, name?: string | null, email?: string | null, image?: string | null } | null };
 
 
+export const GetAllRecurringBillsDocument = gql`
+    query GetAllRecurringBills {
+  recurringBills {
+    recurringBills {
+      id
+      avatar
+      name
+      date
+      amount
+    }
+    totalBills
+    paidBills {
+      count
+      total
+    }
+    totalUpcoming {
+      count
+      total
+    }
+    dueSoon {
+      count
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllRecurringBillsQuery__
+ *
+ * To run a query within a React component, call `useGetAllRecurringBillsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllRecurringBillsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllRecurringBillsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllRecurringBillsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllRecurringBillsQuery, GetAllRecurringBillsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllRecurringBillsQuery, GetAllRecurringBillsQueryVariables>(GetAllRecurringBillsDocument, options);
+      }
+export function useGetAllRecurringBillsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllRecurringBillsQuery, GetAllRecurringBillsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllRecurringBillsQuery, GetAllRecurringBillsQueryVariables>(GetAllRecurringBillsDocument, options);
+        }
+export function useGetAllRecurringBillsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetAllRecurringBillsQuery, GetAllRecurringBillsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllRecurringBillsQuery, GetAllRecurringBillsQueryVariables>(GetAllRecurringBillsDocument, options);
+        }
+export type GetAllRecurringBillsQueryHookResult = ReturnType<typeof useGetAllRecurringBillsQuery>;
+export type GetAllRecurringBillsLazyQueryHookResult = ReturnType<typeof useGetAllRecurringBillsLazyQuery>;
+export type GetAllRecurringBillsSuspenseQueryHookResult = ReturnType<typeof useGetAllRecurringBillsSuspenseQuery>;
+export type GetAllRecurringBillsQueryResult = Apollo.QueryResult<GetAllRecurringBillsQuery, GetAllRecurringBillsQueryVariables>;
 export const GetAllTransactionsDocument = gql`
     query GetAllTransactions {
   transactions {
