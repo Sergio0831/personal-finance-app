@@ -20,7 +20,6 @@ const TablePagination = ({ table }: TableProps<Transaction>) => {
         <span className="hidden sm:block">Prev</span>
         <span className="sr-only">Go to previous page</span>
       </Button>
-
       <div className="flex items-center gap-2 md:hidden">
         {range.map((page) =>
           page === ELLIPSIS ? (
@@ -45,22 +44,22 @@ const TablePagination = ({ table }: TableProps<Transaction>) => {
         )}
       </div>
       <div className="flex items-center gap-2 max-md:hidden">
-        {table.getPageOptions().map((pageSize) => (
+        {table.getPageOptions().map((pageIndex) => (
           <Button
             className={cn(
-              pageSize === table.getState().pagination.pageIndex &&
+              pageIndex === table.getState().pagination.pageIndex &&
                 'bg-foreground text-white hover:bg-foreground'
             )}
-            key={pageSize}
-            onClick={() => table.setPageIndex(pageSize)}
+            key={pageIndex}
+            onClick={() => table.setPageIndex(pageIndex)}
             size="icon"
-            value={`${pageSize + 1}`}
+            value={`${pageIndex + 1}`}
             variant="outline"
           >
-            {pageSize + 1}
+            {pageIndex + 1}
           </Button>
         ))}
-      </div>
+      </div>{' '}
       <Button
         className="h-10 px-4"
         disabled={!table.getCanNextPage()}

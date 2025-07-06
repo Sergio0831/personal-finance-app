@@ -34,20 +34,18 @@ export enum Category {
 
 export type Query = {
   __typename?: 'Query';
-  recentTransactions?: Maybe<Array<Transaction>>;
-  transaction?: Maybe<Transaction>;
+  recentTransactions: Array<Transaction>;
+  recurringBills: RecurringBills;
   transactions: Array<Transaction>;
   user?: Maybe<User>;
 };
 
-
-export type QueryTransactionArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryTransactionsArgs = {
-  recurring?: InputMaybe<Scalars['Boolean']['input']>;
+export type RecurringBills = {
+  __typename?: 'RecurringBills';
+  dueSoon: Scalars['Float']['output'];
+  recurringBills: Array<Transaction>;
+  totalBills: Scalars['Float']['output'];
+  totalUpcoming: Scalars['Float']['output'];
 };
 
 export type Transaction = {

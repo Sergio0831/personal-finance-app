@@ -17,10 +17,17 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar Date
 
 type Query {
-  recentTransactions: [Transaction!]
-  transaction(id: ID!): Transaction
-  transactions(recurring: Boolean): [Transaction!]!
+  recentTransactions: [Transaction!]!
+  recurringBills: RecurringBills!
+  transactions: [Transaction!]!
   user: User
+}
+
+type RecurringBills {
+  dueSoon: Float!
+  recurringBills: [Transaction!]!
+  totalBills: Float!
+  totalUpcoming: Float!
 }
 
 type Transaction {

@@ -34,7 +34,7 @@ const DesktopSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu className="">
               {sidebarItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
+                <SidebarMenuItem key={item.href || item.label}>
                   <SidebarMenuButton
                     asChild
                     className="transition-colors"
