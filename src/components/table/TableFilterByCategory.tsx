@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Category } from '@/generated/prisma';
 import type { Transaction } from '../transactions/Columns';
+import { Label } from '../ui/label';
 import SelectMobileTrigger from '../ui/select-mobile-trigger';
 
 // Consider deriving from schema or making configurable
@@ -24,17 +25,25 @@ const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="text-muted text-preset-4 max-sm:hidden">Category</span>
       <Select
         onValueChange={handleChange}
         value={
           (table.getColumn('category')?.getFilterValue() as string) ?? 'all'
         }
       >
-        <SelectTrigger className="data-[size=default]:h-[45px] max-sm:hidden">
+        <Label
+          className="text-muted text-preset-4 max-sm:hidden"
+          htmlFor="category"
+        >
+          Category
+        </Label>
+        <SelectTrigger
+          className="relative data-[size=default]:h-[45px] max-sm:hidden"
+          id="category"
+        >
           <SelectValue placeholder="All Transactions" />
         </SelectTrigger>
-        <SelectMobileTrigger className=" sm:hidden">
+        <SelectMobileTrigger className="sm:hidden">
           <FilterMobile className="size-5" />
         </SelectMobileTrigger>
         <SelectContent>

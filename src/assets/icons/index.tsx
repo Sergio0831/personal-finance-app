@@ -1,3 +1,5 @@
+export { default as IconBillDue } from './icon-bill-due.svg';
+export { default as IconBillPaid } from './icon-bill-paid.svg';
 export { default as CaretDown } from './icon-caret-down.svg';
 export { default as CaretLeft } from './icon-caret-left.svg';
 export { default as CaretRight } from './icon-caret-right.svg';

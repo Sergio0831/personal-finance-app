@@ -8,12 +8,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import type { Transaction } from '../transactions/Columns';
+import { Label } from '../ui/label';
 import SelectMobileTrigger from '../ui/select-mobile-trigger';
 
 const TableSorting = ({ table }: TableProps<Transaction>) => {
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="text-muted text-preset-4 max-sm:hidden">Sort by</span>
+    <div className="relative flex flex-wrap items-center gap-2">
       <Select
         onValueChange={(value) => {
           const [id, dir] = value.split('-');
@@ -25,10 +25,16 @@ const TableSorting = ({ table }: TableProps<Transaction>) => {
             : 'date-desc'
         }
       >
-        <SelectTrigger className="data-[size=default]:h-[45px] max-sm:hidden">
+        <Label className="max-sm:hidden" htmlFor="sorting">
+          Sort by
+        </Label>
+        <SelectTrigger
+          className="data-[size=default]:h-[45px] max-sm:hidden"
+          id="sorting"
+        >
           <SelectValue placeholder="Latest" />
         </SelectTrigger>
-        <SelectMobileTrigger className=" sm:hidden">
+        <SelectMobileTrigger className="sm:hidden">
           <SortMobile className="size-5" />
         </SelectMobileTrigger>
         <SelectContent>

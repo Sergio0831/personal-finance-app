@@ -10,7 +10,7 @@ const SelectMobileTrigger = ({
   return (
     <Trigger
       className={cn(
-        'cursor-pointer outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/60',
+        'relative cursor-pointer outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/60',
         className
       )}
       {...props}

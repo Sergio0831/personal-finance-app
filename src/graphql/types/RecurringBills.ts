@@ -63,47 +63,63 @@ builder.queryType({
       type: RecurringBills,
       nullable: false,
       resolve: async (_parent, _args, ctx) => {
-        const now = new Date();
-        const in7Days = new Date();
-        in7Days.setDate(now.getDate() + 7);
-
-        const recurringBills = await prisma.transaction.findMany({
+        const allBills = await prisma.transaction.findMany({
           where: {
             userId: ctx.user.id,
             recurring: true,
           },
-          orderBy: { date: 'desc' },
+          orderBy: {
+            date: 'desc',
+          },
         });
 
-        const totalBills = recurringBills.reduce(
-          (sum, tx) => sum + Math.abs(tx.amount),
-          0
+        // Sort and filter 8 unique bills by name (most recent instance of each)
+        const uniqueMap = new Map<string, (typeof allBills)[0]>();
+        for (const bill of allBills.sort(
+          (a, b) => b.date.getTime() - a.date.getTime()
+        )) {
+          if (!uniqueMap.has(bill.name)) {
+            uniqueMap.set(bill.name, bill);
+          }
+          if (uniqueMap.size >= 8) {
+            break;
+          }
+        }
+
+        const bills = [...uniqueMap.values()].sort(
+          (a, b) => new Date(a.date).getDate() - new Date(b.date).getDate()
+        );
+        const today = new Date().getDate();
+
+        const paid = bills.filter(
+          (bill) => new Date(bill.date).getDate() < today
+        );
+        const dueSoon = bills.filter((bill) => {
+          const day = new Date(bill.date).getDate();
+          return day >= today && day <= today + 3;
+        });
+        const upcoming = bills.filter(
+          (bill) => new Date(bill.date).getDate() > today + 3
         );
 
-        const paid = recurringBills.filter((tx) => tx.date < now);
-        const paidBills = {
-          count: paid.length,
-          total: paid.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
-        };
-
-        const upcoming = recurringBills.filter((tx) => tx.date >= now);
-        const totalUpcoming = {
-          count: upcoming.length,
-          total: upcoming.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
-        };
-
-        const soon = upcoming.filter((tx) => tx.date <= in7Days);
-        const dueSoon = {
-          count: soon.length,
-          total: soon.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
-        };
-
         return {
-          recurringBills,
-          totalBills,
-          paidBills,
-          totalUpcoming,
-          dueSoon,
+          recurringBills: bills,
+          totalBills: bills.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
+          paidBills: {
+            count: paid.length,
+            total: paid.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
+          },
+          dueSoon: {
+            count: dueSoon.length,
+            total: dueSoon.reduce((sum, tx) => sum + Math.abs(tx.amount), 0),
+          },
+          totalUpcoming: {
+            count: upcoming.length,
+            total: [...dueSoon, ...upcoming].reduce(
+              (sum, tx) => sum + Math.abs(tx.amount),
+              0
+            ),
+          },
         };
       },
     }),

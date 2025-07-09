@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/clsx';
 
 const labelVariants = cva(
-  'font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+  'text-muted text-preset-4 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
 );
 
 const Label = forwardRef<
