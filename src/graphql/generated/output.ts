@@ -38,8 +38,20 @@ export enum Category {
   Transportation = 'Transportation'
 }
 
+export type Pot = {
+  __typename?: 'Pot';
+  createdAt: Scalars['Date']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  target: Scalars['Float']['output'];
+  theme: Scalars['String']['output'];
+  total: Scalars['Float']['output'];
+  updatedAt: Scalars['Date']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  pots: Array<Pot>;
   recentTransactions: Array<Transaction>;
   recurringBills: RecurringBills;
   transactions: Array<Transaction>;
@@ -76,6 +88,11 @@ export type User = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllPotsQuery = { __typename?: 'Query', pots: Array<{ __typename?: 'Pot', id: string, name: string, target: number, total: number, theme: string }> };
+
 export type GetAllRecurringBillsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -92,6 +109,49 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: string | null, name?: string | null, email?: string | null, image?: string | null } | null };
 
 
+export const GetAllPotsDocument = gql`
+    query GetAllPots {
+  pots {
+    id
+    name
+    target
+    total
+    theme
+  }
+}
+    `;
+
+/**
+ * __useGetAllPotsQuery__
+ *
+ * To run a query within a React component, call `useGetAllPotsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllPotsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllPotsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllPotsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllPotsQuery, GetAllPotsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllPotsQuery, GetAllPotsQueryVariables>(GetAllPotsDocument, options);
+      }
+export function useGetAllPotsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllPotsQuery, GetAllPotsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllPotsQuery, GetAllPotsQueryVariables>(GetAllPotsDocument, options);
+        }
+export function useGetAllPotsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetAllPotsQuery, GetAllPotsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllPotsQuery, GetAllPotsQueryVariables>(GetAllPotsDocument, options);
+        }
+export type GetAllPotsQueryHookResult = ReturnType<typeof useGetAllPotsQuery>;
+export type GetAllPotsLazyQueryHookResult = ReturnType<typeof useGetAllPotsLazyQuery>;
+export type GetAllPotsSuspenseQueryHookResult = ReturnType<typeof useGetAllPotsSuspenseQuery>;
+export type GetAllPotsQueryResult = Apollo.QueryResult<GetAllPotsQuery, GetAllPotsQueryVariables>;
 export const GetAllRecurringBillsDocument = gql`
     query GetAllRecurringBills {
   recurringBills {

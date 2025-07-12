@@ -183,7 +183,9 @@ exports.Prisma.BudgetScalarFieldEnum = {
   category: 'category',
   maximum: 'maximum',
   theme: 'theme',
-  userId: 'userId'
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.PotScalarFieldEnum = {
@@ -192,7 +194,9 @@ exports.Prisma.PotScalarFieldEnum = {
   target: 'target',
   total: 'total',
   theme: 'theme',
-  userId: 'userId'
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {

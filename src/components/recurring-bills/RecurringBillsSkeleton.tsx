@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card } from '../ui/card';
 
-export function RecurringBillsSkeleton() {
+const RecurringBillsSkeleton = () => {
   return (
     <main className="flex gap-6 max-md:flex-col">
       {/* Left panel */}
@@ -49,4 +49,6 @@ export function RecurringBillsSkeleton() {
       </Card>
     </main>
   );
-}
+};
+
+export default RecurringBillsSkeleton;

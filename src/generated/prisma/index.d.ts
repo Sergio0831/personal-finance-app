@@ -7151,6 +7151,8 @@ export namespace Prisma {
     maximum: number | null
     theme: string | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BudgetMaxAggregateOutputType = {
@@ -7159,6 +7161,8 @@ export namespace Prisma {
     maximum: number | null
     theme: string | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BudgetCountAggregateOutputType = {
@@ -7167,6 +7171,8 @@ export namespace Prisma {
     maximum: number
     theme: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -7185,6 +7191,8 @@ export namespace Prisma {
     maximum?: true
     theme?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BudgetMaxAggregateInputType = {
@@ -7193,6 +7201,8 @@ export namespace Prisma {
     maximum?: true
     theme?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BudgetCountAggregateInputType = {
@@ -7201,6 +7211,8 @@ export namespace Prisma {
     maximum?: true
     theme?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -7296,6 +7308,8 @@ export namespace Prisma {
     maximum: number
     theme: string
     userId: string
+    createdAt: Date
+    updatedAt: Date
     _count: BudgetCountAggregateOutputType | null
     _avg: BudgetAvgAggregateOutputType | null
     _sum: BudgetSumAggregateOutputType | null
@@ -7323,6 +7337,8 @@ export namespace Prisma {
     maximum?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
 
@@ -7332,6 +7348,8 @@ export namespace Prisma {
     maximum?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
 
@@ -7341,6 +7359,8 @@ export namespace Prisma {
     maximum?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budget"]>
 
@@ -7350,9 +7370,11 @@ export namespace Prisma {
     maximum?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type BudgetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "category" | "maximum" | "theme" | "userId", ExtArgs["result"]["budget"]>
+  export type BudgetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "category" | "maximum" | "theme" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["budget"]>
   export type BudgetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -7374,6 +7396,8 @@ export namespace Prisma {
       maximum: number
       theme: string
       userId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["budget"]>
     composites: {}
   }
@@ -7803,6 +7827,8 @@ export namespace Prisma {
     readonly maximum: FieldRef<"Budget", 'Float'>
     readonly theme: FieldRef<"Budget", 'String'>
     readonly userId: FieldRef<"Budget", 'String'>
+    readonly createdAt: FieldRef<"Budget", 'DateTime'>
+    readonly updatedAt: FieldRef<"Budget", 'DateTime'>
   }
     
 
@@ -8246,6 +8272,8 @@ export namespace Prisma {
     total: number | null
     theme: string | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PotMaxAggregateOutputType = {
@@ -8255,6 +8283,8 @@ export namespace Prisma {
     total: number | null
     theme: string | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PotCountAggregateOutputType = {
@@ -8264,6 +8294,8 @@ export namespace Prisma {
     total: number
     theme: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -8285,6 +8317,8 @@ export namespace Prisma {
     total?: true
     theme?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PotMaxAggregateInputType = {
@@ -8294,6 +8328,8 @@ export namespace Prisma {
     total?: true
     theme?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PotCountAggregateInputType = {
@@ -8303,6 +8339,8 @@ export namespace Prisma {
     total?: true
     theme?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -8399,6 +8437,8 @@ export namespace Prisma {
     total: number
     theme: string
     userId: string
+    createdAt: Date
+    updatedAt: Date
     _count: PotCountAggregateOutputType | null
     _avg: PotAvgAggregateOutputType | null
     _sum: PotSumAggregateOutputType | null
@@ -8427,6 +8467,8 @@ export namespace Prisma {
     total?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pot"]>
 
@@ -8437,6 +8479,8 @@ export namespace Prisma {
     total?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pot"]>
 
@@ -8447,6 +8491,8 @@ export namespace Prisma {
     total?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pot"]>
 
@@ -8457,9 +8503,11 @@ export namespace Prisma {
     total?: boolean
     theme?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "target" | "total" | "theme" | "userId", ExtArgs["result"]["pot"]>
+  export type PotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "target" | "total" | "theme" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["pot"]>
   export type PotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -8482,6 +8530,8 @@ export namespace Prisma {
       total: number
       theme: string
       userId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["pot"]>
     composites: {}
   }
@@ -8912,6 +8962,8 @@ export namespace Prisma {
     readonly total: FieldRef<"Pot", 'Float'>
     readonly theme: FieldRef<"Pot", 'String'>
     readonly userId: FieldRef<"Pot", 'String'>
+    readonly createdAt: FieldRef<"Pot", 'DateTime'>
+    readonly updatedAt: FieldRef<"Pot", 'DateTime'>
   }
     
 
@@ -9418,7 +9470,9 @@ export namespace Prisma {
     category: 'category',
     maximum: 'maximum',
     theme: 'theme',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type BudgetScalarFieldEnum = (typeof BudgetScalarFieldEnum)[keyof typeof BudgetScalarFieldEnum]
@@ -9430,7 +9484,9 @@ export namespace Prisma {
     target: 'target',
     total: 'total',
     theme: 'theme',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PotScalarFieldEnum = (typeof PotScalarFieldEnum)[keyof typeof PotScalarFieldEnum]
@@ -9930,6 +9986,8 @@ export namespace Prisma {
     maximum?: FloatFilter<"Budget"> | number
     theme?: StringFilter<"Budget"> | string
     userId?: StringFilter<"Budget"> | string
+    createdAt?: DateTimeFilter<"Budget"> | Date | string
+    updatedAt?: DateTimeFilter<"Budget"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -9939,6 +9997,8 @@ export namespace Prisma {
     maximum?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -9951,6 +10011,8 @@ export namespace Prisma {
     maximum?: FloatFilter<"Budget"> | number
     theme?: StringFilter<"Budget"> | string
     userId?: StringFilter<"Budget"> | string
+    createdAt?: DateTimeFilter<"Budget"> | Date | string
+    updatedAt?: DateTimeFilter<"Budget"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -9960,6 +10022,8 @@ export namespace Prisma {
     maximum?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: BudgetCountOrderByAggregateInput
     _avg?: BudgetAvgOrderByAggregateInput
     _max?: BudgetMaxOrderByAggregateInput
@@ -9976,6 +10040,8 @@ export namespace Prisma {
     maximum?: FloatWithAggregatesFilter<"Budget"> | number
     theme?: StringWithAggregatesFilter<"Budget"> | string
     userId?: StringWithAggregatesFilter<"Budget"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Budget"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Budget"> | Date | string
   }
 
   export type PotWhereInput = {
@@ -9988,6 +10054,8 @@ export namespace Prisma {
     total?: FloatFilter<"Pot"> | number
     theme?: StringFilter<"Pot"> | string
     userId?: StringFilter<"Pot"> | string
+    createdAt?: DateTimeFilter<"Pot"> | Date | string
+    updatedAt?: DateTimeFilter<"Pot"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -9998,6 +10066,8 @@ export namespace Prisma {
     total?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -10011,6 +10081,8 @@ export namespace Prisma {
     total?: FloatFilter<"Pot"> | number
     theme?: StringFilter<"Pot"> | string
     userId?: StringFilter<"Pot"> | string
+    createdAt?: DateTimeFilter<"Pot"> | Date | string
+    updatedAt?: DateTimeFilter<"Pot"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -10021,6 +10093,8 @@ export namespace Prisma {
     total?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: PotCountOrderByAggregateInput
     _avg?: PotAvgOrderByAggregateInput
     _max?: PotMaxOrderByAggregateInput
@@ -10038,6 +10112,8 @@ export namespace Prisma {
     total?: FloatWithAggregatesFilter<"Pot"> | number
     theme?: StringWithAggregatesFilter<"Pot"> | string
     userId?: StringWithAggregatesFilter<"Pot"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Pot"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Pot"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -10468,6 +10544,8 @@ export namespace Prisma {
     category: $Enums.Category
     maximum: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutBudgetsInput
   }
 
@@ -10477,6 +10555,8 @@ export namespace Prisma {
     maximum: number
     theme: string
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetUpdateInput = {
@@ -10484,6 +10564,8 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     maximum?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutBudgetsNestedInput
   }
 
@@ -10493,6 +10575,8 @@ export namespace Prisma {
     maximum?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetCreateManyInput = {
@@ -10501,6 +10585,8 @@ export namespace Prisma {
     maximum: number
     theme: string
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetUpdateManyMutationInput = {
@@ -10508,6 +10594,8 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     maximum?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetUncheckedUpdateManyInput = {
@@ -10516,6 +10604,8 @@ export namespace Prisma {
     maximum?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PotCreateInput = {
@@ -10524,6 +10614,8 @@ export namespace Prisma {
     target: number
     total: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPotsInput
   }
 
@@ -10534,6 +10626,8 @@ export namespace Prisma {
     total: number
     theme: string
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PotUpdateInput = {
@@ -10542,6 +10636,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPotsNestedInput
   }
 
@@ -10552,6 +10648,8 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PotCreateManyInput = {
@@ -10561,6 +10659,8 @@ export namespace Prisma {
     total: number
     theme: string
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PotUpdateManyMutationInput = {
@@ -10569,6 +10669,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PotUncheckedUpdateManyInput = {
@@ -10578,6 +10680,8 @@ export namespace Prisma {
     total?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -11014,6 +11118,8 @@ export namespace Prisma {
     maximum?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BudgetAvgOrderByAggregateInput = {
@@ -11026,6 +11132,8 @@ export namespace Prisma {
     maximum?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BudgetMinOrderByAggregateInput = {
@@ -11034,6 +11142,8 @@ export namespace Prisma {
     maximum?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BudgetSumOrderByAggregateInput = {
@@ -11047,6 +11157,8 @@ export namespace Prisma {
     total?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PotAvgOrderByAggregateInput = {
@@ -11061,6 +11173,8 @@ export namespace Prisma {
     total?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PotMinOrderByAggregateInput = {
@@ -11070,6 +11184,8 @@ export namespace Prisma {
     total?: SortOrder
     theme?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PotSumOrderByAggregateInput = {
@@ -11702,6 +11818,8 @@ export namespace Prisma {
     category: $Enums.Category
     maximum: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetUncheckedCreateWithoutUserInput = {
@@ -11709,6 +11827,8 @@ export namespace Prisma {
     category: $Enums.Category
     maximum: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetCreateOrConnectWithoutUserInput = {
@@ -11727,6 +11847,8 @@ export namespace Prisma {
     target: number
     total: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PotUncheckedCreateWithoutUserInput = {
@@ -11735,6 +11857,8 @@ export namespace Prisma {
     target: number
     total: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PotCreateOrConnectWithoutUserInput = {
@@ -11867,6 +11991,8 @@ export namespace Prisma {
     maximum?: FloatFilter<"Budget"> | number
     theme?: StringFilter<"Budget"> | string
     userId?: StringFilter<"Budget"> | string
+    createdAt?: DateTimeFilter<"Budget"> | Date | string
+    updatedAt?: DateTimeFilter<"Budget"> | Date | string
   }
 
   export type PotUpsertWithWhereUniqueWithoutUserInput = {
@@ -11895,6 +12021,8 @@ export namespace Prisma {
     total?: FloatFilter<"Pot"> | number
     theme?: StringFilter<"Pot"> | string
     userId?: StringFilter<"Pot"> | string
+    createdAt?: DateTimeFilter<"Pot"> | Date | string
+    updatedAt?: DateTimeFilter<"Pot"> | Date | string
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -12317,6 +12445,8 @@ export namespace Prisma {
     category: $Enums.Category
     maximum: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PotCreateManyUserInput = {
@@ -12325,6 +12455,8 @@ export namespace Prisma {
     target: number
     total: number
     theme: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -12437,6 +12569,8 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     maximum?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetUncheckedUpdateWithoutUserInput = {
@@ -12444,6 +12578,8 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     maximum?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetUncheckedUpdateManyWithoutUserInput = {
@@ -12451,6 +12587,8 @@ export namespace Prisma {
     category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
     maximum?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PotUpdateWithoutUserInput = {
@@ -12459,6 +12597,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PotUncheckedUpdateWithoutUserInput = {
@@ -12467,6 +12607,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PotUncheckedUpdateManyWithoutUserInput = {
@@ -12475,6 +12617,8 @@ export namespace Prisma {
     target?: FloatFieldUpdateOperationsInput | number
     total?: FloatFieldUpdateOperationsInput | number
     theme?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

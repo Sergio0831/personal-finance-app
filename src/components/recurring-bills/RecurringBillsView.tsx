@@ -11,7 +11,7 @@ import {
 } from '../ui/data-list';
 import { Separator } from '../ui/separator';
 import { columns } from './Columns';
-import { RecurringBillsSkeleton } from './RecurringBillsSkeleton';
+import RecurringBillsSkeleton from './RecurringBillsSkeleton';
 import RecurringBillsTable from './RecurringBillsTable';
 
 const RecurringBillsView = () => {
