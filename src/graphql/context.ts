@@ -1,6 +1,5 @@
 import { GraphQLError } from 'graphql';
 import { headers } from 'next/headers';
-
 import { auth } from '@/lib/auth';
 
 type User = (typeof auth.$Infer.Session)['user'];

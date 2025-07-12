@@ -15,7 +15,7 @@ const Separator = React.forwardRef<
   ) => (
     <Root
       className={cn(
-        'shrink-0 bg-border',
+        'shrink-0 bg-gray-100',
         orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
         className
       )}

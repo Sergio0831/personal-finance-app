@@ -4,9 +4,9 @@ import type { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
 import { IconBillDue, IconBillPaid } from '@/assets/icons';
 import { Avatar } from '@/components/ui/avatar';
-import { getBillStatus } from '@/lib/bill-status';
+import { useBillInfo } from '@/hooks/useBillInfo';
 import { cn } from '@/lib/clsx';
-import { formatAmount, formatDueDay } from '@/lib/format';
+import { formatAmount } from '@/lib/format';
 
 export type RecurringBill = {
   id: string;
@@ -22,10 +22,7 @@ export const columns: ColumnDef<RecurringBill>[] = [
     sortingFn: 'alphanumeric',
     header: () => <div className="md:px-4">Bill Title</div>,
     cell: ({ row }) => {
-      const date = new Date(row.getValue('date'));
-      const day = date.getDate();
-      const formattedDate = formatDueDay(day);
-      const status = getBillStatus(date);
+      const { formattedDate, status } = useBillInfo(row);
 
       return (
         <div>
@@ -66,10 +63,7 @@ export const columns: ColumnDef<RecurringBill>[] = [
       new Date(b.original.date).getDate() - new Date(a.original.date).getDate(),
     header: () => <div>Due Date</div>,
     cell: ({ row }) => {
-      const date = new Date(row.getValue('date'));
-      const day = date.getDate();
-      const formattedDate = formatDueDay(day);
-      const status = getBillStatus(date);
+      const { formattedDate, status } = useBillInfo(row);
 
       return (
         <div className="flex items-center gap-2">
@@ -95,9 +89,9 @@ export const columns: ColumnDef<RecurringBill>[] = [
     sortingFn: 'basic',
     header: () => <div className="text-right md:px-4">Amount</div>,
     cell: ({ row }) => {
+      const { status } = useBillInfo(row);
       const amount = Math.abs(Number.parseFloat(row.getValue('amount')));
       const formattedAmount = formatAmount(amount);
-      const status = getBillStatus(new Date(row.getValue('date')));
 
       return (
         <div className="text-right md:px-4">

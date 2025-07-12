@@ -2,11 +2,10 @@
 
 import type { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
-
 import { Avatar } from '@/components/ui/avatar';
 import type { Category } from '@/generated/prisma';
+import { useTransactionInfo } from '@/hooks/useTransactionInfo';
 import { cn } from '@/lib/clsx';
-import { formatAmount, formatDate } from '@/lib/format';
 
 export type Transaction = {
   id: string;
@@ -66,7 +65,7 @@ export const columns: ColumnDef<Transaction>[] = [
     sortingFn: 'datetime',
     header: () => <div className="text-center">Transaction Date</div>,
     cell: ({ row }) => {
-      const formattedDate = formatDate(row.getValue('date'));
+      const { formattedDate } = useTransactionInfo(row);
 
       return (
         <div className="text-center text-muted text-preset-5">
@@ -83,12 +82,8 @@ export const columns: ColumnDef<Transaction>[] = [
     sortingFn: 'basic',
     header: () => <div className="text-right md:px-4">Amount</div>,
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue('amount'));
-      const formatted = formatAmount(amount);
-      const isPositive = amount > 0;
-      const displayAmount = isPositive ? `+${formatted}` : `-${formatted}`;
-
-      const formattedDate = formatDate(row.getValue('date'));
+      const { isPositive, formattedAmount, formattedDate } =
+        useTransactionInfo(row);
 
       return (
         <div className="text-right md:px-4">
@@ -98,7 +93,7 @@ export const columns: ColumnDef<Transaction>[] = [
               isPositive ? 'text-accent' : 'text-foreground'
             )}
           >
-            {displayAmount}
+            {formattedAmount}
           </span>
           <span className="block text-muted text-preset-5 sm:hidden">
             {row.original.date ? formattedDate : '29 Aug 2024'}

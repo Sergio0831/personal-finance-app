@@ -7,11 +7,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import type { Transaction } from '../transactions/Columns';
 import { Label } from '../ui/label';
 import SelectMobileTrigger from '../ui/select-mobile-trigger';
 
 const TableSorting = ({ table }: TableProps<Transaction>) => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="relative flex flex-wrap items-center gap-2">
       <Select
@@ -25,18 +28,23 @@ const TableSorting = ({ table }: TableProps<Transaction>) => {
             : 'date-desc'
         }
       >
-        <Label className="max-sm:hidden" htmlFor="sorting">
-          Sort by
-        </Label>
-        <SelectTrigger
-          className="data-[size=default]:h-[45px] max-sm:hidden"
-          id="sorting"
-        >
-          <SelectValue placeholder="Latest" />
-        </SelectTrigger>
-        <SelectMobileTrigger className="sm:hidden">
-          <SortMobile className="size-5" />
-        </SelectMobileTrigger>
+        {!isMobile && (
+          <>
+            <Label htmlFor="sorting">Sort by</Label>
+            <SelectTrigger
+              className="data-[size=default]:h-[45px]"
+              id="sorting"
+            >
+              <SelectValue placeholder="Latest" />
+            </SelectTrigger>
+          </>
+        )}
+        {isMobile && (
+          <SelectMobileTrigger>
+            <SortMobile className="size-5" />
+          </SelectMobileTrigger>
+        )}
+
         <SelectContent>
           <SelectItem value="date-desc">Latest</SelectItem>
           <SelectItem value="date-asc">Oldest</SelectItem>

@@ -1,4 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card } from '../ui/card';
 
 export function RecurringBillsSkeleton() {
   return (
@@ -32,18 +33,20 @@ export function RecurringBillsSkeleton() {
       </div>
 
       {/* Table skeleton */}
-      <div className="w-full space-y-3">
-        {new Array(8).fill(null).map((_, index) => (
-          <div
-            className="flex h-20 items-center justify-between rounded-md bg-muted/20 px-4 py-3"
-            key={`skeleton-row-${index}`}
-          >
-            <Skeleton className="h-10 w-1/3 bg-grey-300" />
-            <Skeleton className="h-10 w-1/5 bg-grey-300" />
-            <Skeleton className="h-10 w-1/6 bg-grey-300" />
-          </div>
-        ))}
-      </div>
+      <Card className="w-full">
+        <div className="w-full space-y-3">
+          {['1', '2', '3', '4', '5', '6', '7', '8'].map((id) => (
+            <div
+              className="flex h-20 items-center justify-between rounded-md bg-muted/20 px-4 py-3"
+              key={`skeleton-row-${id}`}
+            >
+              <Skeleton className="h-10 w-1/3 bg-grey-300" />
+              <Skeleton className="h-10 w-1/5 bg-grey-300" />
+              <Skeleton className="h-10 w-1/6 bg-grey-300" />
+            </div>
+          ))}
+        </div>
+      </Card>
     </main>
   );
 }

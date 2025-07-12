@@ -32,10 +32,10 @@ const LoginForm = () => {
 
   const onSubmit = (formValues: LoginSchemaType) => {
     setTransition(async () => {
-      const { error: signInError } = await signInWithCredentials(formValues);
+      const response = await signInWithCredentials(formValues);
 
-      if (signInError) {
-        setError(signInError);
+      if (response.error) {
+        setError(response.error);
       } else {
         toast.success('Login successful. Good to have you back.');
         router.push(DEFAULT_LOGIN_REDIRECT);

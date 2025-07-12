@@ -3,6 +3,13 @@
 import { RecurringBillsIcon } from '@/assets/icons';
 import { useGetAllRecurringBillsQuery } from '@/graphql/generated/output';
 import { formatAmount } from '@/lib/format';
+import {
+  DataList,
+  DataListItem,
+  DataListLabel,
+  DataListValue,
+} from '../ui/data-list';
+import { Separator } from '../ui/separator';
 import { columns } from './Columns';
 import { RecurringBillsSkeleton } from './RecurringBillsSkeleton';
 import RecurringBillsTable from './RecurringBillsTable';
@@ -30,22 +37,30 @@ const RecurringBillsView = () => {
         </div>
         <div className="w-full rounded-xl bg-card p-6 text-foreground">
           <h2 className="mb-4 text-preset-3">Summary</h2>
-          <ul className="grid gap-y-4 [&_li:not(:first-child)]:border-t [&_li:not(:first-child)]:border-t-grey-100 [&_li:not(:first-child)]:pt-4">
-            <li className="flex justify-between">
-              <span className="text-muted text-preset-5">Paid Bills</span>
-              <span className="font-bold text-preset-5">{`${recurringBills?.paidBills?.count ?? 0} (${formatAmount(recurringBills?.paidBills?.total ?? 0)})`}</span>
-            </li>
-            <li className="flex justify-between">
-              <span className="text-muted text-preset-5">Total Upcoming</span>
-              <span className="font-bold text-preset-5">
+          <DataList className="gap-y-4" size="xs">
+            <DataListItem>
+              <DataListLabel>Paid Bills</DataListLabel>
+              <DataListValue>
+                {`${recurringBills?.paidBills?.count ?? 0} (${formatAmount(recurringBills?.paidBills?.total ?? 0)})`}
+              </DataListValue>
+            </DataListItem>
+            <Separator />
+            <DataListItem>
+              <DataListLabel>Total Upcoming</DataListLabel>
+              <DataListValue>
                 {`${recurringBills?.totalUpcoming?.count ?? 0} (${formatAmount(recurringBills?.totalUpcoming?.total ?? 0)})`}
-              </span>
-            </li>
-            <li className="flex justify-between text-destructive">
-              <span className="text-preset-5">Due Soon</span>
-              <span className="font-bold text-preset-5">{`${recurringBills?.dueSoon?.count ?? 0} (${formatAmount(recurringBills?.dueSoon?.total ?? 0)})`}</span>
-            </li>
-          </ul>
+              </DataListValue>
+            </DataListItem>
+            <Separator />
+            <DataListItem>
+              <DataListLabel className="text-destructive">
+                Due Soon
+              </DataListLabel>
+              <DataListValue className="text-destructive">
+                {`${recurringBills?.dueSoon?.count ?? 0} (${formatAmount(recurringBills?.dueSoon?.total ?? 0)})`}
+              </DataListValue>
+            </DataListItem>
+          </DataList>
         </div>
       </div>
       <RecurringBillsTable

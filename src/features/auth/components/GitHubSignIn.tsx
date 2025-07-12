@@ -1,25 +1,23 @@
 'use client';
 
 import { Loader2 } from 'lucide-react';
-import { useState } from 'react';
+import { useTransition } from 'react';
 import { GitHubIcon } from '@/assets/icons';
 import { Button } from '@/components/ui/button';
 import { signIn } from '@/lib/auth-client';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 
 const GitHubSignIn = () => {
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  const handlesocialLogin = async () => {
-    setIsPending(true);
-
-    await signIn.social({
-      provider: 'github',
-      callbackURL: DEFAULT_LOGIN_REDIRECT,
-      errorCallbackURL: '/login/error',
+  const handleSocialLogin = () => {
+    startTransition(() => {
+      signIn.social({
+        provider: 'github',
+        callbackURL: DEFAULT_LOGIN_REDIRECT,
+        errorCallbackURL: '/login/error',
+      });
     });
-
-    setIsPending(false);
   };
 
   return (
@@ -27,7 +25,7 @@ const GitHubSignIn = () => {
       aria-label="Sign in with GitHub"
       className="w-full"
       disabled={isPending}
-      onClick={handlesocialLogin}
+      onClick={handleSocialLogin}
       variant="outline"
     >
       {isPending ? (

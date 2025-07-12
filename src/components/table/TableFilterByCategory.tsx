@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Category } from '@/generated/prisma';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import type { Transaction } from '../transactions/Columns';
 import { Label } from '../ui/label';
 import SelectMobileTrigger from '../ui/select-mobile-trigger';
@@ -15,6 +16,8 @@ import SelectMobileTrigger from '../ui/select-mobile-trigger';
 // Consider deriving from schema or making configurable
 const categories: Category[] = Object.values(Category);
 const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
+  const isMobile = useIsMobile();
+
   const handleChange = (value: string) => {
     if (value === 'all') {
       table.getColumn('category')?.setFilterValue(undefined);
@@ -31,21 +34,27 @@ const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
           (table.getColumn('category')?.getFilterValue() as string) ?? 'all'
         }
       >
-        <Label
-          className="text-muted text-preset-4 max-sm:hidden"
-          htmlFor="category"
-        >
-          Category
-        </Label>
-        <SelectTrigger
-          className="relative data-[size=default]:h-[45px] max-sm:hidden"
-          id="category"
-        >
-          <SelectValue placeholder="All Transactions" />
-        </SelectTrigger>
-        <SelectMobileTrigger className="sm:hidden">
-          <FilterMobile className="size-5" />
-        </SelectMobileTrigger>
+        {!isMobile && (
+          <>
+            <Label
+              className="text-muted text-preset-4 max-sm:hidden"
+              htmlFor="category"
+            >
+              Category
+            </Label>
+            <SelectTrigger
+              className="relative data-[size=default]:h-[45px] max-sm:hidden"
+              id="category"
+            >
+              <SelectValue placeholder="All Transactions" />
+            </SelectTrigger>
+          </>
+        )}
+        {isMobile && (
+          <SelectMobileTrigger className="sm:hidden">
+            <FilterMobile className="size-5" />
+          </SelectMobileTrigger>
+        )}
         <SelectContent>
           <SelectItem value="all">All Transactions</SelectItem>
           {categories.map((cat) => (

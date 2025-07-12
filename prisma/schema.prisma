@@ -25,9 +25,6 @@ model User {
   updatedAt     DateTime      @default(now()) @map("updated_at")
   sessions      Session[]
   accounts      Account[]
-  balance       Float         @default(0)
-  income        Float         @default(0)
-  expenses      Float         @default(0)
   transactions  Transaction[]
   budgets       Budget[]
   pots          Pot[]
