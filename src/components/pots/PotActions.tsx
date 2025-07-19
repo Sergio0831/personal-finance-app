@@ -1,38 +1,72 @@
+'use client';
+
+import { useState } from 'react';
 import { IconEllipsis } from '@/assets/icons';
 import { Button } from '../ui/button';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
+import { Modal } from '../ui/modal';
 import { Separator } from '../ui/separator';
+import PotEditForm from './PotEditForm';
 
-const PotActions = () => (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button className="size-5 text-gray-300" size="icon" variant="ghost">
-        <IconEllipsis />
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuItem className="focus:bg-foreground/10">
-        <Button className="font-normal text-sm" size="sm" variant="ghost">
-          Edit Pot
-        </Button>
-      </DropdownMenuItem>
-      <Separator />
-      <DropdownMenuItem variant="destructive">
+const PotActions = ({ id, name }: { id: string; name: string }) => {
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  return (
+    <>
+      <Modal
+        description="If your saving targets change, feel free to update your pots."
+        isOpen={isEditOpen}
+        setIsOpen={setIsEditOpen}
+        title="Edit Pot"
+      >
+        <PotEditForm />
+      </Modal>
+      <Modal
+        description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever."
+        isOpen={isDeleteOpen}
+        setIsOpen={setIsDeleteOpen}
+        title={`Delete ‘${name}’?`}
+      >
+        <Button variant="destructive">Yes, Confirm Deletion</Button>
         <Button
-          className="font-normal text-sm hover:text-destructive/70"
-          size="sm"
+          className="h-min w-full p-0 font-normal text-muted hover:text-foreground"
+          onClick={() => setIsDeleteOpen(false)}
           variant="ghost"
         >
-          Delete Pot
+          No, Go Back
         </Button>
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+      </Modal>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button className="size-5 text-gray-300" size="icon" variant="ghost">
+            <IconEllipsis />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem
+            className="focus:bg-foreground/10"
+            onClick={() => setIsEditOpen(true)}
+          >
+            Edit Pot
+          </DropdownMenuItem>
+          <Separator />
+          <DropdownMenuItem
+            onClick={() => setIsDeleteOpen(true)}
+            variant="destructive"
+          >
+            Delete Pot
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  );
+};
 
 export default PotActions;

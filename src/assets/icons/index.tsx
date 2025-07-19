@@ -3,6 +3,7 @@ export { default as IconBillPaid } from './icon-bill-paid.svg';
 export { default as CaretDown } from './icon-caret-down.svg';
 export { default as CaretLeft } from './icon-caret-left.svg';
 export { default as CaretRight } from './icon-caret-right.svg';
+export { default as IconCloseModal } from './icon-close-modal.svg';
 export { default as IconEllipsis } from './icon-ellipsis.svg';
 export { default as FilterMobile } from './icon-filter-mobile.svg';
 export { default as GitHubIcon } from './icon-github.svg';

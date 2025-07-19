@@ -35,7 +35,7 @@ function AvatarFallback({
   return (
     <Fallback
       className={cn(
-        'flex size-full items-center justify-center rounded-full bg-muted',
+        'flex size-full items-center justify-center rounded-full bg-accent text-white',
         className
       )}
       data-slot="avatar-fallback"

@@ -20,8 +20,8 @@ const buttonVariants = cva(
         ghost: 'bg-transparent text-foreground hover:text-muted',
       },
       size: {
-        sm: 'h-9 rounded-sm px-3 text-preset-3',
-        lg: 'h-11 rounded-md px-8 text-preset-4',
+        sm: 'h-9 rounded-sm px-3 text-xs',
+        lg: 'h-13 rounded-md px-4 text-sm',
         icon: 'h-10 w-10 rounded-md p-0',
         link: '',
       },

@@ -1,11 +1,10 @@
 'use client';
 
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { useSession } from '@/lib/auth-client';
-
-import GeneratedAvatar from './GeneratedAvatar';
+import { getInitials } from '@/lib/get-initials';
 
 const UserAvatar = () => {
   const { data, isPending } = useSession();
@@ -16,12 +15,14 @@ const UserAvatar = () => {
 
   const user = data.user;
 
-  return user.image ? (
+  return (
     <Avatar>
-      <AvatarImage alt="User Avatar" src={user.image} />
+      <AvatarImage
+        alt="User Avatar"
+        src={user.image ? user.image : getInitials(user.name)}
+      />
+      <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
     </Avatar>
-  ) : (
-    <GeneratedAvatar seed={user.name || 'user'} variant="initials" />
   );
 };
 
