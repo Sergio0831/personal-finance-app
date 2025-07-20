@@ -23,6 +23,14 @@ export const builder = new SchemaBuilder<{
   prisma: {
     client: prisma,
   },
+  zod: {
+    validationError: (zodError) => {
+      // the default behavior is to just throw the zod error directly
+      return JSON.stringify(
+        zodError.formErrors
+      );
+    },
+  },
 });
 
 export const CategoryEnumType = builder.enumType('Category', {

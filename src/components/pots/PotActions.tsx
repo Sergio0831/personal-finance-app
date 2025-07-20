@@ -1,9 +1,11 @@
 'use client';
 
+import { ApolloError } from '@apollo/client';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { IconEllipsis } from '@/assets/icons';
+import { useDeletePotMutation } from '@/graphql/generated/output';
 import { Button } from '../ui/button';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +19,21 @@ import PotEditForm from './PotEditForm';
 const PotActions = ({ id, name }: { id: string; name: string }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [deletePotMutation, { loading }] = useDeletePotMutation({
+    variables: {
+      id,
+    },
+    onCompleted: () => {
+      setIsDeleteOpen(false);
+      toast.success(`Pot ${name} deleted successfully!`);
+    },
+    refetchQueries: ['GetAllPots'],
+    onError: (error) => {
+      if (error instanceof ApolloError) {
+        toast.error(`Error deleting pot: ${error.message}`);
+      }
+    },
+  });
 
   return (
     <>
@@ -34,7 +51,13 @@ const PotActions = ({ id, name }: { id: string; name: string }) => {
         setIsOpen={setIsDeleteOpen}
         title={`Delete ‘${name}’?`}
       >
-        <Button variant="destructive">Yes, Confirm Deletion</Button>
+        <Button
+          disabled={loading}
+          onClick={() => deletePotMutation()}
+          variant="destructive"
+        >
+          Yes, Confirm Deletion
+        </Button>
         <Button
           className="h-min w-full p-0 font-normal text-muted hover:text-foreground"
           onClick={() => setIsDeleteOpen(false)}

@@ -16,10 +16,22 @@ enum Category {
   Transportation
 }
 
+input CreatePotInput {
+  name: String!
+  target: Float!
+  theme: String!
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar Date
+
+type Mutation {
+  createPot(input: CreatePotInput!): Pot
+  deletePot(id: String!): Pot
+  updatePot(id: String!, input: UpdatePotInput!): Pot
+}
 
 type Pot {
   createdAt: Date!
@@ -57,6 +69,12 @@ type Transaction {
   recurring: Boolean!
   user: User!
   userId: String!
+}
+
+input UpdatePotInput {
+  name: String
+  target: Float
+  theme: String
 }
 
 type User {

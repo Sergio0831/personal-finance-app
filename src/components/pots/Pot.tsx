@@ -35,7 +35,7 @@ const Pot = ({ id, name, theme, target, total }: PotProps) => {
         <div>
           <div className="flex items-center justify-between text-muted text-preset-5">
             <span className="font-bold">{percentage}%</span>
-            <span>{formatAmount(target)}</span>
+            <span>Target of {formatAmount(target)}</span>
           </div>
         </div>
       </CardContent>

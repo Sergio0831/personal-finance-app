@@ -34,12 +34,12 @@ function SelectTrigger({
   children,
   ...props
 }: React.ComponentProps<typeof Trigger> & {
-  size?: 'sm' | 'default';
+  size?: 'sm' | 'default' | 'lg';
 }) {
   return (
     <Trigger
       className={cn(
-        "group flex w-fit cursor-pointer items-center justify-between gap-4 whitespace-nowrap rounded-md border border-input bg-transparent px-5 py-2 text-sm outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "group flex w-fit cursor-pointer items-center justify-between gap-4 whitespace-nowrap rounded-md border border-input bg-transparent px-5 py-2 text-sm outline-none transition-[color,box-shadow] hover:border-muted focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[size=default]:h-9 data-[size=lg]:h-11 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
       data-size={size}
@@ -95,7 +95,7 @@ function SelectItem({
   return (
     <Item
       className={cn(
-        'relative not-[last-child]:mb-3 w-full cursor-pointer select-none border-grey-100 border-b pb-3 text-sm outline-hidden transition-transform hover:font-bold focus-visible:font-bold data-[disabled]:pointer-events-none data-[state=checked]:font-bold data-[disabled]:opacity-50',
+        'relative mb-3 w-full cursor-pointer select-none border-grey-100 border-b pb-3 text-sm outline-hidden transition-transform last:mb-0 last:border-0 hover:font-bold focus-visible:font-bold data-[disabled]:pointer-events-none data-[state=checked]:font-bold data-[disabled]:opacity-50',
         className
       )}
       data-slot="select-item"

@@ -17,11 +17,8 @@ const UserAvatar = () => {
 
   return (
     <Avatar>
-      <AvatarImage
-        alt="User Avatar"
-        src={user.image ? user.image : getInitials(user.name)}
-      />
-      <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+      <AvatarImage alt="User Avatar" src={user.image ?? undefined} />
+      <AvatarFallback>{getInitials(user.name)}</AvatarFallback>{' '}
     </Avatar>
   );
 };

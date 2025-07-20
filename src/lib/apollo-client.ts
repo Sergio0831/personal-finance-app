@@ -1,4 +1,3 @@
-// apollo-client.ts
 import { HttpLink } from '@apollo/client';
 import {
   ApolloClient,
@@ -13,10 +12,12 @@ export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
     cache: new InMemoryCache(),
     link: new HttpLink({
       uri: SERVER_URL,
-
       fetchOptions: {
         credentials: 'include',
       },
     }),
+    devtools: {
+      enabled: true,
+    },
   });
 });

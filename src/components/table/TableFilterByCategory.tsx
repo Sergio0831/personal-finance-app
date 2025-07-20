@@ -13,7 +13,6 @@ import type { Transaction } from '../transactions/Columns';
 import { Label } from '../ui/label';
 import SelectMobileTrigger from '../ui/select-mobile-trigger';
 
-// Consider deriving from schema or making configurable
 const categories: Category[] = Object.values(Category);
 const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
   const isMobile = useIsMobile();

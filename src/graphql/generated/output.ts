@@ -38,6 +38,35 @@ export enum Category {
   Transportation = 'Transportation'
 }
 
+export type CreatePotInput = {
+  name: Scalars['String']['input'];
+  target: Scalars['Float']['input'];
+  theme: Scalars['String']['input'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createPot?: Maybe<Pot>;
+  deletePot?: Maybe<Pot>;
+  updatePot?: Maybe<Pot>;
+};
+
+
+export type MutationCreatePotArgs = {
+  input: CreatePotInput;
+};
+
+
+export type MutationDeletePotArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type MutationUpdatePotArgs = {
+  id: Scalars['String']['input'];
+  input: UpdatePotInput;
+};
+
 export type Pot = {
   __typename?: 'Pot';
   createdAt: Scalars['Date']['output'];
@@ -80,6 +109,12 @@ export type Transaction = {
   userId: Scalars['String']['output'];
 };
 
+export type UpdatePotInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  target?: InputMaybe<Scalars['Float']['input']>;
+  theme?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type User = {
   __typename?: 'User';
   email?: Maybe<Scalars['String']['output']>;
@@ -87,6 +122,20 @@ export type User = {
   image?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
+
+export type CreatePotMutationVariables = Exact<{
+  input: CreatePotInput;
+}>;
+
+
+export type CreatePotMutation = { __typename?: 'Mutation', createPot?: { __typename?: 'Pot', id: string } | null };
+
+export type DeletePotMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type DeletePotMutation = { __typename?: 'Mutation', deletePot?: { __typename?: 'Pot', id: string } | null };
 
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -109,6 +158,72 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: string | null, name?: string | null, email?: string | null, image?: string | null } | null };
 
 
+export const CreatePotDocument = gql`
+    mutation CreatePot($input: CreatePotInput!) {
+  createPot(input: $input) {
+    id
+  }
+}
+    `;
+export type CreatePotMutationFn = Apollo.MutationFunction<CreatePotMutation, CreatePotMutationVariables>;
+
+/**
+ * __useCreatePotMutation__
+ *
+ * To run a mutation, you first call `useCreatePotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPotMutation, { data, loading, error }] = useCreatePotMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreatePotMutation(baseOptions?: Apollo.MutationHookOptions<CreatePotMutation, CreatePotMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePotMutation, CreatePotMutationVariables>(CreatePotDocument, options);
+      }
+export type CreatePotMutationHookResult = ReturnType<typeof useCreatePotMutation>;
+export type CreatePotMutationResult = Apollo.MutationResult<CreatePotMutation>;
+export type CreatePotMutationOptions = Apollo.BaseMutationOptions<CreatePotMutation, CreatePotMutationVariables>;
+export const DeletePotDocument = gql`
+    mutation DeletePot($id: String!) {
+  deletePot(id: $id) {
+    id
+  }
+}
+    `;
+export type DeletePotMutationFn = Apollo.MutationFunction<DeletePotMutation, DeletePotMutationVariables>;
+
+/**
+ * __useDeletePotMutation__
+ *
+ * To run a mutation, you first call `useDeletePotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePotMutation, { data, loading, error }] = useDeletePotMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeletePotMutation(baseOptions?: Apollo.MutationHookOptions<DeletePotMutation, DeletePotMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeletePotMutation, DeletePotMutationVariables>(DeletePotDocument, options);
+      }
+export type DeletePotMutationHookResult = ReturnType<typeof useDeletePotMutation>;
+export type DeletePotMutationResult = Apollo.MutationResult<DeletePotMutation>;
+export type DeletePotMutationOptions = Apollo.BaseMutationOptions<DeletePotMutation, DeletePotMutationVariables>;
 export const GetAllPotsDocument = gql`
     query GetAllPots {
   pots {

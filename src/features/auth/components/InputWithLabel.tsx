@@ -1,7 +1,7 @@
 'use client';
 
 import type { InputHTMLAttributes } from 'react';
-import { type FieldError, useFormContext } from 'react-hook-form';
+import { type FieldError, type Path, useFormContext } from 'react-hook-form';
 
 import {
   FormControl,
@@ -16,8 +16,9 @@ import { cn } from '@/lib/clsx';
 
 type InputWithLabelProps<T> = {
   label: string;
-  nameInSchema: keyof T & string;
+  nameInSchema: Path<T>;
   error: FieldError | undefined;
+  charsLeft?: number;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const InputWithLabel = <T,>({
@@ -26,9 +27,12 @@ const InputWithLabel = <T,>({
   error,
   className,
   disabled,
+  charsLeft,
   ...props
 }: InputWithLabelProps<T>) => {
   const { control } = useFormContext();
+
+  const showCharsLeft = typeof charsLeft === 'number' && !error;
 
   return (
     <FormField
@@ -48,6 +52,16 @@ const InputWithLabel = <T,>({
               {...props}
             />
           </FormControl>
+          {showCharsLeft && (
+            <p
+              className={cn(
+                'mt-1 text-right text-xs',
+                charsLeft === 0 ? 'text-destructive' : 'text-muted'
+              )}
+            >
+              {charsLeft} {charsLeft === 1 ? 'character' : 'characters'} left
+            </p>
+          )}
           <FormMessage id={field.name} />
         </FormItem>
       )}
