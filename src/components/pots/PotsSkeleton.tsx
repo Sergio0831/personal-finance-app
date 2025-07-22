@@ -5,7 +5,7 @@ import { Skeleton } from '../ui/skeleton';
 
 const PotsSkeleton = () => {
   return (
-    <main className="grid gap-6 md:grid-cols-2">
+    <main className="grid @3xl:grid-cols-2 gap-6">
       {['1', '2', '3', '4'].map((id) => (
         <Card className="flex flex-col gap-y-8" key={id}>
           <Skeleton className="h-8" />

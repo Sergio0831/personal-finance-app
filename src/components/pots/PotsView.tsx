@@ -14,7 +14,7 @@ const PotsView = () => {
   }
 
   return (
-    <main className="grid gap-6 md:grid-cols-2">
+    <main className="grid @3xl:grid-cols-2 gap-6">
       {pots?.map((pot) => (
         <Pot key={pot.id} {...pot} />
       ))}

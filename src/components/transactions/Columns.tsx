@@ -20,10 +20,10 @@ export const columns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'name',
     sortingFn: 'alphanumeric',
-    header: () => <div className="md:px-4">Recipient / Sender</div>,
+    header: () => <div className="@xl:px-4">Recipient / Sender</div>,
     cell: ({ row }) => {
       return (
-        <div className="flex items-center gap-4 md:px-4">
+        <div className="flex items-center gap-4 @xl:px-4">
           <Avatar>
             <Image
               alt={row.original.name}
@@ -38,7 +38,7 @@ export const columns: ColumnDef<Transaction>[] = [
           </Avatar>
           <div>
             <span className="font-bold text-preset-4">{row.original.name}</span>
-            <span className="block text-muted text-preset-5 sm:hidden">
+            <span className="block @xl:hidden text-muted text-preset-5">
               {row.original.category}
             </span>
           </div>
@@ -57,7 +57,7 @@ export const columns: ColumnDef<Transaction>[] = [
       );
     },
     meta: {
-      className: 'hidden sm:table-cell',
+      className: 'hidden @xl:table-cell',
     },
   },
   {
@@ -74,7 +74,7 @@ export const columns: ColumnDef<Transaction>[] = [
       );
     },
     meta: {
-      className: 'hidden sm:table-cell',
+      className: 'hidden @xl:table-cell',
     },
   },
   {
@@ -95,7 +95,7 @@ export const columns: ColumnDef<Transaction>[] = [
           >
             {formattedAmount}
           </span>
-          <span className="block text-muted text-preset-5 sm:hidden">
+          <span className="block @xl:hidden text-muted text-preset-5">
             {row.original.date ? formattedDate : '29 Aug 2024'}
           </span>
         </div>

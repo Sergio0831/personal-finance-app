@@ -24,7 +24,7 @@ const RecurringBillsView = () => {
   const recurringBills = data?.recurringBills;
 
   return (
-    <main className="flex gap-6 max-md:flex-col">
+    <main className="flex @max-3xl:flex-col gap-6">
       <div className="basis flex flex-2/5 gap-4 max-sm:flex-col md:flex-col">
         <div className="w-full rounded-xl bg-foreground p-6 text-white max-sm:flex max-sm:items-center max-sm:gap-x-5">
           <RecurringBillsIcon className="size-10 sm:mb-8" />

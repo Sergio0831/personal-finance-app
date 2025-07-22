@@ -29,7 +29,7 @@ export const DataTable = <TData, TValue>({
 }: DataTableProps<TData, TValue>) => {
   return (
     <Table>
-      <TableHeader className="max-md:line-clamp-0 max-md:h-0">
+      <TableHeader className="@max-lg:line-clamp-0 @max-lg:h-0">
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => {

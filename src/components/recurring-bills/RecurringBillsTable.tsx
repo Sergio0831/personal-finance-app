@@ -44,7 +44,7 @@ const RecurringBillsTable = ({ columns, data }: RecurringBillsTableProps) => {
 
   return (
     <Card className="mb-13 grid w-full gap-y-6 overflow-x-auto sm:mb-18 md:mb-0">
-      <CardHeader className="flex-row justify-between gap-x-6 space-y-0 max-sm:items-center max-md:items-end">
+      <CardHeader className="flex-row justify-between gap-x-6 space-y-0 max-sm:items-center sm:items-end">
         <TableFilter table={table} />
         <TableSorting table={table} />
       </CardHeader>

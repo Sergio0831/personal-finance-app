@@ -62,7 +62,7 @@ const TransactionsTable = ({
         <TransactionTableSkeleton />
       ) : (
         <>
-          <CardHeader className="flex-row justify-between gap-x-6 space-y-0 sm:items-end">
+          <CardHeader className="justify-between gap-x-6 gap-y-4 space-y-0 sm:items-end">
             <TableFilter table={table} />
             <div className="flex items-center gap-x-6">
               <TableSorting table={table} />

@@ -17,10 +17,10 @@ const TablePagination = ({ table }: TableProps<Transaction>) => {
         variant="outline"
       >
         <CaretLeft />
-        <span className="hidden sm:block">Prev</span>
+        <span className="@max-xl:hidden">Prev</span>
         <span className="sr-only">Go to previous page</span>
       </Button>
-      <div className="flex items-center gap-2 md:hidden">
+      <div className="flex @md:hidden items-center gap-2">
         {range.map((page) =>
           page === ELLIPSIS ? (
             <span className="px-2" key={page}>
@@ -43,7 +43,7 @@ const TablePagination = ({ table }: TableProps<Transaction>) => {
           )
         )}
       </div>
-      <div className="flex items-center gap-2 max-md:hidden">
+      <div className="flex @max-md:hidden items-center gap-2">
         {table.getPageOptions().map((pageIndex) => (
           <Button
             className={cn(
@@ -66,7 +66,7 @@ const TablePagination = ({ table }: TableProps<Transaction>) => {
         onClick={() => table.nextPage()}
         variant="outline"
       >
-        <span className="hidden sm:block">Next</span>
+        <span className="@max-xl:hidden">Next</span>
         <CaretRight />
         <span className="sr-only">Go to next page</span>
       </Button>

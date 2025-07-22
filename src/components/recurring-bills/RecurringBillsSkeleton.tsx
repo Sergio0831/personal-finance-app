@@ -3,7 +3,7 @@ import { Card } from '../ui/card';
 
 const RecurringBillsSkeleton = () => {
   return (
-    <main className="flex gap-6 max-md:flex-col">
+    <main className="flex @max-3xl:flex-col gap-6">
       {/* Left panel */}
       <div className="basis flex flex-2/5 gap-4 max-sm:flex-col md:flex-col">
         {/* Total Bills Card */}

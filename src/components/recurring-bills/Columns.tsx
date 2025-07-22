@@ -20,13 +20,13 @@ export const columns: ColumnDef<RecurringBill>[] = [
   {
     accessorKey: 'name',
     sortingFn: 'alphanumeric',
-    header: () => <div className="md:px-4">Bill Title</div>,
+    header: () => <div className="@xl:px-4">Bill Title</div>,
     cell: ({ row }) => {
       const { formattedDate, status } = useBillInfo(row);
 
       return (
         <div>
-          <div className="flex items-center gap-4 max-sm:mb-2 md:px-4">
+          <div className="@max-lg:mb-2 flex items-center gap-4 @xl:px-4">
             <Avatar>
               <Image
                 alt={row.original.name}
@@ -41,7 +41,7 @@ export const columns: ColumnDef<RecurringBill>[] = [
             </Avatar>
             <span className="font-bold text-preset-4">{row.original.name}</span>
           </div>
-          <div className="flex items-center gap-2 sm:hidden">
+          <div className="flex @lg:hidden items-center gap-2">
             <span
               className={cn(
                 'text-xs',
@@ -81,20 +81,20 @@ export const columns: ColumnDef<RecurringBill>[] = [
       );
     },
     meta: {
-      className: 'hidden sm:table-cell',
+      className: 'hidden @lg:table-cell',
     },
   },
   {
     accessorKey: 'amount',
     sortingFn: 'basic',
-    header: () => <div className="text-right md:px-4">Amount</div>,
+    header: () => <div className="@lg:px-4 text-right">Amount</div>,
     cell: ({ row }) => {
       const { status } = useBillInfo(row);
       const amount = Math.abs(Number.parseFloat(row.getValue('amount')));
       const formattedAmount = formatAmount(amount);
 
       return (
-        <div className="text-right md:px-4">
+        <div className="@lg:px-4 text-right">
           <span
             className={cn(
               'font-bold text-sm',

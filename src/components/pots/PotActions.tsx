@@ -1,6 +1,5 @@
 'use client';
 
-import { ApolloError } from '@apollo/client';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { IconEllipsis } from '@/assets/icons';
@@ -29,12 +28,9 @@ const PotActions = ({ id, name }: { id: string; name: string }) => {
     },
     refetchQueries: ['GetAllPots'],
     onError: (error) => {
-      if (error instanceof ApolloError) {
-        toast.error(`Error deleting pot: ${error.message}`);
-      }
+      toast.error(`Error deleting pot: ${error.message}`);
     },
   });
-
   return (
     <>
       <Modal

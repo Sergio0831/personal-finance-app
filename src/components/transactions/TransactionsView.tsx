@@ -9,11 +9,13 @@ const TransactionsView = () => {
   const { data, loading } = useGetAllTransactionsQuery();
 
   return (
-    <TransactionsTable
-      columns={columns}
-      data={data?.transactions || []}
-      isLoading={loading}
-    />
+    <main>
+      <TransactionsTable
+        columns={columns}
+        data={data?.transactions || []}
+        isLoading={loading}
+      />
+    </main>
   );
 };
 

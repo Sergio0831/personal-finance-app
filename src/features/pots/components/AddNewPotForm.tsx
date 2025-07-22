@@ -51,12 +51,13 @@ const AddNewPotForm = ({
         refetchQueries: ['GetAllPots'],
       });
     } catch (error) {
-      if (error instanceof ApolloError) {
-        toast.error(`Error creating pot: ${error.message}`);
-      }
+      const errorMessage =
+        error instanceof ApolloError
+          ? error.message
+          : 'An unexpected error occurred';
+      toast.error(`Error creating pot: ${errorMessage}`);
     }
   };
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>

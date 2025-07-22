@@ -26,6 +26,7 @@ type SelectWithLabelProps<T> = {
   error: FieldError | undefined;
   options: Option[];
   isThemeSelect?: boolean;
+  placeholder?: string;
 } & SelectHTMLAttributes<HTMLSelectElement>;
 
 const SelectWithLabel = <T,>({
@@ -34,6 +35,7 @@ const SelectWithLabel = <T,>({
   disabled,
   options,
   isThemeSelect,
+  placeholder = 'Select theme',
 }: SelectWithLabelProps<T>) => {
   const { control } = useFormContext();
 
@@ -52,7 +54,7 @@ const SelectWithLabel = <T,>({
                 id={field.name}
                 size="lg"
               >
-                <SelectValue placeholder="Select theme" />
+                <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
             <SelectContent className="max-h-75">

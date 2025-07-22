@@ -11,7 +11,7 @@ export const themeOptions: { label: string; value: Theme }[] = [
   { label: 'Brown', value: '#93674F' },
   { label: 'Magenta', value: '#934F6F' },
   { label: 'Blue', value: '#3F82B2' },
-  { label: 'Navy', value: '#97A0AC' },
+  { label: 'Grey', value: '#97A0AC' },
   { label: 'Army', value: '#7F9161' },
   { label: 'Pink', value: '#AF81BA' },
   { label: 'Gold', value: '#CAB361' },
