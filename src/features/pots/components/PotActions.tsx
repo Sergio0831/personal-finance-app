@@ -3,19 +3,29 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { IconEllipsis } from '@/assets/icons';
+import { EditPotForm } from '@/features/pots/components';
 import { useDeletePotMutation } from '@/graphql/generated/output';
-import { Button } from '../ui/button';
+import { Modal } from '../../../components/custom/modal';
+import { Button } from '../../../components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
-import { Modal } from '../ui/modal';
-import { Separator } from '../ui/separator';
-import PotEditForm from './PotEditForm';
+} from '../../../components/ui/dropdown-menu';
+import { Separator } from '../../../components/ui/separator';
 
-const PotActions = ({ id, name }: { id: string; name: string }) => {
+const PotActions = ({
+  id,
+  name,
+  target,
+  theme,
+}: {
+  id: string;
+  name: string;
+  target: number;
+  theme: string;
+}) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [deletePotMutation, { loading }] = useDeletePotMutation({
@@ -24,7 +34,7 @@ const PotActions = ({ id, name }: { id: string; name: string }) => {
     },
     onCompleted: () => {
       setIsDeleteOpen(false);
-      toast.success(`Pot ${name} deleted successfully!`);
+      toast.success(`Pot '${name}' deleted successfully!`);
     },
     refetchQueries: ['GetAllPots'],
     onError: (error) => {
@@ -39,7 +49,13 @@ const PotActions = ({ id, name }: { id: string; name: string }) => {
         setIsOpen={setIsEditOpen}
         title="Edit Pot"
       >
-        <PotEditForm />
+        <EditPotForm
+          id={id}
+          name={name}
+          setIsOpen={setIsEditOpen}
+          target={target}
+          theme={theme}
+        />
       </Modal>
       <Modal
         description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever."

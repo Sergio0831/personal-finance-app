@@ -8,15 +8,15 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import SelectMobileTrigger from '../custom/mobile-select-trigger';
 import type { Transaction } from '../transactions/Columns';
 import { Label } from '../ui/label';
-import SelectMobileTrigger from '../ui/select-mobile-trigger';
 
 const TableSorting = ({ table }: TableProps<Transaction>) => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="relative flex flex-wrap items-center gap-2">
+    <div className="relative flex flex-wrap items-center justify-end gap-2">
       <Select
         onValueChange={(value) => {
           const [id, dir] = value.split('-');

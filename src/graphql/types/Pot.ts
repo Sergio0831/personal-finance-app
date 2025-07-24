@@ -14,9 +14,9 @@ const CreatePotInput = builder.inputType('CreatePotInput', {
 
 const UpdatePotInput = builder.inputType('UpdatePotInput', {
   fields: (t) => ({
-    name: t.string(),
-    target: t.float(),
-    theme: t.string(),
+    name: t.string({ required: true }),
+    target: t.float({ required: true }),
+    theme: t.string({ required: true }),
   }),
 });
 
@@ -87,20 +87,10 @@ builder.mutationType({
         schema: UpdatePotSchema,
       },
       resolve: async (query, _parent, { id, input }, ctx) => {
-        const data: Record<string, unknown> = {};
-        if (typeof input.name === 'string') {
-          data.name = input.name;
-        }
-        if (typeof input.theme === 'string') {
-          data.theme = input.theme;
-        }
-        if (typeof input.target === 'number') {
-          data.target = input.target;
-        }
         return await prisma.pot.update({
           ...query,
           where: { id, userId: ctx.user.id },
-          data,
+          data: input,
         });
       },
     }),

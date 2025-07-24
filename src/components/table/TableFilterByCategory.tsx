@@ -9,9 +9,9 @@ import {
 } from '@/components/ui/select';
 import { Category } from '@/generated/prisma';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import SelectMobileTrigger from '../custom/mobile-select-trigger';
 import type { Transaction } from '../transactions/Columns';
 import { Label } from '../ui/label';
-import SelectMobileTrigger from '../ui/select-mobile-trigger';
 
 const categories: Category[] = Object.values(Category);
 const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
@@ -26,7 +26,7 @@ const TableFilterByCategory = ({ table }: TableProps<Transaction>) => {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-wrap items-center justify-end gap-2">
       <Select
         onValueChange={handleChange}
         value={

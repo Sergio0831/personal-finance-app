@@ -15,3 +15,11 @@ export const DELETE_POT = gql`
         }
     }
 `;
+
+export const UPDATE_POT = gql`
+    mutation UpdatePot($id: String!, $input: UpdatePotInput!) {
+        updatePot(id: $id, input: $input) {
+          id
+        }
+    }
+`;

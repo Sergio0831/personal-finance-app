@@ -11,45 +11,51 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { themeOptions } from '@/constants/theme';
 import { InputWithLabel } from '@/features/auth/components';
-import { useCreatePotMutation } from '@/graphql/generated/output';
+import { useUpdatePotMutation } from '@/graphql/generated/output';
 import { useUsedThemes } from '../hooks/useUsedThemes';
-import { CreatePotSchema, type CreatePotSchemaType } from '../schemas';
+import { UpdatePotSchema, type UpdatePotSchemaType } from '../schemas';
 
 const MAX_NAME_LENGTH = 30;
 
-const AddNewPotForm = ({
+const EditPotForm = ({
   setIsOpen,
+  id,
+  name,
+  target,
+  theme,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  id: string;
+  name: string;
+  target: number;
+  theme: string;
 }) => {
-  const [createPotMutation, { loading }] = useCreatePotMutation();
+  const [updatePotMutation, { loading }] = useUpdatePotMutation();
 
-  const usedTheme = useUsedThemes();
+  const usedTheme = useUsedThemes().filter((t) => t !== theme);
 
-  const form = useForm<CreatePotSchemaType>({
-    resolver: zodResolver(CreatePotSchema),
+  const form = useForm<UpdatePotSchemaType>({
+    resolver: zodResolver(UpdatePotSchema),
     defaultValues: {
+      id,
       input: {
-        name: '',
-        target: '' as unknown as number,
-        theme: '',
+        name,
+        target,
+        theme,
       },
     },
   });
 
-  const potName = form.watch('input.name');
-  const charsLeft = MAX_NAME_LENGTH - potName.length;
-
-  const onSubmit = async (formValues: CreatePotSchemaType) => {
+  const onSubmit = async (formValues: UpdatePotSchemaType) => {
     try {
-      await createPotMutation({
+      await updatePotMutation({
         variables: {
+          id,
           input: formValues.input,
         },
         onCompleted: () => {
-          form.reset();
           setIsOpen(false);
-          toast.success(`Pot '${formValues.input.name}' created successfully!`);
+          toast.success(`Pot '${formValues.input.name}' updated successfully!`);
         },
         refetchQueries: ['GetAllPots'],
       });
@@ -64,8 +70,7 @@ const AddNewPotForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <InputWithLabel<CreatePotSchemaType>
-          charsLeft={charsLeft}
+        <InputWithLabel<UpdatePotSchemaType>
           disabled={loading}
           error={form.formState.errors.input?.name}
           label="Pot Name"
@@ -74,7 +79,7 @@ const AddNewPotForm = ({
           placeholder="e.g. Rainy Days"
           type="text"
         />
-        <InputWithLabel<CreatePotSchemaType>
+        <InputWithLabel<UpdatePotSchemaType>
           disabled={loading}
           error={form.formState.errors.input?.target}
           label="Target"
@@ -82,7 +87,7 @@ const AddNewPotForm = ({
           placeholder="e.g. 2000"
           type="text"
         />
-        <ThemeSelectWithLabel<CreatePotSchemaType>
+        <ThemeSelectWithLabel<UpdatePotSchemaType>
           className="mb-5"
           disabled={loading}
           error={form.formState.errors.input?.theme}
@@ -93,11 +98,15 @@ const AddNewPotForm = ({
           usedThemeValues={usedTheme}
         />
         <Button className="w-full" disabled={loading} type="submit">
-          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Add Pot'}
+          {loading ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            'Save Changes'
+          )}
         </Button>
       </form>
     </Form>
   );
 };
 
-export default AddNewPotForm;
+export default EditPotForm;

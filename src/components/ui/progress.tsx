@@ -20,7 +20,7 @@ function Progress({
       {...props}
     >
       <Indicator
-        className="h-full w-full flex-1 transition-all"
+        className="h-full w-full flex-1 transition-transform duration-500 ease-in-out will-change-transform"
         data-slot="progress-indicator"
         style={{
           transform: `translateX(-${100 - (value || 0)}%)`,

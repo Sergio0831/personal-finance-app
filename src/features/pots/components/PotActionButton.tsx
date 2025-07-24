@@ -1,4 +1,4 @@
-import { Button } from '../ui/button';
+import { Button } from '../../../components/ui/button';
 
 const PotActionButton = ({ children }: { children: React.ReactNode }) => (
   <Button className="w-full px-0" variant="secondary">

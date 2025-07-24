@@ -95,7 +95,7 @@ function SelectItem({
   return (
     <Item
       className={cn(
-        'relative mb-3 w-full cursor-pointer select-none border-grey-100 border-b pb-3 text-sm outline-hidden transition-transform last:mb-0 last:border-0 hover:font-bold focus-visible:font-bold data-[disabled]:pointer-events-none data-[state=checked]:font-bold data-[disabled]:opacity-50',
+        'relative mb-3 w-full cursor-pointer select-none border-grey-100 border-b pb-3 text-sm outline-hidden transition-transform last:mb-0 last:border-0 hover:font-bold focus-visible:font-bold data-[disabled]:pointer-events-none data-[state=checked]:font-bold data-[disabled]:text-muted',
         className
       )}
       data-slot="select-item"

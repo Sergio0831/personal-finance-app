@@ -64,7 +64,7 @@ const TransactionsTable = ({
         <>
           <CardHeader className="justify-between gap-x-6 gap-y-4 space-y-0 sm:items-end">
             <TableFilter table={table} />
-            <div className="flex items-center gap-x-6">
+            <div className="flex items-center justify-end gap-x-6">
               <TableSorting table={table} />
               <TableFilterByCategory table={table} />
             </div>

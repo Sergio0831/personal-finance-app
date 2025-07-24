@@ -1,5 +1,5 @@
 import { PageHeader } from '@/components/layout';
-import { PotsView } from '@/components/pots';
+import { PotsView } from '@/features/pots/components';
 
 const PotsPage = () => {
   return (

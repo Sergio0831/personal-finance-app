@@ -1,5 +1,6 @@
 import type { SelectHTMLAttributes } from 'react';
 import { type FieldError, type Path, useFormContext } from 'react-hook-form';
+import { cn } from '@/lib/clsx';
 import {
   FormControl,
   FormField,
@@ -20,23 +21,23 @@ type Option = {
   label: string;
 };
 
-type SelectWithLabelProps<T> = {
+type ThemeSelectWithLabelProps<T> = {
   label: string;
   nameInSchema: Path<T>;
   error: FieldError | undefined;
   options: Option[];
-  isThemeSelect?: boolean;
-  placeholder?: string;
+  placeholder: string;
+  usedThemeValues: string[];
 } & SelectHTMLAttributes<HTMLSelectElement>;
 
-const SelectWithLabel = <T,>({
+const ThemeSelectWithLabel = <T,>({
   label,
   nameInSchema,
   disabled,
   options,
-  isThemeSelect,
-  placeholder = 'Select theme',
-}: SelectWithLabelProps<T>) => {
+  placeholder = 'Select option',
+  usedThemeValues = [],
+}: ThemeSelectWithLabelProps<T>) => {
   const { control } = useFormContext();
 
   return (
@@ -58,19 +59,31 @@ const SelectWithLabel = <T,>({
               </SelectTrigger>
             </FormControl>
             <SelectContent className="max-h-75">
-              {options.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  <div className="flex items-center gap-x-3">
-                    {isThemeSelect && (
-                      <div
-                        className="size-4 rounded-full"
-                        style={{ backgroundColor: `${option.value}` }}
-                      />
-                    )}
-                    {option.label}
-                  </div>
-                </SelectItem>
-              ))}
+              {options.map((option) => {
+                const isUsed = usedThemeValues.includes(option.value);
+
+                return (
+                  <SelectItem
+                    disabled={isUsed}
+                    key={option.value}
+                    value={option.value}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-x-3">
+                        <div
+                          className={cn(
+                            'size-4 rounded-full',
+                            isUsed && 'opacity-20'
+                          )}
+                          style={{ backgroundColor: `${option.value}` }}
+                        />
+                        {option.label}
+                      </div>
+                      {isUsed && <span className="text-xs">Already used</span>}
+                    </div>
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
           <FormMessage id={field.name} />
@@ -80,4 +93,4 @@ const SelectWithLabel = <T,>({
   );
 };
 
-export default SelectWithLabel;
+export default ThemeSelectWithLabel;

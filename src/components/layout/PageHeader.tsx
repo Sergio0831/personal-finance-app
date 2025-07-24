@@ -6,8 +6,8 @@ import { UserButton } from '@/components/user';
 import { AddNewBudgetForm } from '@/features/budgets/components';
 import { AddNewPotForm } from '@/features/pots/components';
 import { cn } from '@/lib/clsx';
+import { Modal } from '../custom/modal';
 import { Button } from '../ui/button';
-import { Modal } from '../ui/modal';
 
 interface PageHeaderProps extends ComponentProps<'header'> {
   title: string;

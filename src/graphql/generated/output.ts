@@ -137,6 +137,14 @@ export type DeletePotMutationVariables = Exact<{
 
 export type DeletePotMutation = { __typename?: 'Mutation', deletePot?: { __typename?: 'Pot', id: string } | null };
 
+export type UpdatePotMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  input: UpdatePotInput;
+}>;
+
+
+export type UpdatePotMutation = { __typename?: 'Mutation', updatePot?: { __typename?: 'Pot', id: string } | null };
+
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -224,6 +232,40 @@ export function useDeletePotMutation(baseOptions?: Apollo.MutationHookOptions<De
 export type DeletePotMutationHookResult = ReturnType<typeof useDeletePotMutation>;
 export type DeletePotMutationResult = Apollo.MutationResult<DeletePotMutation>;
 export type DeletePotMutationOptions = Apollo.BaseMutationOptions<DeletePotMutation, DeletePotMutationVariables>;
+export const UpdatePotDocument = gql`
+    mutation UpdatePot($id: String!, $input: UpdatePotInput!) {
+  updatePot(id: $id, input: $input) {
+    id
+  }
+}
+    `;
+export type UpdatePotMutationFn = Apollo.MutationFunction<UpdatePotMutation, UpdatePotMutationVariables>;
+
+/**
+ * __useUpdatePotMutation__
+ *
+ * To run a mutation, you first call `useUpdatePotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePotMutation, { data, loading, error }] = useUpdatePotMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdatePotMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePotMutation, UpdatePotMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePotMutation, UpdatePotMutationVariables>(UpdatePotDocument, options);
+      }
+export type UpdatePotMutationHookResult = ReturnType<typeof useUpdatePotMutation>;
+export type UpdatePotMutationResult = Apollo.MutationResult<UpdatePotMutation>;
+export type UpdatePotMutationOptions = Apollo.BaseMutationOptions<UpdatePotMutation, UpdatePotMutationVariables>;
 export const GetAllPotsDocument = gql`
     query GetAllPots {
   pots {

@@ -3,8 +3,13 @@
 import { useEffect, useState } from 'react';
 import type { Pot as PotType } from '@/generated/prisma';
 import { formatAmount } from '@/lib/format';
-import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
-import { Progress } from '../ui/progress';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '../../../components/ui/card';
+import { Progress } from '../../../components/ui/progress';
 import PotActionButton from './PotActionButton';
 import PotActions from './PotActions';
 import PotHeader from './PotHeader';
@@ -24,7 +29,7 @@ const Pot = ({ id, name, theme, target, total }: PotProps) => {
     <Card className="flex flex-col gap-y-8">
       <CardHeader className="flex-row items-center justify-between">
         <PotHeader name={name} theme={theme} />
-        <PotActions id={id} name={name} />
+        <PotActions id={id} name={name} target={target} theme={theme} />
       </CardHeader>
       <CardContent className="flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
