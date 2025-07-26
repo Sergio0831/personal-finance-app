@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from '../ui/dialog';
 
-interface ModalProps {
+interface ResponsiveModalProps {
   children: React.ReactNode;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -14,13 +14,13 @@ interface ModalProps {
   description: string;
 }
 
-export const Modal = ({
+export const ResponsiveModal = ({
   children,
   isOpen,
   setIsOpen,
   title,
   description,
-}: ModalProps) => (
+}: ResponsiveModalProps) => (
   <Dialog onOpenChange={setIsOpen} open={isOpen}>
     <DialogContent>
       <DialogHeader>
@@ -32,4 +32,4 @@ export const Modal = ({
   </Dialog>
 );
 
-export default Modal;
+export default ResponsiveModal;

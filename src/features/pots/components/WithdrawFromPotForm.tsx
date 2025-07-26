@@ -21,7 +21,7 @@ import { CreatePotSchema, type CreatePotSchemaType } from '../schemas';
 
 const MAX_NAME_LENGTH = 30;
 
-const AddNewPotForm = ({
+const WithdrawFromPotForm = ({
   setIsOpen,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -104,4 +104,4 @@ const AddNewPotForm = ({
   );
 };
 
-export default AddNewPotForm;
+export default WithdrawFromPotForm;

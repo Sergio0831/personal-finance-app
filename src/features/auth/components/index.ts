@@ -1,19 +1,7 @@
-import AuthAlert from './AuthAlert';
-import AuthIllustration from './AuthIllustration';
-import AuthWrapper from './AuthWrapper';
-import GitHubSignIn from './GitHubSignIn';
-import InputWithLabel from './InputWithLabel';
-import LoginForm from './LoginForm';
-import PasswordInputWithLabel from './PasswordInputWithLabel';
-import RegisterForm from './RegisterForm';
-
-export {
-	AuthWrapper,
-	GitHubSignIn,
-	RegisterForm,
-	LoginForm,
-	InputWithLabel,
-	PasswordInputWithLabel,
-	AuthIllustration,
-	AuthAlert
-};
+export { default as AuthAlert } from './AuthAlert';
+export { default as AuthIllustration } from './AuthIllustration';
+export { default as AuthWrapper } from './AuthWrapper';
+export { default as GitHubSignIn } from './GitHubSignIn';
+export { default as LoginForm } from './LoginForm';
+export { default as PasswordInputWithLabel } from './PasswordInputWithLabel';
+export { default as RegisterForm } from './RegisterForm';

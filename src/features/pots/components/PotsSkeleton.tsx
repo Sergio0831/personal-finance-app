@@ -10,7 +10,7 @@ const PotsSkeleton = () => {
         <Card className="flex flex-col gap-y-8" key={id}>
           <Skeleton className="h-8" />
           <Skeleton className="h-24" />
-          <Skeleton className="h-13" />
+          <Skeleton className="h-[3.25rem]" />
         </Card>
       ))}
     </main>

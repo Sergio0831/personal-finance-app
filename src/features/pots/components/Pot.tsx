@@ -1,22 +1,26 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { Pot as PotType } from '@/generated/prisma';
-import { formatAmount } from '@/lib/format';
+import ResponsiveModal from '@/components/custom/ResponsiveModal';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from '../../../components/ui/card';
-import { Progress } from '../../../components/ui/progress';
+} from '@/components/ui/card';
+import type { Pot as PotType } from '@/generated/prisma';
+import { AddMoneyToPot, WithdrawFromPotForm } from '.';
 import PotActionButton from './PotActionButton';
 import PotActions from './PotActions';
 import PotHeader from './PotHeader';
+import PotProgress from './PotProgress';
 
 type PotProps = Pick<PotType, 'id' | 'name' | 'theme' | 'target' | 'total'>;
 
 const Pot = ({ id, name, theme, target, total }: PotProps) => {
+  const [isAddMoneyOpen, setIsAddMoneyOpen] = useState(false);
+  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+
   const percentage = Math.min((total / target) * 100, 100).toFixed(2);
   const [progress, setProgress] = useState(0);
 
@@ -26,29 +30,63 @@ const Pot = ({ id, name, theme, target, total }: PotProps) => {
   }, [percentage]);
 
   return (
-    <Card className="flex flex-col gap-y-8">
-      <CardHeader className="flex-row items-center justify-between">
-        <PotHeader name={name} theme={theme} />
-        <PotActions id={id} name={name} target={target} theme={theme} />
-      </CardHeader>
-      <CardContent className="flex flex-col gap-y-4">
-        <div className="flex items-center justify-between">
-          <span className="text-muted text-preset-4">Total Saved</span>
-          <span className="text-preset-1">{formatAmount(total)}</span>
-        </div>
-        <Progress color={theme} value={progress} />
-        <div>
-          <div className="flex items-center justify-between text-muted text-preset-5">
-            <span className="font-bold">{percentage}%</span>
-            <span>Target of {formatAmount(target)}</span>
-          </div>
-        </div>
-      </CardContent>
-      <CardFooter className="gap-4">
-        <PotActionButton> + Add Money</PotActionButton>
-        <PotActionButton>Withdraw</PotActionButton>
-      </CardFooter>
-    </Card>
+    <>
+      <ResponsiveModal
+        description="Add funds to grow your savings. Track progress toward your goal."
+        isOpen={isAddMoneyOpen}
+        setIsOpen={setIsAddMoneyOpen}
+        title={`Add to \u2018${name}\u2019?`}
+      >
+        <AddMoneyToPot
+          id={id}
+          name={name}
+          percantage={percentage}
+          progress={progress}
+          setIsOpen={setIsAddMoneyOpen}
+          target={target}
+          theme={theme}
+          total={total}
+        />
+      </ResponsiveModal>
+      <ResponsiveModal
+        description="Take out money when you need it. Your total will update automatically."
+        isOpen={isWithdrawOpen}
+        setIsOpen={setIsWithdrawOpen}
+        title={`Withdraw from \u2018${name}\u2019?`}
+      >
+        <WithdrawFromPotForm
+          id={id}
+          name={name}
+          setIsOpen={setIsAddMoneyOpen}
+          target={target}
+          theme={theme}
+        />
+      </ResponsiveModal>
+      <Card className="flex flex-col gap-y-8">
+        <CardHeader className="flex-row items-center justify-between">
+          <PotHeader name={name} theme={theme} />
+          <PotActions id={id} name={name} target={target} theme={theme} />
+        </CardHeader>
+        <CardContent>
+          <PotProgress
+            label="Total Saved"
+            percentage={percentage}
+            progress={progress}
+            target={target}
+            theme={theme}
+            total={total}
+          />
+        </CardContent>
+        <CardFooter className="gap-4">
+          <PotActionButton onClick={() => setIsAddMoneyOpen(true)}>
+            + Add Money
+          </PotActionButton>
+          <PotActionButton onClick={() => setIsWithdrawOpen(true)}>
+            Withdraw
+          </PotActionButton>
+        </CardFooter>
+      </Card>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import { UserButton } from '@/components/user';
 import { AddNewBudgetForm } from '@/features/budgets/components';
 import { AddNewPotForm } from '@/features/pots/components';
 import { cn } from '@/lib/clsx';
-import { Modal } from '../custom/modal';
+import ResponsiveModal from '../custom/ResponsiveModal';
 import { Button } from '../ui/button';
 
 interface PageHeaderProps extends ComponentProps<'header'> {
@@ -32,24 +32,24 @@ const PageHeader = ({ className, title, ...rest }: PageHeaderProps) => {
   return (
     <>
       {isPotPage && (
-        <Modal
+        <ResponsiveModal
           description="Create a pot to set savings targets. These can help keep you on track as you save for special purchases."
           isOpen={isPotModalOpen}
           setIsOpen={setIsPotModalOpen}
           title="Add New Pot"
         >
           <AddNewPotForm setIsOpen={setIsPotModalOpen} />
-        </Modal>
+        </ResponsiveModal>
       )}
       {isBudgetPage && (
-        <Modal
+        <ResponsiveModal
           description="Choose a category to set a spending budget. These categories can help you monitor spending."
           isOpen={isBudgetModalOpen}
           setIsOpen={setIsBudgetModalOpen}
           title="Add New Budget"
         >
           <AddNewBudgetForm />
-        </Modal>
+        </ResponsiveModal>
       )}
       <header
         {...rest}

@@ -29,6 +29,7 @@ export const CreatePotSchema = z.object({
       .max(30, 'Pot name cannot exceed 30 characters'),
     target: z.coerce
       .number({ invalid_type_error: 'Target must be a number' })
+      .positive('Amount must be greater than zero')
       .min(1, { message: 'Target must be at least 1' })
       .max(1_000_000, { message: 'Target cannot exceed 1,000,000' }),
     theme: z.string().min(7, 'Theme must be a valid hex color'),

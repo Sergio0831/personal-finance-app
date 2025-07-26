@@ -3,17 +3,17 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { IconEllipsis } from '@/assets/icons';
-import { EditPotForm } from '@/features/pots/components';
-import { useDeletePotMutation } from '@/graphql/generated/output';
-import { Modal } from '../../../components/custom/modal';
-import { Button } from '../../../components/ui/button';
+import ResponsiveModal from '@/components/custom/ResponsiveModal';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../../../components/ui/dropdown-menu';
-import { Separator } from '../../../components/ui/separator';
+} from '@/components/ui/dropdown-menu';
+import { Separator } from '@/components/ui/separator';
+import { EditPotForm } from '@/features/pots/components';
+import { useDeletePotMutation } from '@/graphql/generated/output';
 
 const PotActions = ({
   id,
@@ -43,7 +43,7 @@ const PotActions = ({
   });
   return (
     <>
-      <Modal
+      <ResponsiveModal
         description="If your saving targets change, feel free to update your pots."
         isOpen={isEditOpen}
         setIsOpen={setIsEditOpen}
@@ -56,12 +56,12 @@ const PotActions = ({
           target={target}
           theme={theme}
         />
-      </Modal>
-      <Modal
+      </ResponsiveModal>
+      <ResponsiveModal
         description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever."
         isOpen={isDeleteOpen}
         setIsOpen={setIsDeleteOpen}
-        title={`Delete ‘${name}’?`}
+        title={`Delete \u2018${name}\u2019?`}
       >
         <Button
           disabled={loading}
@@ -77,7 +77,7 @@ const PotActions = ({
         >
           No, Go Back
         </Button>
-      </Modal>
+      </ResponsiveModal>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button className="size-5 text-gray-300" size="icon" variant="ghost">

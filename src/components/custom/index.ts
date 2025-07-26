@@ -1,3 +1,5 @@
-export { default as MobileSelectTrigger } from './mobile-select-trigger';
-export { default as Modal } from './modal';
-export { default as ThemeSelectWithLabel } from './theme-select-with-label';
+export { default as AmountInputWithLabel } from './AmountInputWithLabel';
+export { default as InputWithLabel } from './InputWithLabel';
+export { default as MobileSelectTrigger } from './MobileSelectTrigger';
+export { default as Modal } from './ResponsiveModal';
+export { default as ThemeSelectWithLabel } from './ThemeSelectWithLabel';

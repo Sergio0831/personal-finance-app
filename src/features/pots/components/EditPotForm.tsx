@@ -6,11 +6,15 @@ import { Loader2 } from 'lucide-react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { ThemeSelectWithLabel } from '@/components/custom';
+import {
+  AmountInputWithLabel,
+  InputWithLabel,
+  ThemeSelectWithLabel,
+} from '@/components/custom';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { themeOptions } from '@/constants/theme';
-import { InputWithLabel } from '@/features/auth/components';
+
 import { useUpdatePotMutation } from '@/graphql/generated/output';
 import { useUsedThemes } from '../hooks/useUsedThemes';
 import { UpdatePotSchema, type UpdatePotSchemaType } from '../schemas';
@@ -64,7 +68,7 @@ const EditPotForm = ({
         error instanceof ApolloError
           ? error.message
           : 'An unexpected error occurred';
-      toast.error(`Error creating pot: ${errorMessage}`);
+      toast.error(`Error updating pot: ${errorMessage}`);
     }
   };
   return (
@@ -79,7 +83,7 @@ const EditPotForm = ({
           placeholder="e.g. Rainy Days"
           type="text"
         />
-        <InputWithLabel<UpdatePotSchemaType>
+        <AmountInputWithLabel<UpdatePotSchemaType>
           disabled={loading}
           error={form.formState.errors.input?.target}
           label="Target"

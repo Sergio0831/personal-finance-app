@@ -1,7 +1,7 @@
 'use client';
 
 import { type InputHTMLAttributes, useState } from 'react';
-import { type FieldError, useFormContext } from 'react-hook-form';
+import { type FieldError, type Path, useFormContext } from 'react-hook-form';
 import { HidePassword, ShowPassword } from '@/assets/icons';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,7 +16,7 @@ import { cn } from '@/lib/clsx';
 
 type PasswordInputWithLabelProps<T> = {
   label: string;
-  nameInSchema: keyof T & string;
+  nameInSchema: Path<T>;
   error: FieldError | undefined;
   createPassword?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;

@@ -23,3 +23,11 @@ export const UPDATE_POT = gql`
         }
     }
 `;
+
+export const ADD_TO_POT = gql`
+    mutation AddToPot($id: String!, $amount: Float!) {
+        addToPot(id: $id, amount: $amount) {
+          id,
+        }
+    }
+`;

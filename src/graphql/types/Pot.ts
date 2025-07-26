@@ -1,4 +1,6 @@
+import { GraphQLError } from 'graphql';
 import { CreatePotSchema } from '../../features/pots/schemas/add-new-pot.schema';
+import { AddToPotSchema } from '../../features/pots/schemas/add-to-pot.schema';
 import { DeletePotSchema } from '../../features/pots/schemas/delete-pot.schema';
 import { UpdatePotSchema } from '../../features/pots/schemas/update-pot.schema';
 import { prisma } from '../../lib/prisma-client';
@@ -90,7 +92,11 @@ builder.mutationType({
         return await prisma.pot.update({
           ...query,
           where: { id, userId: ctx.user.id },
-          data: input,
+          data: {
+            name: input.name,
+            target: input.target,
+            theme: input.theme,
+          },
         });
       },
     }),
@@ -106,6 +112,43 @@ builder.mutationType({
         return await prisma.pot.delete({
           ...query,
           where: { id, userId: ctx.user.id },
+        });
+      },
+    }),
+    addToPot: t.prismaField({
+      type: Pot,
+      args: {
+        id: t.arg.string({ required: true }),
+        amount: t.arg.float({ required: true }),
+      },
+      validate: {
+        schema: AddToPotSchema,
+      },
+      resolve: async (query, _parent, { id, amount }, ctx) => {
+        const pot = await prisma.pot.findFirstOrThrow({
+          where: {
+            id,
+            userId: ctx.user.id,
+          },
+          select: {
+            total: true,
+            target: true,
+          },
+        });
+
+        const newTotal = pot.total + amount;
+        if (newTotal > pot.target) {
+          throw new GraphQLError('Amount exceeds your saving target');
+        }
+
+        return await prisma.pot.update({
+          ...query,
+          where: { id, userId: ctx.user.id },
+          data: {
+            total: {
+              increment: amount,
+            },
+          },
         });
       },
     }),

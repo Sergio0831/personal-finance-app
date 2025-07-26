@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-
+import { InputWithLabel } from '@/components/custom';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
@@ -14,7 +14,6 @@ import { signInWithCredentials } from '../actions/sign-in';
 import { LoginSchema, type LoginSchemaType } from '../schemas';
 import AuthAlert from './AuthAlert';
 import AuthWrapper from './AuthWrapper';
-import InputWithLabel from './InputWithLabel';
 import PasswordInputWithLabel from './PasswordInputWithLabel';
 
 const LoginForm = () => {

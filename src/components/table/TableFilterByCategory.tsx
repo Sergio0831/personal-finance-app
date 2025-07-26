@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Category } from '@/generated/prisma';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import SelectMobileTrigger from '../custom/mobile-select-trigger';
+import SelectMobileTrigger from '../custom/MobileSelectTrigger';
 import type { Transaction } from '../transactions/Columns';
 import { Label } from '../ui/label';
 

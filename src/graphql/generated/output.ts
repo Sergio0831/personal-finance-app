@@ -46,9 +46,16 @@ export type CreatePotInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addToPot?: Maybe<Pot>;
   createPot?: Maybe<Pot>;
   deletePot?: Maybe<Pot>;
   updatePot?: Maybe<Pot>;
+};
+
+
+export type MutationAddToPotArgs = {
+  amount: Scalars['Float']['input'];
+  id: Scalars['String']['input'];
 };
 
 
@@ -110,9 +117,9 @@ export type Transaction = {
 };
 
 export type UpdatePotInput = {
-  name?: InputMaybe<Scalars['String']['input']>;
-  target?: InputMaybe<Scalars['Float']['input']>;
-  theme?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  target: Scalars['Float']['input'];
+  theme: Scalars['String']['input'];
 };
 
 export type User = {
@@ -144,6 +151,14 @@ export type UpdatePotMutationVariables = Exact<{
 
 
 export type UpdatePotMutation = { __typename?: 'Mutation', updatePot?: { __typename?: 'Pot', id: string } | null };
+
+export type AddToPotMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  amount: Scalars['Float']['input'];
+}>;
+
+
+export type AddToPotMutation = { __typename?: 'Mutation', addToPot?: { __typename?: 'Pot', id: string } | null };
 
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -266,6 +281,40 @@ export function useUpdatePotMutation(baseOptions?: Apollo.MutationHookOptions<Up
 export type UpdatePotMutationHookResult = ReturnType<typeof useUpdatePotMutation>;
 export type UpdatePotMutationResult = Apollo.MutationResult<UpdatePotMutation>;
 export type UpdatePotMutationOptions = Apollo.BaseMutationOptions<UpdatePotMutation, UpdatePotMutationVariables>;
+export const AddToPotDocument = gql`
+    mutation AddToPot($id: String!, $amount: Float!) {
+  addToPot(id: $id, amount: $amount) {
+    id
+  }
+}
+    `;
+export type AddToPotMutationFn = Apollo.MutationFunction<AddToPotMutation, AddToPotMutationVariables>;
+
+/**
+ * __useAddToPotMutation__
+ *
+ * To run a mutation, you first call `useAddToPotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddToPotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addToPotMutation, { data, loading, error }] = useAddToPotMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      amount: // value for 'amount'
+ *   },
+ * });
+ */
+export function useAddToPotMutation(baseOptions?: Apollo.MutationHookOptions<AddToPotMutation, AddToPotMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddToPotMutation, AddToPotMutationVariables>(AddToPotDocument, options);
+      }
+export type AddToPotMutationHookResult = ReturnType<typeof useAddToPotMutation>;
+export type AddToPotMutationResult = Apollo.MutationResult<AddToPotMutation>;
+export type AddToPotMutationOptions = Apollo.BaseMutationOptions<AddToPotMutation, AddToPotMutationVariables>;
 export const GetAllPotsDocument = gql`
     query GetAllPots {
   pots {
