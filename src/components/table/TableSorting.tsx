@@ -7,9 +7,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import type { Transaction } from '@/features/transactions/components';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import SelectMobileTrigger from '../custom/MobileSelectTrigger';
-import type { Transaction } from '../transactions/Columns';
 import { Label } from '../ui/label';
 
 const TableSorting = ({ table }: TableProps<Transaction>) => {

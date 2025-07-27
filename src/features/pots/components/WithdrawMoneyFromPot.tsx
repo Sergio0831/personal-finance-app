@@ -3,10 +3,10 @@
 import { type Dispatch, type SetStateAction, useState } from 'react';
 import { Progress } from '@/components/custom';
 import { cn } from '@/lib/clsx';
-import AddMoneyToPotForm from './AddMoneyToPotForm';
 import PotProgress from './PotProgress';
+import WithdrawFromPotForm from './WithdrawFromPotForm';
 
-type AddMoneyToPotProps = {
+type WithdrawMoneyFromPotProps = {
   id: string;
   name: string;
   total: number;
@@ -17,26 +17,27 @@ type AddMoneyToPotProps = {
   percantage: string;
 };
 
-const AddMoneyToPot = ({
+const WithdrawMoneyFromPot = ({
   setIsOpen,
   total,
   target,
   theme,
   id,
   name,
-}: AddMoneyToPotProps) => {
+}: WithdrawMoneyFromPotProps) => {
   const [amount, setAmount] = useState(0);
 
-  const newTotal = total + amount;
+  const newTotal = Math.max(total - amount, 0);
   const oldPercentage = Math.min((total / target) * 100, 100);
-  const addedPercentage = Math.min((amount / target) * 100, 100);
+  const removedPercentage = Math.min((amount / target) * 100, 100);
+  const newPercentage = Math.max(oldPercentage - removedPercentage, 0);
 
   return (
     <>
       <PotProgress
-        className={cn(amount > 0 && 'text-accent')}
+        className={cn(amount > 0 && 'text-destructive')}
         label="New Amount"
-        percentage={(oldPercentage + addedPercentage).toFixed(2)}
+        percentage={newPercentage.toFixed(2)}
         target={target}
         total={newTotal}
       >
@@ -44,18 +45,18 @@ const AddMoneyToPot = ({
           segments={[
             {
               key: 1,
-              value: oldPercentage,
+              value: newPercentage,
               color: theme,
             },
             {
               key: 2,
-              value: addedPercentage,
-              color: 'var(--accent)',
+              value: removedPercentage,
+              color: 'var(--destructive)',
             },
           ]}
         />
       </PotProgress>
-      <AddMoneyToPotForm
+      <WithdrawFromPotForm
         id={id}
         name={name}
         onAmountChange={setAmount}
@@ -65,4 +66,4 @@ const AddMoneyToPot = ({
   );
 };
 
-export default AddMoneyToPot;
+export default WithdrawMoneyFromPot;

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import Logo from '@/components/Logo';
+import Logo from '@/components/layout/Logo';
 
 const AuthIllustration = () => {
   return (

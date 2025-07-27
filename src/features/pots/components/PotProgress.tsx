@@ -1,25 +1,23 @@
-import { Progress } from '@/components/ui/progress';
+import type { ReactNode } from 'react';
 import { cn } from '@/lib/clsx';
 import { formatAmount } from '@/lib/format';
 
 type PotProgressProps = {
   total: number;
-  theme: string;
-  progress: number;
   percentage: string;
   label: string;
   target: number;
-  className: string;
+  className?: string;
+  children: ReactNode;
 };
 
 const PotProgress = ({
   total,
-  theme,
-  progress,
   percentage,
   label,
   target,
   className,
+  children,
 }: PotProgressProps) => {
   return (
     <div className="flex flex-col gap-y-4">
@@ -27,7 +25,7 @@ const PotProgress = ({
         <span className="text-muted text-preset-4">{label}</span>
         <span className="text-preset-1">{formatAmount(total)}</span>
       </div>
-      <Progress color={theme} value={progress} />
+      {children}
       <div>
         <div className="flex items-center justify-between text-muted text-preset-5">
           <span className={cn('font-bold', className)}>{percentage}%</span>

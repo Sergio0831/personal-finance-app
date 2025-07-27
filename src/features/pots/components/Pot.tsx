@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Progress } from '@/components/custom';
 import ResponsiveModal from '@/components/custom/ResponsiveModal';
 import {
   Card,
@@ -9,7 +10,7 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import type { Pot as PotType } from '@/generated/prisma';
-import { AddMoneyToPot, WithdrawFromPotForm } from '.';
+import { AddMoneyToPot, WithdrawMoneyFromPot } from '.';
 import PotActionButton from './PotActionButton';
 import PotActions from './PotActions';
 import PotHeader from './PotHeader';
@@ -20,9 +21,9 @@ type PotProps = Pick<PotType, 'id' | 'name' | 'theme' | 'target' | 'total'>;
 const Pot = ({ id, name, theme, target, total }: PotProps) => {
   const [isAddMoneyOpen, setIsAddMoneyOpen] = useState(false);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const percentage = Math.min((total / target) * 100, 100).toFixed(2);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setProgress(+percentage), 500);
@@ -54,12 +55,15 @@ const Pot = ({ id, name, theme, target, total }: PotProps) => {
         setIsOpen={setIsWithdrawOpen}
         title={`Withdraw from \u2018${name}\u2019?`}
       >
-        <WithdrawFromPotForm
+        <WithdrawMoneyFromPot
           id={id}
           name={name}
-          setIsOpen={setIsAddMoneyOpen}
+          percantage={percentage}
+          progress={progress}
+          setIsOpen={setIsWithdrawOpen}
           target={target}
           theme={theme}
+          total={total}
         />
       </ResponsiveModal>
       <Card className="flex flex-col gap-y-8">
@@ -71,11 +75,19 @@ const Pot = ({ id, name, theme, target, total }: PotProps) => {
           <PotProgress
             label="Total Saved"
             percentage={percentage}
-            progress={progress}
             target={target}
-            theme={theme}
             total={total}
-          />
+          >
+            <Progress
+              segments={[
+                {
+                  key: 1,
+                  value: progress,
+                  color: theme,
+                },
+              ]}
+            />
+          </PotProgress>
         </CardContent>
         <CardFooter className="gap-4">
           <PotActionButton onClick={() => setIsAddMoneyOpen(true)}>

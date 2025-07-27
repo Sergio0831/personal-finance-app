@@ -19,10 +19,10 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
-import TableFilter from '../table/TableFilter';
-import TableFilterByCategory from '../table/TableFilterByCategory';
-import TablePagination from '../table/TablePagination';
-import TableSorting from '../table/TableSorting';
+import TableFilter from '../../../components/table/TableFilter';
+import TableFilterByCategory from '../../../components/table/TableFilterByCategory';
+import TablePagination from '../../../components/table/TablePagination';
+import TableSorting from '../../../components/table/TableSorting';
 import type { Transaction } from './Columns';
 import TransactionTableSkeleton from './TransactionTableSkeleton';
 

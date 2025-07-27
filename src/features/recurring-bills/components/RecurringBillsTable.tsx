@@ -10,11 +10,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useState } from 'react';
-
+import { TableFilter, TableSorting } from '@/components/table';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
-import TableFilter from '../table/TableFilter';
-import TableSorting from '../table/TableSorting';
 import type { RecurringBill } from './Columns';
 
 interface RecurringBillsTableProps {

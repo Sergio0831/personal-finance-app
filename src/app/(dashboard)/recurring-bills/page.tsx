@@ -1,5 +1,5 @@
 import { PageHeader } from '@/components/layout';
-import { RecurringBillsView } from '@/components/recurring-bills';
+import { RecurringBillsView } from '@/features/recurring-bills/components';
 
 const RecurringBillsPage = () => {
   return (

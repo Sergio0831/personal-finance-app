@@ -50,6 +50,7 @@ export type Mutation = {
   createPot?: Maybe<Pot>;
   deletePot?: Maybe<Pot>;
   updatePot?: Maybe<Pot>;
+  withdrawFromPot?: Maybe<Pot>;
 };
 
 
@@ -72,6 +73,12 @@ export type MutationDeletePotArgs = {
 export type MutationUpdatePotArgs = {
   id: Scalars['String']['input'];
   input: UpdatePotInput;
+};
+
+
+export type MutationWithdrawFromPotArgs = {
+  amount: Scalars['Float']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type Pot = {
@@ -159,6 +166,14 @@ export type AddToPotMutationVariables = Exact<{
 
 
 export type AddToPotMutation = { __typename?: 'Mutation', addToPot?: { __typename?: 'Pot', id: string } | null };
+
+export type WithdrawFromPotMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  amount: Scalars['Float']['input'];
+}>;
+
+
+export type WithdrawFromPotMutation = { __typename?: 'Mutation', withdrawFromPot?: { __typename?: 'Pot', id: string } | null };
 
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -315,6 +330,40 @@ export function useAddToPotMutation(baseOptions?: Apollo.MutationHookOptions<Add
 export type AddToPotMutationHookResult = ReturnType<typeof useAddToPotMutation>;
 export type AddToPotMutationResult = Apollo.MutationResult<AddToPotMutation>;
 export type AddToPotMutationOptions = Apollo.BaseMutationOptions<AddToPotMutation, AddToPotMutationVariables>;
+export const WithdrawFromPotDocument = gql`
+    mutation WithdrawFromPot($id: String!, $amount: Float!) {
+  withdrawFromPot(id: $id, amount: $amount) {
+    id
+  }
+}
+    `;
+export type WithdrawFromPotMutationFn = Apollo.MutationFunction<WithdrawFromPotMutation, WithdrawFromPotMutationVariables>;
+
+/**
+ * __useWithdrawFromPotMutation__
+ *
+ * To run a mutation, you first call `useWithdrawFromPotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useWithdrawFromPotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [withdrawFromPotMutation, { data, loading, error }] = useWithdrawFromPotMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      amount: // value for 'amount'
+ *   },
+ * });
+ */
+export function useWithdrawFromPotMutation(baseOptions?: Apollo.MutationHookOptions<WithdrawFromPotMutation, WithdrawFromPotMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<WithdrawFromPotMutation, WithdrawFromPotMutationVariables>(WithdrawFromPotDocument, options);
+      }
+export type WithdrawFromPotMutationHookResult = ReturnType<typeof useWithdrawFromPotMutation>;
+export type WithdrawFromPotMutationResult = Apollo.MutationResult<WithdrawFromPotMutation>;
+export type WithdrawFromPotMutationOptions = Apollo.BaseMutationOptions<WithdrawFromPotMutation, WithdrawFromPotMutationVariables>;
 export const GetAllPotsDocument = gql`
     query GetAllPots {
   pots {

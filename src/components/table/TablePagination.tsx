@@ -1,9 +1,9 @@
 import { CaretLeft, CaretRight } from '@/assets/icons';
 import { Button } from '@/components/ui/button';
 import type { TableProps } from '@/components/ui/data-table';
+import type { Transaction } from '@/features/transactions/components';
 import { ELLIPSIS, usePaginationRange } from '@/hooks/usePaginationRange';
 import { cn } from '@/lib/clsx';
-import type { Transaction } from '../transactions/Columns';
 
 const TablePagination = ({ table }: TableProps<Transaction>) => {
   const range = usePaginationRange(table);

@@ -8,3 +8,4 @@ export { default as PotActions } from './PotActions';
 export { default as PotHeader } from './PotHeader';
 export { default as PotsView } from './PotsView';
 export { default as WithdrawFromPotForm } from './WithdrawFromPotForm';
+export { default as WithdrawMoneyFromPot } from './WithdrawMoneyFromPot';

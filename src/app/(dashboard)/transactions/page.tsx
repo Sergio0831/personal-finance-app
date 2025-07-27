@@ -1,5 +1,5 @@
 import { PageHeader } from '@/components/layout';
-import { TransactionsView } from '@/components/transactions';
+import { TransactionsView } from '@/features/transactions/components';
 
 const TransactionsPage = () => {
   return (

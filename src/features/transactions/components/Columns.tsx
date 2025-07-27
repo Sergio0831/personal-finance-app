@@ -4,8 +4,8 @@ import type { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
 import { Avatar } from '@/components/ui/avatar';
 import type { Category } from '@/generated/prisma';
-import { useTransactionInfo } from '@/hooks/useTransactionInfo';
 import { cn } from '@/lib/clsx';
+import { useTransactionInfo } from '../hooks/useTransactionInfo';
 
 export type Transaction = {
   id: string;

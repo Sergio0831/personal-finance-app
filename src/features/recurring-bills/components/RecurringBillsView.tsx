@@ -1,15 +1,15 @@
 'use client';
 
 import { RecurringBillsIcon } from '@/assets/icons';
-import { useGetAllRecurringBillsQuery } from '@/graphql/generated/output';
-import { formatAmount } from '@/lib/format';
 import {
   DataList,
   DataListItem,
   DataListLabel,
   DataListValue,
-} from '../ui/data-list';
-import { Separator } from '../ui/separator';
+} from '@/components/ui/data-list';
+import { Separator } from '@/components/ui/separator';
+import { useGetAllRecurringBillsQuery } from '@/graphql/generated/output';
+import { formatAmount } from '@/lib/format';
 import { columns } from './Columns';
 import RecurringBillsSkeleton from './RecurringBillsSkeleton';
 import RecurringBillsTable from './RecurringBillsTable';

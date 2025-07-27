@@ -4,9 +4,10 @@ import type { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
 import { IconBillDue, IconBillPaid } from '@/assets/icons';
 import { Avatar } from '@/components/ui/avatar';
-import { useBillInfo } from '@/hooks/useBillInfo';
+
 import { cn } from '@/lib/clsx';
 import { formatAmount } from '@/lib/format';
+import { useBillInfo } from '../hooks/useBillInfo';
 
 export type RecurringBill = {
   id: string;

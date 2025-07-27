@@ -31,3 +31,11 @@ export const ADD_TO_POT = gql`
         }
     }
 `;
+
+export const WITHDRAW_FROM_POT = gql`
+    mutation WithdrawFromPot($id: String!, $amount: Float!) {
+        withdrawFromPot(id: $id, amount: $amount) {
+          id,
+        }
+    }
+`;

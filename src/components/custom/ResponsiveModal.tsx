@@ -23,7 +23,7 @@ export const ResponsiveModal = ({
 }: ResponsiveModalProps) => (
   <Dialog onOpenChange={setIsOpen} open={isOpen}>
     <DialogContent>
-      <DialogHeader>
+      <DialogHeader className="pr-4">
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>

@@ -3,6 +3,7 @@ import { CreatePotSchema } from '../../features/pots/schemas/add-new-pot.schema'
 import { AddToPotSchema } from '../../features/pots/schemas/add-to-pot.schema';
 import { DeletePotSchema } from '../../features/pots/schemas/delete-pot.schema';
 import { UpdatePotSchema } from '../../features/pots/schemas/update-pot.schema';
+import { WithdrawFromPotSchema } from '../../features/pots/schemas/withdraw-from-pot.schema';
 import { prisma } from '../../lib/prisma-client';
 import { builder } from '../builder';
 
@@ -147,6 +148,43 @@ builder.mutationType({
           data: {
             total: {
               increment: amount,
+            },
+          },
+        });
+      },
+    }),
+    withdrawFromPot: t.prismaField({
+      type: Pot,
+      args: {
+        id: t.arg.string({ required: true }),
+        amount: t.arg.float({ required: true }),
+      },
+      validate: {
+        schema: WithdrawFromPotSchema,
+      },
+      resolve: async (query, _parent, { id, amount }, ctx) => {
+        const pot = await prisma.pot.findFirstOrThrow({
+          where: {
+            id,
+            userId: ctx.user.id,
+          },
+          select: {
+            total: true,
+          },
+        });
+
+        if (amount > pot.total) {
+          throw new GraphQLError(
+            'You cannot withdraw more than the total saved.'
+          );
+        }
+
+        return await prisma.pot.update({
+          ...query,
+          where: { id, userId: ctx.user.id },
+          data: {
+            total: {
+              decrement: amount,
             },
           },
         });

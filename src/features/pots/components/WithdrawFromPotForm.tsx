@@ -3,101 +3,90 @@
 import { ApolloError } from '@apollo/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
-import type { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import {
-  AmountInputWithLabel,
-  InputWithLabel,
-  ThemeSelectWithLabel,
-} from '@/components/custom';
+import { AmountInputWithLabel } from '@/components/custom';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { themeOptions } from '@/constants/theme';
+import { useWithdrawFromPotMutation } from '@/graphql/generated/output';
+import {
+  WithdrawFromPotSchema,
+  type WithdrawFromPotSchemaType,
+} from '../schemas';
 
-import { useCreatePotMutation } from '@/graphql/generated/output';
-import { useUsedThemes } from '../hooks/useUsedThemes';
-import { CreatePotSchema, type CreatePotSchemaType } from '../schemas';
-
-const MAX_NAME_LENGTH = 30;
+type WithdrawFromPotFormProps = {
+  id: string;
+  name: string;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onAmountChange: Dispatch<SetStateAction<number>>;
+};
 
 const WithdrawFromPotForm = ({
+  id,
+  name,
   setIsOpen,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
-  const [createPotMutation, { loading }] = useCreatePotMutation();
+  onAmountChange,
+}: WithdrawFromPotFormProps) => {
+  const [withdrawFromPotMutation, { loading }] = useWithdrawFromPotMutation();
 
-  const usedTheme = useUsedThemes();
-
-  const form = useForm<CreatePotSchemaType>({
-    resolver: zodResolver(CreatePotSchema),
+  const form = useForm<WithdrawFromPotSchemaType>({
+    resolver: zodResolver(WithdrawFromPotSchema),
     defaultValues: {
-      input: {
-        name: '',
-        target: '' as unknown as number,
-        theme: '',
-      },
+      id,
+      amount: '' as unknown as number,
     },
   });
 
-  const potName = form.watch('input.name');
-  const charsLeft = MAX_NAME_LENGTH - potName.length;
+  const potAmount = form.watch('amount') ?? 0;
 
-  const onSubmit = async (formValues: CreatePotSchemaType) => {
+  useEffect(() => {
+    if (onAmountChange) {
+      onAmountChange(Number(potAmount));
+    }
+  }, [potAmount, onAmountChange]);
+
+  const onSubmit = async (formValues: WithdrawFromPotSchemaType) => {
     try {
-      await createPotMutation({
+      await withdrawFromPotMutation({
         variables: {
-          input: formValues.input,
+          id,
+          amount: formValues.amount,
         },
         onCompleted: () => {
           form.reset();
           setIsOpen(false);
-          toast.success(`Pot '${formValues.input.name}' created successfully!`);
+          toast.success(
+            `Withdrawed money from \u2018${name}\u2019 successfully!`
+          );
         },
         refetchQueries: ['GetAllPots'],
       });
     } catch (error) {
       const errorMessage =
         error instanceof ApolloError
-          ? error.message
+          ? (error.graphQLErrors[0].message ?? error.message)
           : 'An unexpected error occurred';
-      toast.error(`Error creating pot: ${errorMessage}`);
+      toast.error(errorMessage);
     }
   };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <InputWithLabel<CreatePotSchemaType>
-          charsLeft={charsLeft}
+        <AmountInputWithLabel<WithdrawFromPotSchemaType>
           disabled={loading}
-          error={form.formState.errors.input?.name}
-          label="Pot Name"
-          maxLength={MAX_NAME_LENGTH}
-          nameInSchema="input.name"
-          placeholder="e.g. Rainy Days"
-          type="text"
-        />
-        <AmountInputWithLabel<CreatePotSchemaType>
-          disabled={loading}
-          error={form.formState.errors.input?.target}
-          label="Target"
-          nameInSchema="input.target"
+          error={form.formState.errors.amount}
+          label="Amount to Withdraw"
+          nameInSchema="amount"
           placeholder="e.g. 2000"
           type="text"
         />
-        <ThemeSelectWithLabel<CreatePotSchemaType>
-          className="mb-5"
-          disabled={loading}
-          error={form.formState.errors.input?.theme}
-          label="Theme"
-          nameInSchema="input.theme"
-          options={themeOptions}
-          placeholder="Select theme"
-          usedThemeValues={usedTheme}
-        />
         <Button className="w-full" disabled={loading} type="submit">
-          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Add Pot'}
+          {loading ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            'Confirm Withdrawal'
+          )}
         </Button>
       </form>
     </Form>

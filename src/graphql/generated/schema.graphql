@@ -32,6 +32,7 @@ type Mutation {
   createPot(input: CreatePotInput!): Pot
   deletePot(id: String!): Pot
   updatePot(id: String!, input: UpdatePotInput!): Pot
+  withdrawFromPot(amount: Float!, id: String!): Pot
 }
 
 type Pot {

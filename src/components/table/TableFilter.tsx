@@ -2,7 +2,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { Search } from '@/assets/icons';
 import type { TableProps } from '@/components/ui/data-table';
 import { Input } from '@/components/ui/input';
-import type { Transaction } from '../transactions/Columns';
+import type { Transaction } from '@/features/transactions/components';
 
 const TableFilter = ({ table }: TableProps<Transaction>) => {
   const handleSearch = useDebouncedCallback((term: string) => {

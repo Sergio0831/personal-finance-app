@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import Logo from '@/components/Logo';
-import LogoMobile from '@/components/LogoMobile';
+import Logo from '@/components/layout/Logo';
+import LogoMobile from '@/components/layout/LogoMobile';
 import {
   Sidebar,
   SidebarContent,
