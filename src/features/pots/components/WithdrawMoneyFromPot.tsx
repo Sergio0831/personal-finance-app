@@ -12,9 +12,7 @@ type WithdrawMoneyFromPotProps = {
   total: number;
   target: number;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  progress: number;
   theme: string;
-  percantage: string;
 };
 
 const WithdrawMoneyFromPot = ({

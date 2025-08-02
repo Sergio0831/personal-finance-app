@@ -25,6 +25,16 @@ export type AmountSummary = {
   total: Scalars['Float']['output'];
 };
 
+export type Budget = {
+  __typename?: 'Budget';
+  category: Category;
+  createdAt: Scalars['Date']['output'];
+  id: Scalars['ID']['output'];
+  maximum: Scalars['Float']['output'];
+  theme: Scalars['String']['output'];
+  updatedAt: Scalars['Date']['output'];
+};
+
 export enum Category {
   Bills = 'Bills',
   DiningOut = 'DiningOut',
@@ -37,6 +47,12 @@ export enum Category {
   Shopping = 'Shopping',
   Transportation = 'Transportation'
 }
+
+export type CreateBudgetInput = {
+  category: Category;
+  maximum: Scalars['Float']['input'];
+  theme: Scalars['String']['input'];
+};
 
 export type CreatePotInput = {
   name: Scalars['String']['input'];
@@ -94,6 +110,7 @@ export type Pot = {
 
 export type Query = {
   __typename?: 'Query';
+  budgets: Array<Budget>;
   pots: Array<Pot>;
   recentTransactions: Array<Transaction>;
   recurringBills: RecurringBills;
@@ -174,6 +191,11 @@ export type WithdrawFromPotMutationVariables = Exact<{
 
 
 export type WithdrawFromPotMutation = { __typename?: 'Mutation', withdrawFromPot?: { __typename?: 'Pot', id: string } | null };
+
+export type GetAllBudgetsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllBudgetsQuery = { __typename?: 'Query', budgets: Array<{ __typename?: 'Budget', id: string, category: Category, maximum: number, theme: string }> };
 
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -364,6 +386,48 @@ export function useWithdrawFromPotMutation(baseOptions?: Apollo.MutationHookOpti
 export type WithdrawFromPotMutationHookResult = ReturnType<typeof useWithdrawFromPotMutation>;
 export type WithdrawFromPotMutationResult = Apollo.MutationResult<WithdrawFromPotMutation>;
 export type WithdrawFromPotMutationOptions = Apollo.BaseMutationOptions<WithdrawFromPotMutation, WithdrawFromPotMutationVariables>;
+export const GetAllBudgetsDocument = gql`
+    query GetAllBudgets {
+  budgets {
+    id
+    category
+    maximum
+    theme
+  }
+}
+    `;
+
+/**
+ * __useGetAllBudgetsQuery__
+ *
+ * To run a query within a React component, call `useGetAllBudgetsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllBudgetsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllBudgetsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllBudgetsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>(GetAllBudgetsDocument, options);
+      }
+export function useGetAllBudgetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>(GetAllBudgetsDocument, options);
+        }
+export function useGetAllBudgetsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>(GetAllBudgetsDocument, options);
+        }
+export type GetAllBudgetsQueryHookResult = ReturnType<typeof useGetAllBudgetsQuery>;
+export type GetAllBudgetsLazyQueryHookResult = ReturnType<typeof useGetAllBudgetsLazyQuery>;
+export type GetAllBudgetsSuspenseQueryHookResult = ReturnType<typeof useGetAllBudgetsSuspenseQuery>;
+export type GetAllBudgetsQueryResult = Apollo.QueryResult<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>;
 export const GetAllPotsDocument = gql`
     query GetAllPots {
   pots {

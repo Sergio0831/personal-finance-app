@@ -7,7 +7,7 @@ import { Avatar } from '@/components/ui/avatar';
 
 import { cn } from '@/lib/clsx';
 import { formatAmount } from '@/lib/format';
-import { useBillInfo } from '../hooks/useBillInfo';
+import { getBillInfo } from '../utils/getBillInfo';
 
 export type RecurringBill = {
   id: string;
@@ -23,7 +23,7 @@ export const columns: ColumnDef<RecurringBill>[] = [
     sortingFn: 'alphanumeric',
     header: () => <div className="@xl:px-4">Bill Title</div>,
     cell: ({ row }) => {
-      const { formattedDate, status } = useBillInfo(row);
+      const { formattedDate, status } = getBillInfo(row);
 
       return (
         <div>
@@ -61,10 +61,10 @@ export const columns: ColumnDef<RecurringBill>[] = [
   {
     accessorKey: 'date',
     sortingFn: (a, b) =>
-      new Date(b.original.date).getDate() - new Date(a.original.date).getDate(),
+      new Date(b.original.date).getTime() - new Date(a.original.date).getTime(),
     header: () => <div>Due Date</div>,
     cell: ({ row }) => {
-      const { formattedDate, status } = useBillInfo(row);
+      const { formattedDate, status } = getBillInfo(row);
 
       return (
         <div className="flex items-center gap-2">
@@ -90,7 +90,7 @@ export const columns: ColumnDef<RecurringBill>[] = [
     sortingFn: 'basic',
     header: () => <div className="@lg:px-4 text-right">Amount</div>,
     cell: ({ row }) => {
-      const { status } = useBillInfo(row);
+      const { status } = getBillInfo(row);
       const amount = Math.abs(Number.parseFloat(row.getValue('amount')));
       const formattedAmount = formatAmount(amount);
 

@@ -13,10 +13,12 @@ type ProgressProps = React.ComponentProps<typeof Root> & {
 };
 
 const Progress = ({ className, segments, ...props }: ProgressProps) => {
+  const totalValue = segments.reduce((sum, segment) => sum + segment.value, 0);
+
   return (
     <Root
       className={cn(
-        'relative flex h-2 w-full gap-[2px] overflow-hidden rounded-sm bg-background',
+        'relative flex h-2 w-full overflow-hidden rounded-sm bg-background',
         className
       )}
       data-slot="progress"
@@ -24,11 +26,15 @@ const Progress = ({ className, segments, ...props }: ProgressProps) => {
     >
       {segments.map((segment) => (
         <Indicator
+          aria-valuemax={100}
+          aria-valuemin={0}
+          aria-valuenow={totalValue}
           className="h-full rounded-sm transition-all duration-500"
           data-slot={`progress-indicator-${segment.key}`}
           key={segment.key}
+          role="progressbar"
           style={{
-            width: `${segment.value}%`,
+            flex: `${segment.value}% 0 0`,
             backgroundColor: segment.color || 'var(--accent)',
           }}
         />

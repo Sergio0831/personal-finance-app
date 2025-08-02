@@ -15,7 +15,19 @@ import RecurringBillsSkeleton from './RecurringBillsSkeleton';
 import RecurringBillsTable from './RecurringBillsTable';
 
 const RecurringBillsView = () => {
-  const { data, loading } = useGetAllRecurringBillsQuery();
+  const { data, loading, error } = useGetAllRecurringBillsQuery();
+
+  if (loading) {
+    return <RecurringBillsSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-screen items-center justify-center text-foreground">
+        Error loading recurring bills. Please try again.
+      </div>
+    );
+  }
 
   if (loading) {
     return <RecurringBillsSkeleton />;

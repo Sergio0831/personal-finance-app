@@ -6,10 +6,10 @@
 	--white: hsl(0, 0%, 100%);
 	--beige-100: hsl(30, 36%, 96%);
 	--beige-500: hsl(23, 6%, 57%);
-	--grey-100: hsl(0, 0%, 95%);
-	--grey-300: hsl(0, 0%, 70%);
-	--grey-500: hsl(0, 0%, 41%);
-	--grey-900: hsl(252, 7%, 13%);
+	--gray-100: hsl(0, 0%, 95%);
+	--gray-300: hsl(0, 0%, 70%);
+	--gray-500: hsl(0, 0%, 41%);
+	--gray-900: hsl(252, 7%, 13%);
 	--green: hsl(177, 52%, 32%);
 	--yellow: hsl(28, 73%, 81%);
 	--cyan: hsl(190, 52%, 68%);
@@ -22,44 +22,44 @@
 	--brown: hsl(21, 30%, 44%);
 	--magenta: hsl(332, 30%, 44%);
 	--blue: hsl(205, 48%, 47%);
-	--navy-grey: hsl(214, 11%, 63%);
+	--navy-gray: hsl(214, 11%, 63%);
 	--army-green: hsl(83, 20%, 47%);
 	--gold: hsl(47, 50%, 59%);
 	--orange: hsl(18, 47%, 52%);
 	--pink: hsl(330, 50%, 60%);
 
 	--background: var(--beige-100);
-	--foreground: var(--grey-900);
+	--foreground: var(--gray-900);
 
 	--accent: var(--green);
 
 	--card: var(--color-white);
-	--card-foreground: var(--color-grey-900);
+	--card-foreground: var(--color-gray-900);
 
 	--input: var(--beige-500);
-	--input-active: var(--grey-900);
+	--input-active: var(--gray-900);
 	--border: var(--beige-500);
-	--muted: var(--grey-500);
-	--muted-foreground: var(--grey-300);
+	--muted: var(--gray-500);
+	--muted-foreground: var(--gray-300);
 	--destructive: var(--red-500);
 	--destructive-foreground: var(--white);
 	--ring: var(--green);
 
 	/* Sidebar background color */
-	--sidebar-background: var(--grey-900);
+	--sidebar-background: var(--gray-900);
 	/* Sidebar text color */
-	--sidebar-foreground: var(--grey-300);
+	--sidebar-foreground: var(--gray-300);
 	/* Sidebar hover item text color */
-	--sidebar-primary: var(--grey-100);
+	--sidebar-primary: var(--gray-100);
 	--sidebar-primary-foreground: oklch(0.985 0 0);
 	/* Sidebar active item background color */
 	--sidebar-accent: var(--beige-100);
 	/* Sidebar active item text color */
-	--sidebar-accent-foreground: var(--grey-900);
-	--sidebar-border: var(--grey-900);
+	--sidebar-accent-foreground: var(--gray-900);
+	--sidebar-border: var(--gray-900);
 	--sidebar-ring: var(--green);
 
-	--popover: var(--grey-900);
+	--popover: var(--gray-900);
 	--popover-foregorund: var(--white);
 
 	--toast: hsl(176, 74%, 92%);
@@ -74,10 +74,10 @@
 
 	--color-white: var(--white);
 	--color-beige-500: var(--beige-500);
-	--color-grey-900: var(--grey-900);
-	--color-grey-500: var(--grey-500);
-	--color-grey-300: var(--grey-300);
-	--color-grey-100: var(--grey-100);
+	--color-gray-900: var(--gray-900);
+	--color-gray-500: var(--gray-500);
+	--color-gray-300: var(--gray-300);
+	--color-gray-100: var(--gray-100);
 	--color-red-400: var(--red-400);
 	--color-red-500: var(--red-500);
 

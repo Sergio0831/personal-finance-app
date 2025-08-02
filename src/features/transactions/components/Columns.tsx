@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Avatar } from '@/components/ui/avatar';
 import type { Category } from '@/generated/prisma';
 import { cn } from '@/lib/clsx';
-import { useTransactionInfo } from '../hooks/useTransactionInfo';
+import { getTransactionInfo } from '../utils/getTransactionInfo';
 
 export type Transaction = {
   id: string;
@@ -65,11 +65,11 @@ export const columns: ColumnDef<Transaction>[] = [
     sortingFn: 'datetime',
     header: () => <div className="text-center">Transaction Date</div>,
     cell: ({ row }) => {
-      const { formattedDate } = useTransactionInfo(row);
+      const { formattedDate } = getTransactionInfo(row);
 
       return (
         <div className="text-center text-muted text-preset-5">
-          {row.original.date ? formattedDate : '29 Aug 2024'}
+          {formattedDate}
         </div>
       );
     },
@@ -83,7 +83,7 @@ export const columns: ColumnDef<Transaction>[] = [
     header: () => <div className="text-right md:px-4">Amount</div>,
     cell: ({ row }) => {
       const { isPositive, formattedAmount, formattedDate } =
-        useTransactionInfo(row);
+        getTransactionInfo(row);
 
       return (
         <div className="text-right md:px-4">
@@ -96,7 +96,7 @@ export const columns: ColumnDef<Transaction>[] = [
             {formattedAmount}
           </span>
           <span className="block @xl:hidden text-muted text-preset-5">
-            {row.original.date ? formattedDate : '29 Aug 2024'}
+            {formattedDate}
           </span>
         </div>
       );

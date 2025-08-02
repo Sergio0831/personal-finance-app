@@ -1,8 +1,10 @@
 import type { Row } from '@tanstack/react-table';
 import { formatAmount, formatDate } from '@/lib/format';
 
-export function useTransactionInfo<TData>(row: Row<TData>) {
-  const amount = Number.parseFloat(row.getValue('amount'));
+export function getTransactionInfo<TData>(row: Row<TData>) {
+  const amountValue = row.getValue('amount');
+  const amount = Number.parseFloat(String(amountValue ?? 0));
+
   const isPositive = amount > 0;
   const formattedAmount = isPositive
     ? `+${formatAmount(amount)}`

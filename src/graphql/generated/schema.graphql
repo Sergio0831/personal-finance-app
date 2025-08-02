@@ -3,6 +3,15 @@ type AmountSummary {
   total: Float!
 }
 
+type Budget {
+  category: Category!
+  createdAt: Date!
+  id: ID!
+  maximum: Float!
+  theme: String!
+  updatedAt: Date!
+}
+
 enum Category {
   Bills
   DiningOut
@@ -14,6 +23,12 @@ enum Category {
   PersonalCare
   Shopping
   Transportation
+}
+
+input CreateBudgetInput {
+  category: Category!
+  maximum: Float!
+  theme: String!
 }
 
 input CreatePotInput {
@@ -46,6 +61,7 @@ type Pot {
 }
 
 type Query {
+  budgets: [Budget!]!
   pots: [Pot!]!
   recentTransactions: [Transaction!]!
   recurringBills: RecurringBills!

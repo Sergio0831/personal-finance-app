@@ -8,10 +8,10 @@ const TransactionTableSkeleton = () => {
           className="flex h-20 items-center justify-between rounded-md bg-muted/20 px-4 py-3"
           key={`skeleton-row-${id}`}
         >
-          <Skeleton className="h-10 w-1/3 bg-grey-300" />
-          <Skeleton className="h-10 w-1/5 bg-grey-300" />
-          <Skeleton className="h-10 w-1/6 bg-grey-300" />
-          <Skeleton className="h-10 w-1/6 bg-grey-300" />
+          <Skeleton className="h-10 w-1/3 bg-gray-300" />
+          <Skeleton className="h-10 w-1/5 bg-gray-300" />
+          <Skeleton className="h-10 w-1/6 bg-gray-300" />
+          <Skeleton className="h-10 w-1/6 bg-gray-300" />
         </div>
       ))}
     </div>
