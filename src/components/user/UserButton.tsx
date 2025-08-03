@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,18 +46,15 @@ const UserButton = () => {
         <UserAvatar />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0">
-        <Button
+        <DropdownMenuItem
           aria-label="Sign out"
-          asChild
+          className="text-destructive-foreground text-sm"
           disabled={isPending}
           onClick={handleSignOut}
-          size="sm"
           variant="destructive"
         >
-          <DropdownMenuItem className="text-destructive-foreground text-sm">
-            Logout
-          </DropdownMenuItem>
-        </Button>
+          Logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

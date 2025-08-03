@@ -2,16 +2,9 @@
 
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { IconEllipsis } from '@/assets/icons';
+import { OptionsMenu } from '@/components/custom';
 import ResponsiveModal from '@/components/custom/ResponsiveModal';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Separator } from '@/components/ui/separator';
 import { EditPotForm } from '@/features/pots/components';
 import { useDeletePotMutation } from '@/graphql/generated/output';
 
@@ -26,14 +19,14 @@ const PotActions = ({
   target: number;
   theme: string;
 }) => {
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditPotOpen, setIsEditPotOpen] = useState(false);
+  const [isDeletePotOpen, setIsDeletePotOpen] = useState(false);
   const [deletePotMutation, { loading }] = useDeletePotMutation({
     variables: {
       id,
     },
     onCompleted: () => {
-      setIsDeleteOpen(false);
+      setIsDeletePotOpen(false);
       toast.success(`Pot '${name}' deleted successfully!`);
     },
     refetchQueries: ['GetAllPots'],
@@ -45,22 +38,22 @@ const PotActions = ({
     <>
       <ResponsiveModal
         description="If your saving targets change, feel free to update your pots."
-        isOpen={isEditOpen}
-        setIsOpen={setIsEditOpen}
+        isOpen={isEditPotOpen}
+        setIsOpen={setIsEditPotOpen}
         title="Edit Pot"
       >
         <EditPotForm
           id={id}
           name={name}
-          setIsOpen={setIsEditOpen}
+          setIsOpen={setIsEditPotOpen}
           target={target}
           theme={theme}
         />
       </ResponsiveModal>
       <ResponsiveModal
         description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever."
-        isOpen={isDeleteOpen}
-        setIsOpen={setIsDeleteOpen}
+        isOpen={isDeletePotOpen}
+        setIsOpen={setIsDeletePotOpen}
         title={`Delete \u2018${name}\u2019?`}
       >
         <Button
@@ -72,34 +65,18 @@ const PotActions = ({
         </Button>
         <Button
           className="h-min w-full p-0 font-normal text-muted hover:text-foreground"
-          onClick={() => setIsDeleteOpen(false)}
+          onClick={() => setIsDeletePotOpen(false)}
           variant="ghost"
         >
           No, Go Back
         </Button>
       </ResponsiveModal>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button className="size-5 text-gray-300" size="icon" variant="ghost">
-            <IconEllipsis />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem
-            className="focus:bg-foreground/10"
-            onClick={() => setIsEditOpen(true)}
-          >
-            Edit Pot
-          </DropdownMenuItem>
-          <Separator />
-          <DropdownMenuItem
-            onClick={() => setIsDeleteOpen(true)}
-            variant="destructive"
-          >
-            Delete Pot
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <OptionsMenu
+        deleteLabel="Delete Pot"
+        editLabel="Edit Pot"
+        onDelete={() => setIsDeletePotOpen(true)}
+        onEdit={() => setIsEditPotOpen(true)}
+      />
     </>
   );
 };

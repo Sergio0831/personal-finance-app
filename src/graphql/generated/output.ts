@@ -30,6 +30,7 @@ export type Budget = {
   category: Category;
   createdAt: Scalars['Date']['output'];
   id: Scalars['ID']['output'];
+  lastTransactions: Array<LastTransaction>;
   maximum: Scalars['Float']['output'];
   theme: Scalars['String']['output'];
   updatedAt: Scalars['Date']['output'];
@@ -58,6 +59,15 @@ export type CreatePotInput = {
   name: Scalars['String']['input'];
   target: Scalars['Float']['input'];
   theme: Scalars['String']['input'];
+};
+
+export type LastTransaction = {
+  __typename?: 'LastTransaction';
+  amount: Scalars['Float']['output'];
+  avatar: Scalars['String']['output'];
+  date: Scalars['Date']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -195,7 +205,7 @@ export type WithdrawFromPotMutation = { __typename?: 'Mutation', withdrawFromPot
 export type GetAllBudgetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllBudgetsQuery = { __typename?: 'Query', budgets: Array<{ __typename?: 'Budget', id: string, category: Category, maximum: number, theme: string }> };
+export type GetAllBudgetsQuery = { __typename?: 'Query', budgets: Array<{ __typename?: 'Budget', id: string, category: Category, maximum: number, theme: string, lastTransactions: Array<{ __typename?: 'LastTransaction', id: string, avatar: string, name: string, amount: number, date: any }> }> };
 
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -393,6 +403,13 @@ export const GetAllBudgetsDocument = gql`
     category
     maximum
     theme
+    lastTransactions {
+      id
+      avatar
+      name
+      amount
+      date
+    }
   }
 }
     `;

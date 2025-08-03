@@ -41,8 +41,6 @@ const Pot = ({ id, name, theme, target, total }: PotProps) => {
         <AddMoneyToPot
           id={id}
           name={name}
-          percantage={percentage}
-          progress={progress}
           setIsOpen={setIsAddMoneyOpen}
           target={target}
           theme={theme}
@@ -58,8 +56,6 @@ const Pot = ({ id, name, theme, target, total }: PotProps) => {
         <WithdrawMoneyFromPot
           id={id}
           name={name}
-          percantage={percentage}
-          progress={progress}
           setIsOpen={setIsWithdrawOpen}
           target={target}
           theme={theme}

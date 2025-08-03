@@ -36,8 +36,8 @@ const RecurringBillsView = () => {
   const recurringBills = data?.recurringBills;
 
   return (
-    <main className="flex @max-3xl:flex-col gap-6">
-      <div className="basis flex flex-2/5 gap-4 max-sm:flex-col md:flex-col">
+    <main className="grid @min-3xl:grid-cols-12 gap-6">
+      <div className="@min-3xl:col-span-4 flex gap-4 self-start max-sm:flex-col md:flex-col">
         <div className="w-full rounded-xl bg-foreground p-6 text-white max-sm:flex max-sm:items-center max-sm:gap-x-5">
           <RecurringBillsIcon className="size-10 sm:mb-8" />
           <div>
@@ -76,6 +76,7 @@ const RecurringBillsView = () => {
         </div>
       </div>
       <RecurringBillsTable
+        className="@min-3xl:col-span-8"
         columns={columns}
         data={recurringBills?.recurringBills || []}
       />

@@ -7,6 +7,13 @@ export const GET_ALL_BUDGETS = gql`
             category
             maximum
             theme
+            lastTransactions {
+                id
+                avatar
+                name
+                amount
+                date
+            }
         }
     }
 `;

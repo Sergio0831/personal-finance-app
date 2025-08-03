@@ -1,6 +1,7 @@
+
 import { prisma } from '../../lib/prisma-client';
 import { builder, CategoryEnumType } from '../builder';
-import { Transaction } from './Transaction';
+import { LastTransaction } from './LastTransaction';
 
 // Budget type definition
 export const BudgetInput = builder.inputType('CreateBudgetInput', {
@@ -27,7 +28,7 @@ export const Budget = builder.prismaObject('Budget', {
     }),
     // Custom computed field
     lastTransactions: t.field({
-      type: [Transaction],
+      type: [LastTransaction],
       nullable: false,
       resolve: async (budget, _args, ctx) => {
         const transactions = await prisma.transaction.findMany({
