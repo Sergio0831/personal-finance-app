@@ -5,49 +5,55 @@ import { Label, Pie, PieChart } from 'recharts';
 import {
   type ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { formatAmount } from '@/lib/format';
+import { calculateSpent } from '../utils';
+import type { BudgetProps } from './Budget';
 
-const chartData = [
-  { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-  { browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
-  { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-  { browser: 'other', visitors: 190, fill: 'var(--color-other)' },
-];
+type BudgetChartProps = {
+  budgets: BudgetProps[] | undefined;
+};
 
-const chartConfig = {
-  visitors: {
-    label: 'Visitors',
-  },
-  chrome: {
-    label: 'Chrome',
-    color: 'var(--chart-1)',
-  },
-  safari: {
-    label: 'Safari',
-    color: 'var(--chart-2)',
-  },
-  firefox: {
-    label: 'Firefox',
-    color: 'var(--chart-3)',
-  },
-  edge: {
-    label: 'Edge',
-    color: 'var(--chart-4)',
-  },
-  other: {
-    label: 'Other',
-    color: 'var(--chart-5)',
-  },
-} satisfies ChartConfig;
+const BudgetChart = ({ budgets }: BudgetChartProps) => {
+  // Chart data
+  const chartData = useMemo(() => {
+    if (!budgets) {
+      return [];
+    }
 
-const BudgetChart = () => {
-  const totalVisitors = useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
-  }, []);
+    return budgets.map((budget) => ({
+      category: budget.category,
+      spent: calculateSpent(budget.lastTransactions),
+      fill: budget.theme,
+    }));
+  }, [budgets]);
+
+  // Chart config
+  const chartConfig = useMemo<ChartConfig>(() => {
+    if (!budgets) {
+      return {};
+    }
+
+    return budgets.reduce((acc, budget) => {
+      acc[budget.category] = {
+        label: budget.category,
+        color: budget.theme,
+      };
+      return acc;
+    }, {} as ChartConfig);
+  }, [budgets]);
+
+  const totalSpent = useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.spent, 0);
+  }, [chartData]);
+
+  const totalLimit = useMemo(() => {
+    return budgets?.reduce((acc, curr) => acc + curr.maximum, 0) || 0;
+  }, [budgets]);
 
   return (
     <div className="flex-1 pb-0">
@@ -55,16 +61,37 @@ const BudgetChart = () => {
         className="mx-auto aspect-square max-h-70"
         config={chartConfig}
       >
-        <PieChart>
+        <PieChart height={240} width={240}>
           <ChartTooltip
-            content={<ChartTooltipContent hideLabel />}
+            content={
+              <ChartTooltipContent
+                formatter={(value, name) => (
+                  <>
+                    <div
+                      className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                      style={
+                        {
+                          '--color-bg': `var(--color-${name})`,
+                        } as React.CSSProperties
+                      }
+                    />
+                    {chartConfig[name as keyof typeof chartConfig]?.label ||
+                      name}
+                    <div className="ml-auto font-bold tabular-nums">
+                      {formatAmount(+value)}
+                    </div>
+                  </>
+                )}
+                hideLabel
+              />
+            }
             cursor={false}
           />
           <Pie
             data={chartData}
-            dataKey="visitors"
-            innerRadius={60}
-            nameKey="browser"
+            dataKey="spent"
+            innerRadius={80}
+            nameKey="category"
             strokeWidth={5}
           >
             <Label
@@ -78,18 +105,18 @@ const BudgetChart = () => {
                       y={viewBox.cy}
                     >
                       <tspan
-                        className="text-preset-1"
+                        className="fill-foreground font-bold text-3xl"
                         x={viewBox.cx}
                         y={viewBox.cy}
                       >
-                        {formatAmount(338)}
+                        {formatAmount(totalSpent)}
                       </tspan>
                       <tspan
-                        className="text-muted text-preset-5"
+                        className="fill-muted-foreground"
                         x={viewBox.cx}
                         y={(viewBox.cy || 0) + 24}
                       >
-                        of {formatAmount(975)} limit
+                        of {formatAmount(totalLimit)} limit
                       </tspan>
                     </text>
                   );

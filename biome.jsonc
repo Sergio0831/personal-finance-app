@@ -3,5 +3,17 @@
   "extends": ["ultracite"],
   "files": {
     "includes": ["**", "!**/generated/**/*"]
+  },
+  "linter": {
+    "rules": {
+      "complexity": {
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 20
+          }
+        }
+      }
+    }
   }
 }

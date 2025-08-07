@@ -5,11 +5,12 @@ import { Progress } from '@/components/custom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import type { Budget as BudgetType } from '@/graphql/generated/output';
 import { formatAmount } from '@/lib/format';
+import { calculateSpent } from '../utils';
 import BudgetActions from './BudgetActions';
 import BudgetSummary from './BudgetSummary';
 import LatestSpending from './LatestSpending';
 
-type BudgetProps = Pick<
+export type BudgetProps = Pick<
   BudgetType,
   'id' | 'category' | 'theme' | 'maximum' | 'lastTransactions'
 >;
@@ -23,10 +24,7 @@ const Budget = ({
 }: BudgetProps) => {
   const [progress, setProgress] = useState(0);
 
-  const spent = lastTransactions.reduce(
-    (total, transaction) => total + Math.abs(transaction.amount || 0),
-    0
-  );
+  const spent = calculateSpent(lastTransactions);
   const remaining = maximum - spent;
 
   const percentage = Math.min((spent / maximum) * 100, 100).toFixed(2);
