@@ -53,6 +53,7 @@ type LastTransaction {
 
 type Mutation {
   addToPot(amount: Float!, id: String!): Pot
+  createBudget(input: CreateBudgetInput!): Budget
   createPot(input: CreatePotInput!): Pot
   deletePot(id: String!): Pot
   updatePot(id: String!, input: UpdatePotInput!): Pot

@@ -48,7 +48,7 @@ const PageHeader = ({ className, title, ...rest }: PageHeaderProps) => {
           setIsOpen={setIsBudgetModalOpen}
           title="Add New Budget"
         >
-          <AddNewBudgetForm />
+          <AddNewBudgetForm setIsOpen={setIsBudgetModalOpen} />
         </ResponsiveModal>
       )}
       <header

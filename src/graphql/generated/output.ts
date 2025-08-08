@@ -73,6 +73,7 @@ export type LastTransaction = {
 export type Mutation = {
   __typename?: 'Mutation';
   addToPot?: Maybe<Pot>;
+  createBudget?: Maybe<Budget>;
   createPot?: Maybe<Pot>;
   deletePot?: Maybe<Pot>;
   updatePot?: Maybe<Pot>;
@@ -83,6 +84,11 @@ export type Mutation = {
 export type MutationAddToPotArgs = {
   amount: Scalars['Float']['input'];
   id: Scalars['String']['input'];
+};
+
+
+export type MutationCreateBudgetArgs = {
+  input: CreateBudgetInput;
 };
 
 
@@ -164,6 +170,13 @@ export type User = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type CreateBudgetMutationVariables = Exact<{
+  input: CreateBudgetInput;
+}>;
+
+
+export type CreateBudgetMutation = { __typename?: 'Mutation', createBudget?: { __typename?: 'Budget', id: string } | null };
+
 export type CreatePotMutationVariables = Exact<{
   input: CreatePotInput;
 }>;
@@ -228,6 +241,39 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: string | null, name?: string | null, email?: string | null, image?: string | null } | null };
 
 
+export const CreateBudgetDocument = gql`
+    mutation CreateBudget($input: CreateBudgetInput!) {
+  createBudget(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateBudgetMutationFn = Apollo.MutationFunction<CreateBudgetMutation, CreateBudgetMutationVariables>;
+
+/**
+ * __useCreateBudgetMutation__
+ *
+ * To run a mutation, you first call `useCreateBudgetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateBudgetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createBudgetMutation, { data, loading, error }] = useCreateBudgetMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateBudgetMutation(baseOptions?: Apollo.MutationHookOptions<CreateBudgetMutation, CreateBudgetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateBudgetMutation, CreateBudgetMutationVariables>(CreateBudgetDocument, options);
+      }
+export type CreateBudgetMutationHookResult = ReturnType<typeof useCreateBudgetMutation>;
+export type CreateBudgetMutationResult = Apollo.MutationResult<CreateBudgetMutation>;
+export type CreateBudgetMutationOptions = Apollo.BaseMutationOptions<CreateBudgetMutation, CreateBudgetMutationVariables>;
 export const CreatePotDocument = gql`
     mutation CreatePot($input: CreatePotInput!) {
   createPot(input: $input) {

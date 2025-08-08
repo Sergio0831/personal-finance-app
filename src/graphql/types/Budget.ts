@@ -1,4 +1,5 @@
 
+import { CreateBudgetSchema } from '../../features/budgets/schemas/create-budget.schema';
 import { prisma } from '../../lib/prisma-client';
 import { builder, CategoryEnumType } from '../builder';
 import { LastTransaction } from './LastTransaction';
@@ -61,3 +62,28 @@ builder.queryType({
     }),
   }),
 });
+
+builder.mutationType({
+  fields: (t) => ({
+    createBudget: t.prismaField({
+      type: Budget,
+      args: {
+        input: t.arg({ type: BudgetInput, required: true }),
+      },
+      validate: {
+        schema: CreateBudgetSchema,
+      },
+      resolve: async (query, _parent, { input }, ctx) => {
+        return await prisma.budget.create({
+          ...query,
+          data: {
+            category: input.category,
+            maximum: input.maximum,
+            theme: input.theme,
+            userId: ctx.user.id,
+          },
+        });
+      },
+    }),
+  })
+})

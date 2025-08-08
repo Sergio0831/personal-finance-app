@@ -16,7 +16,7 @@ import { Form } from '@/components/ui/form';
 import { themeOptions } from '@/constants/theme';
 
 import { useCreatePotMutation } from '@/graphql/generated/output';
-import { useUsedThemes } from '../hooks/useUsedThemes';
+import { useUsedPotThemes } from '../hooks/useUsedPotThemes';
 import { CreatePotSchema, type CreatePotSchemaType } from '../schemas';
 
 const MAX_NAME_LENGTH = 30;
@@ -28,7 +28,7 @@ const AddNewPotForm = ({
 }) => {
   const [createPotMutation, { loading }] = useCreatePotMutation();
 
-  const usedTheme = useUsedThemes();
+  const usedTheme = useUsedPotThemes();
 
   const form = useForm<CreatePotSchemaType>({
     resolver: zodResolver(CreatePotSchema),

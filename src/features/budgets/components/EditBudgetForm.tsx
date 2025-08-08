@@ -15,13 +15,14 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { themeOptions } from '@/constants/theme';
 
-import { useUpdatePotMutation } from '@/graphql/generated/output';
-import { useUsedPotThemes } from '../hooks/useUsedPotThemes';
-import { UpdatePotSchema, type UpdatePotSchemaType } from '../schemas';
+
+
+
+import { useUsedBudgetThemes } from '../hooks/useUsedBudgetThemes';
 
 const MAX_NAME_LENGTH = 30;
 
-const EditPotForm = ({
+const EditBudgetForm = ({
   setIsOpen,
   id,
   name,
@@ -34,43 +35,49 @@ const EditPotForm = ({
   target: number;
   theme: string;
 }) => {
-  const [updatePotMutation, { loading }] = useUpdatePotMutation();
+//   const [updatePotMutation, { loading }] = useUpdatePotMutation();
 
-  const usedTheme = useUsedPotThemes().filter((t) => t !== theme);
+  const usedTheme = useUsedBudgetThemes().filter((t) => t !== theme);
 
-  const form = useForm<UpdatePotSchemaType>({
-    resolver: zodResolver(UpdatePotSchema),
-    defaultValues: {
-      id,
-      input: {
-        name,
-        target,
-        theme,
-      },
-    },
-  });
+//   const form = useForm<UpdatePotSchemaType>({
+//     resolver: zodResolver(UpdatePotSchema),
+//     defaultValues: {
+//       id,
+//       input: {
+//         name,
+//         target,
+//         theme,
+//       },
+//     },
+//   });
 
-  const onSubmit = async (formValues: UpdatePotSchemaType) => {
-    try {
-      await updatePotMutation({
-        variables: {
-          id,
-          input: formValues.input,
-        },
-        onCompleted: () => {
-          setIsOpen(false);
-          toast.success(`Pot '${formValues.input.name}' updated successfully!`);
-        },
-        refetchQueries: ['GetAllPots'],
-      });
-    } catch (error) {
-      const errorMessage =
-        error instanceof ApolloError
-          ? error.message
-          : 'An unexpected error occurred';
-      toast.error(`Error updating pot: ${errorMessage}`);
-    }
-  };
+//   const onSubmit = async (formValues: UpdatePotSchemaType) => {
+//     try {
+//       await updatePotMutation({
+//         variables: {
+//           id,
+//           input: formValues.input,
+//         },
+//         onCompleted: () => {
+//           setIsOpen(false);
+//           toast.success(`Pot '${formValues.input.name}' updated successfully!`);
+//         },
+//         refetchQueries: ['GetAllPots'],
+//       });
+//     } catch (error) {
+//       const errorMessage =
+//         error instanceof ApolloError
+//           ? error.message
+//           : 'An unexpected error occurred';
+//       toast.error(`Error updating pot: ${errorMessage}`);
+//     }
+//   };
+
+const onSubmit = async (formValues: any) => {
+    return formValues
+}
+
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -113,4 +120,4 @@ const EditPotForm = ({
   );
 };
 
-export default EditPotForm;
+export default EditBudgetForm;
