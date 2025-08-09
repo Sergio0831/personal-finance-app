@@ -1,13 +1,15 @@
 import { GraphQLError } from 'graphql';
-import { CreatePotSchema } from '../../features/pots/schemas/add-new-pot.schema';
-import { AddToPotSchema } from '../../features/pots/schemas/add-to-pot.schema';
-import { DeletePotSchema } from '../../features/pots/schemas/delete-pot.schema';
-import { UpdatePotSchema } from '../../features/pots/schemas/update-pot.schema';
-import { WithdrawFromPotSchema } from '../../features/pots/schemas/withdraw-from-pot.schema';
+import {
+  AddToPotSchema,
+  CreatePotSchema,
+  DeletePotSchema,
+  UpdatePotSchema,
+  WithdrawFromPotSchema,
+} from '../../features/pots/schemas';
 import { prisma } from '../../lib/prisma-client';
 import { builder } from '../builder';
 
-const CreatePotInput = builder.inputType('CreatePotInput', {
+const PotInput = builder.inputType('PotInput', {
   fields: (t) => ({
     name: t.string({ required: true }),
     target: t.float({ required: true }),
@@ -15,13 +17,7 @@ const CreatePotInput = builder.inputType('CreatePotInput', {
   }),
 });
 
-const UpdatePotInput = builder.inputType('UpdatePotInput', {
-  fields: (t) => ({
-    name: t.string({ required: true }),
-    target: t.float({ required: true }),
-    theme: t.string({ required: true }),
-  }),
-});
+
 
 export const Pot = builder.prismaObject('Pot', {
   fields: (t) => ({
@@ -62,7 +58,7 @@ builder.mutationType({
     createPot: t.prismaField({
       type: Pot,
       args: {
-        input: t.arg({ type: CreatePotInput, required: true }),
+        input: t.arg({ type: PotInput, required: true }),
       },
       validate: {
         schema: CreatePotSchema,
@@ -84,7 +80,7 @@ builder.mutationType({
       type: Pot,
       args: {
         id: t.arg.string({ required: true }),
-        input: t.arg({ type: UpdatePotInput, required: true }),
+        input: t.arg({ type: PotInput, required: true }),
       },
       validate: {
         schema: UpdatePotSchema,

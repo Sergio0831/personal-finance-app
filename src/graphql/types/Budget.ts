@@ -1,11 +1,14 @@
-
-import { CreateBudgetSchema } from '../../features/budgets/schemas/create-budget.schema';
+import {
+  CreateBudgetSchema,
+  DeleteBudgetSchema,
+  UpdateBudgetSchema,
+} from '../../features/budgets/schemas';
 import { prisma } from '../../lib/prisma-client';
 import { builder, CategoryEnumType } from '../builder';
 import { LastTransaction } from './LastTransaction';
 
 // Budget type definition
-export const BudgetInput = builder.inputType('CreateBudgetInput', {
+export const BudgetInput = builder.inputType('BudgetInput', {
   fields: (t) => ({
     category: t.field({ type: CategoryEnumType, required: true }),
     maximum: t.float({ required: true }),
@@ -85,5 +88,41 @@ builder.mutationType({
         });
       },
     }),
-  })
-})
+    updateBudget: t.prismaField({
+      type: Budget,
+      args: {
+        id: t.arg.string({ required: true }),
+        input: t.arg({ type: BudgetInput, required: true }),
+      },
+      validate: {
+        schema: UpdateBudgetSchema,
+      },
+      resolve: async (query, _parent, { id, input }, ctx) => {
+        return await prisma.budget.update({
+          ...query,
+          where: { id, userId: ctx.user.id },
+          data: {
+            category: input.category,
+            maximum: input.maximum,
+            theme: input.theme,
+          },
+        });
+      },
+    }),
+    deleteBudget: t.prismaField({
+      type: Budget,
+      args: {
+        id: t.arg.string({ required: true }),
+      },
+      validate: {
+        schema: DeleteBudgetSchema,
+      },
+      resolve: async (query, _parent, { id }, ctx) => {
+        return await prisma.budget.delete({
+          ...query,
+          where: { id, userId: ctx.user.id },
+        });
+      },
+    }),
+  }),
+});

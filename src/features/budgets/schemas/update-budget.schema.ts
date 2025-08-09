@@ -1,13 +1,14 @@
 import { z } from 'zod';
+import { Category } from '../../../generated/prisma';
 
 export const UpdateBudgetSchema = z.object({
   id: z.string({ required_error: 'Budget ID is required' }),
   input: z
     .object({
-      category: z
-        .string()
-        .min(2, 'Pot name must be at least 2 characters')
-        .max(30, 'Pot name cannot exceed 30 characters'),
+      category: z.nativeEnum(Category, {
+        required_error: 'Category is required',
+        invalid_type_error: 'Invalid category',
+      }),
       maximum: z.coerce
         .number({ invalid_type_error: 'Maximum spent must be a number' })
         .positive('Amount must be greater than zero')

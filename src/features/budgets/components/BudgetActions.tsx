@@ -1,39 +1,68 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { OptionsMenu } from '@/components/custom';
 import ResponsiveModal from '@/components/custom/ResponsiveModal';
 import { Button } from '@/components/ui/button';
+import {
+  type Category,
+  useDeleteBudgetMutation,
+} from '@/graphql/generated/output';
+import EditBudgetForm from './EditBudgetForm';
 
-const BudgetActions = () => {
+const BudgetActions = ({
+  id,
+  category,
+  theme,
+}: {
+  id: string;
+  category: Category;
+  theme: string;
+}) => {
   const [isBudgetEditOpen, setIsEditBudgetOpen] = useState(false);
   const [isDeleteBudgetOpen, setIsDeleteBudgetOpen] = useState(false);
+
+  const [deleteBudgetMutation, { loading }] = useDeleteBudgetMutation({
+    variables: {
+      id,
+    },
+    onCompleted: () => {
+      setIsDeleteBudgetOpen(false);
+      // toast.success(`Budget '${category}' deleted successfully!`);
+    },
+    refetchQueries: ['GetAllBudgets'],
+    onError: (error) => {
+      toast.error(`Error deleting budget: ${error.message}`);
+    },
+  });
 
   return (
     <>
       <ResponsiveModal
-        description="If your saving targets change, feel free to update your pots."
+        description="As your budgets change, feel free to update your spending limits."
         isOpen={isBudgetEditOpen}
         setIsOpen={setIsEditBudgetOpen}
-        title="Edit Pot"
+        title="Edit Budget"
       >
-        <EditPotForm
+        <div>Edit Budget Form</div>
+        {/* <EditBudgetForm
+          category={category}
           id={id}
-          name={name}
           setIsOpen={setIsEditBudgetOpen}
           target={target}
           theme={theme}
-        />
+        /> */}
       </ResponsiveModal>
       <ResponsiveModal
-        description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever."
+        description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever."
         isOpen={isDeleteBudgetOpen}
         setIsOpen={setIsDeleteBudgetOpen}
-        title={`Delete \u2018${name}\u2019?`}
+        title={`Delete \u2018${category}\u2019?`}
       >
         <Button
           disabled={loading}
-          onClick={() => deletePotMutation()}
+          onClick={() => deleteBudgetMutation()}
           variant="destructive"
         >
           Yes, Confirm Deletion

@@ -13,6 +13,12 @@ type Budget {
   updatedAt: Date!
 }
 
+input BudgetInput {
+  category: Category!
+  maximum: Float!
+  theme: String!
+}
+
 enum Category {
   Bills
   DiningOut
@@ -24,18 +30,6 @@ enum Category {
   PersonalCare
   Shopping
   Transportation
-}
-
-input CreateBudgetInput {
-  category: Category!
-  maximum: Float!
-  theme: String!
-}
-
-input CreatePotInput {
-  name: String!
-  target: Float!
-  theme: String!
 }
 
 """
@@ -53,10 +47,12 @@ type LastTransaction {
 
 type Mutation {
   addToPot(amount: Float!, id: String!): Pot
-  createBudget(input: CreateBudgetInput!): Budget
-  createPot(input: CreatePotInput!): Pot
+  createBudget(input: BudgetInput!): Budget
+  createPot(input: PotInput!): Pot
+  deleteBudget(id: String!): Budget
   deletePot(id: String!): Pot
-  updatePot(id: String!, input: UpdatePotInput!): Pot
+  updateBudget(id: String!, input: BudgetInput!): Budget
+  updatePot(id: String!, input: PotInput!): Pot
   withdrawFromPot(amount: Float!, id: String!): Pot
 }
 
@@ -68,6 +64,12 @@ type Pot {
   theme: String!
   total: Float!
   updatedAt: Date!
+}
+
+input PotInput {
+  name: String!
+  target: Float!
+  theme: String!
 }
 
 type Query {
@@ -97,12 +99,6 @@ type Transaction {
   recurring: Boolean!
   user: User!
   userId: String!
-}
-
-input UpdatePotInput {
-  name: String!
-  target: Float!
-  theme: String!
 }
 
 type User {

@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import type { Transaction } from '@/features/transactions/components';
-import { Category } from '@/generated/prisma';
+import { Category } from '@/graphql/generated/output';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import SelectMobileTrigger from '../custom/MobileSelectTrigger';
 import { Label } from '../ui/label';

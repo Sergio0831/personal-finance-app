@@ -36,6 +36,12 @@ export type Budget = {
   updatedAt: Scalars['Date']['output'];
 };
 
+export type BudgetInput = {
+  category: Category;
+  maximum: Scalars['Float']['input'];
+  theme: Scalars['String']['input'];
+};
+
 export enum Category {
   Bills = 'Bills',
   DiningOut = 'DiningOut',
@@ -48,18 +54,6 @@ export enum Category {
   Shopping = 'Shopping',
   Transportation = 'Transportation'
 }
-
-export type CreateBudgetInput = {
-  category: Category;
-  maximum: Scalars['Float']['input'];
-  theme: Scalars['String']['input'];
-};
-
-export type CreatePotInput = {
-  name: Scalars['String']['input'];
-  target: Scalars['Float']['input'];
-  theme: Scalars['String']['input'];
-};
 
 export type LastTransaction = {
   __typename?: 'LastTransaction';
@@ -75,7 +69,9 @@ export type Mutation = {
   addToPot?: Maybe<Pot>;
   createBudget?: Maybe<Budget>;
   createPot?: Maybe<Pot>;
+  deleteBudget?: Maybe<Budget>;
   deletePot?: Maybe<Pot>;
+  updateBudget?: Maybe<Budget>;
   updatePot?: Maybe<Pot>;
   withdrawFromPot?: Maybe<Pot>;
 };
@@ -88,12 +84,17 @@ export type MutationAddToPotArgs = {
 
 
 export type MutationCreateBudgetArgs = {
-  input: CreateBudgetInput;
+  input: BudgetInput;
 };
 
 
 export type MutationCreatePotArgs = {
-  input: CreatePotInput;
+  input: PotInput;
+};
+
+
+export type MutationDeleteBudgetArgs = {
+  id: Scalars['String']['input'];
 };
 
 
@@ -102,9 +103,15 @@ export type MutationDeletePotArgs = {
 };
 
 
+export type MutationUpdateBudgetArgs = {
+  id: Scalars['String']['input'];
+  input: BudgetInput;
+};
+
+
 export type MutationUpdatePotArgs = {
   id: Scalars['String']['input'];
-  input: UpdatePotInput;
+  input: PotInput;
 };
 
 
@@ -122,6 +129,12 @@ export type Pot = {
   theme: Scalars['String']['output'];
   total: Scalars['Float']['output'];
   updatedAt: Scalars['Date']['output'];
+};
+
+export type PotInput = {
+  name: Scalars['String']['input'];
+  target: Scalars['Float']['input'];
+  theme: Scalars['String']['input'];
 };
 
 export type Query = {
@@ -156,12 +169,6 @@ export type Transaction = {
   userId: Scalars['String']['output'];
 };
 
-export type UpdatePotInput = {
-  name: Scalars['String']['input'];
-  target: Scalars['Float']['input'];
-  theme: Scalars['String']['input'];
-};
-
 export type User = {
   __typename?: 'User';
   email?: Maybe<Scalars['String']['output']>;
@@ -171,14 +178,29 @@ export type User = {
 };
 
 export type CreateBudgetMutationVariables = Exact<{
-  input: CreateBudgetInput;
+  input: BudgetInput;
 }>;
 
 
 export type CreateBudgetMutation = { __typename?: 'Mutation', createBudget?: { __typename?: 'Budget', id: string } | null };
 
+export type DeleteBudgetMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type DeleteBudgetMutation = { __typename?: 'Mutation', deleteBudget?: { __typename?: 'Budget', id: string } | null };
+
+export type UpdateBudgetMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  input: BudgetInput;
+}>;
+
+
+export type UpdateBudgetMutation = { __typename?: 'Mutation', updateBudget?: { __typename?: 'Budget', id: string } | null };
+
 export type CreatePotMutationVariables = Exact<{
-  input: CreatePotInput;
+  input: PotInput;
 }>;
 
 
@@ -193,7 +215,7 @@ export type DeletePotMutation = { __typename?: 'Mutation', deletePot?: { __typen
 
 export type UpdatePotMutationVariables = Exact<{
   id: Scalars['String']['input'];
-  input: UpdatePotInput;
+  input: PotInput;
 }>;
 
 
@@ -242,7 +264,7 @@ export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'User',
 
 
 export const CreateBudgetDocument = gql`
-    mutation CreateBudget($input: CreateBudgetInput!) {
+    mutation CreateBudget($input: BudgetInput!) {
   createBudget(input: $input) {
     id
   }
@@ -274,8 +296,75 @@ export function useCreateBudgetMutation(baseOptions?: Apollo.MutationHookOptions
 export type CreateBudgetMutationHookResult = ReturnType<typeof useCreateBudgetMutation>;
 export type CreateBudgetMutationResult = Apollo.MutationResult<CreateBudgetMutation>;
 export type CreateBudgetMutationOptions = Apollo.BaseMutationOptions<CreateBudgetMutation, CreateBudgetMutationVariables>;
+export const DeleteBudgetDocument = gql`
+    mutation DeleteBudget($id: String!) {
+  deleteBudget(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteBudgetMutationFn = Apollo.MutationFunction<DeleteBudgetMutation, DeleteBudgetMutationVariables>;
+
+/**
+ * __useDeleteBudgetMutation__
+ *
+ * To run a mutation, you first call `useDeleteBudgetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBudgetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBudgetMutation, { data, loading, error }] = useDeleteBudgetMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteBudgetMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBudgetMutation, DeleteBudgetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBudgetMutation, DeleteBudgetMutationVariables>(DeleteBudgetDocument, options);
+      }
+export type DeleteBudgetMutationHookResult = ReturnType<typeof useDeleteBudgetMutation>;
+export type DeleteBudgetMutationResult = Apollo.MutationResult<DeleteBudgetMutation>;
+export type DeleteBudgetMutationOptions = Apollo.BaseMutationOptions<DeleteBudgetMutation, DeleteBudgetMutationVariables>;
+export const UpdateBudgetDocument = gql`
+    mutation UpdateBudget($id: String!, $input: BudgetInput!) {
+  updateBudget(id: $id, input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateBudgetMutationFn = Apollo.MutationFunction<UpdateBudgetMutation, UpdateBudgetMutationVariables>;
+
+/**
+ * __useUpdateBudgetMutation__
+ *
+ * To run a mutation, you first call `useUpdateBudgetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBudgetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBudgetMutation, { data, loading, error }] = useUpdateBudgetMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateBudgetMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBudgetMutation, UpdateBudgetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBudgetMutation, UpdateBudgetMutationVariables>(UpdateBudgetDocument, options);
+      }
+export type UpdateBudgetMutationHookResult = ReturnType<typeof useUpdateBudgetMutation>;
+export type UpdateBudgetMutationResult = Apollo.MutationResult<UpdateBudgetMutation>;
+export type UpdateBudgetMutationOptions = Apollo.BaseMutationOptions<UpdateBudgetMutation, UpdateBudgetMutationVariables>;
 export const CreatePotDocument = gql`
-    mutation CreatePot($input: CreatePotInput!) {
+    mutation CreatePot($input: PotInput!) {
   createPot(input: $input) {
     id
   }
@@ -341,7 +430,7 @@ export type DeletePotMutationHookResult = ReturnType<typeof useDeletePotMutation
 export type DeletePotMutationResult = Apollo.MutationResult<DeletePotMutation>;
 export type DeletePotMutationOptions = Apollo.BaseMutationOptions<DeletePotMutation, DeletePotMutationVariables>;
 export const UpdatePotDocument = gql`
-    mutation UpdatePot($id: String!, $input: UpdatePotInput!) {
+    mutation UpdatePot($id: String!, $input: PotInput!) {
   updatePot(id: $id, input: $input) {
     id
   }

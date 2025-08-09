@@ -44,7 +44,7 @@ const Budget = ({
           />
           <h2 className="text-preset-2">{category}</h2>
         </div>
-        <BudgetActions />
+        <BudgetActions category={category} id={id} theme={theme} />
       </CardHeader>
       <CardContent>
         <div className="mb-5 grid gap-y-4">
