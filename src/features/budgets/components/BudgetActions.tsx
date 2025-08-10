@@ -14,10 +14,12 @@ import EditBudgetForm from './EditBudgetForm';
 const BudgetActions = ({
   id,
   category,
+  maximum,
   theme,
 }: {
   id: string;
   category: Category;
+  maximum: number;
   theme: string;
 }) => {
   const [isBudgetEditOpen, setIsEditBudgetOpen] = useState(false);
@@ -46,13 +48,13 @@ const BudgetActions = ({
         title="Edit Budget"
       >
         <div>Edit Budget Form</div>
-        {/* <EditBudgetForm
+        <EditBudgetForm
           category={category}
           id={id}
+          maximum={maximum}
           setIsOpen={setIsEditBudgetOpen}
-          target={target}
           theme={theme}
-        /> */}
+        />
       </ResponsiveModal>
       <ResponsiveModal
         description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever."

@@ -8,97 +8,93 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import {
   AmountInputWithLabel,
-  InputWithLabel,
+  SelectWithLabel,
   ThemeSelectWithLabel,
 } from '@/components/custom';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { themeOptions } from '@/constants/theme';
-
-
-
-
+import { Category, useUpdateBudgetMutation } from '@/graphql/generated/output';
 import { useUsedBudgetThemes } from '../hooks/useUsedBudgetThemes';
-
-const MAX_NAME_LENGTH = 30;
+import { UpdateBudgetSchema, type UpdateBudgetSchemaType } from '../schemas';
 
 const EditBudgetForm = ({
   setIsOpen,
   id,
-  name,
-  target,
+  category,
+  maximum,
   theme,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   id: string;
-  name: string;
-  target: number;
+  category: string;
+  maximum: number;
   theme: string;
 }) => {
-//   const [updatePotMutation, { loading }] = useUpdatePotMutation();
+  const [updateBudgetMutation, { loading }] = useUpdateBudgetMutation();
 
   const usedTheme = useUsedBudgetThemes().filter((t) => t !== theme);
 
-//   const form = useForm<UpdatePotSchemaType>({
-//     resolver: zodResolver(UpdatePotSchema),
-//     defaultValues: {
-//       id,
-//       input: {
-//         name,
-//         target,
-//         theme,
-//       },
-//     },
-//   });
+  const categories: Category[] = Object.values(Category);
 
-//   const onSubmit = async (formValues: UpdatePotSchemaType) => {
-//     try {
-//       await updatePotMutation({
-//         variables: {
-//           id,
-//           input: formValues.input,
-//         },
-//         onCompleted: () => {
-//           setIsOpen(false);
-//           toast.success(`Pot '${formValues.input.name}' updated successfully!`);
-//         },
-//         refetchQueries: ['GetAllPots'],
-//       });
-//     } catch (error) {
-//       const errorMessage =
-//         error instanceof ApolloError
-//           ? error.message
-//           : 'An unexpected error occurred';
-//       toast.error(`Error updating pot: ${errorMessage}`);
-//     }
-//   };
+  const form = useForm<UpdateBudgetSchemaType>({
+    resolver: zodResolver(UpdateBudgetSchema),
+    defaultValues: {
+      id,
+      input: {
+        category: category as Category,
+        maximum,
+        theme,
+      },
+    },
+  });
 
-const onSubmit = async (formValues: any) => {
-    return formValues
-}
-
+  const onSubmit = async (formValues: UpdateBudgetSchemaType) => {
+    try {
+      await updateBudgetMutation({
+        variables: {
+          id,
+          input: {
+            ...formValues.input,
+            category: formValues.input.category as Category,
+          },
+        },
+        onCompleted: () => {
+          setIsOpen(false);
+          toast.success(
+            `Budget '${formValues.input.category}' updated successfully!`
+          );
+        },
+        refetchQueries: ['GetAllBudgets'],
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof ApolloError
+          ? error.message
+          : 'An unexpected error occurred';
+      toast.error(`Error updating pot: ${errorMessage}`);
+    }
+  };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <InputWithLabel<UpdatePotSchemaType>
-          disabled={loading}
-          error={form.formState.errors.input?.name}
-          label="Pot Name"
-          maxLength={MAX_NAME_LENGTH}
-          nameInSchema="input.name"
-          placeholder="e.g. Rainy Days"
-          type="text"
+        <SelectWithLabel<UpdateBudgetSchemaType>
+          error={form.formState.errors.input?.category}
+          label="Category"
+          nameInSchema="input.category"
+          options={categories}
+          placeholder="Budget Category"
         />
-        <AmountInputWithLabel<UpdatePotSchemaType>
+        <AmountInputWithLabel<UpdateBudgetSchemaType>
           disabled={loading}
-          error={form.formState.errors.input?.target}
+          error={form.formState.errors.input?.maximum}
           label="Target"
-          nameInSchema="input.target"
+          nameInSchema="input.maximum"
           placeholder="e.g. 2000"
           type="text"
         />
-        <ThemeSelectWithLabel<UpdatePotSchemaType>
+        <ThemeSelectWithLabel<UpdateBudgetSchemaType>
           className="mb-5"
           disabled={loading}
           error={form.formState.errors.input?.theme}
