@@ -19,10 +19,12 @@ const BudgetsSkeleton = () => {
       </Card>
       <div className="@min-3xl:col-span-7 grid gap-6">
         {['1', '2'].map((id) => (
-          <Card className="grid gap-y-5" key={id}>
-            <Skeleton className="h-6 bg-muted/20" />
-            <Skeleton className="h-32 bg-muted/20" />
-            <Skeleton className="h-62 bg-muted/20" />
+          <Card key={id}>
+            <CardContent className="grid gap-y-5">
+              <Skeleton className="h-6 bg-muted/20" />
+              <Skeleton className="h-32 bg-muted/20" />
+              <Skeleton className="h-64 bg-muted/20" />
+            </CardContent>
           </Card>
         ))}
       </div>

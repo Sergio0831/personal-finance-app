@@ -35,7 +35,6 @@ builder.queryType({
         return transactions;
       },
     }),
-
     recentTransactions: t.prismaField({
       type: [Transaction],
       nullable: false,

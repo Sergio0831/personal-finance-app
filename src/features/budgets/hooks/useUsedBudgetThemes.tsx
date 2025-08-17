@@ -5,8 +5,7 @@ import {
 import { useUsedThemes } from '@/hooks/useUsedThemes';
 
 export function useUsedBudgetThemes(): string[] {
-  return useUsedThemes<GetAllBudgetsQuery>(
-    GetAllBudgetsDocument,
-    (data) => data?.budgets.map((budget) => budget.theme) ?? []
+  return useUsedThemes<GetAllBudgetsQuery>(GetAllBudgetsDocument, (data) =>
+    (data?.budgets ?? []).map((budget) => budget.theme)
   );
 }

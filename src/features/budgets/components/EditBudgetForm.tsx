@@ -18,19 +18,21 @@ import { Category, useUpdateBudgetMutation } from '@/graphql/generated/output';
 import { useUsedBudgetThemes } from '../hooks/useUsedBudgetThemes';
 import { UpdateBudgetSchema, type UpdateBudgetSchemaType } from '../schemas';
 
+type EditBudgetFormProps = {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  id: string;
+  category: Category;
+  maximum: number;
+  theme: string;
+};
+
 const EditBudgetForm = ({
   setIsOpen,
   id,
   category,
   maximum,
   theme,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  id: string;
-  category: string;
-  maximum: number;
-  theme: string;
-}) => {
+}: EditBudgetFormProps) => {
   const [updateBudgetMutation, { loading }] = useUpdateBudgetMutation();
 
   const usedTheme = useUsedBudgetThemes().filter((t) => t !== theme);
@@ -42,7 +44,7 @@ const EditBudgetForm = ({
     defaultValues: {
       id,
       input: {
-        category: category as Category,
+        category,
         maximum,
         theme,
       },

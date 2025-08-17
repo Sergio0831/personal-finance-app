@@ -11,17 +11,19 @@ import {
 } from '@/graphql/generated/output';
 import EditBudgetForm from './EditBudgetForm';
 
+type BudgetActionsProps = {
+  id: string;
+  category: Category;
+  maximum: number;
+  theme: string;
+};
+
 const BudgetActions = ({
   id,
   category,
   maximum,
   theme,
-}: {
-  id: string;
-  category: Category;
-  maximum: number;
-  theme: string;
-}) => {
+}: BudgetActionsProps) => {
   const [isBudgetEditOpen, setIsEditBudgetOpen] = useState(false);
   const [isDeleteBudgetOpen, setIsDeleteBudgetOpen] = useState(false);
 
@@ -47,7 +49,6 @@ const BudgetActions = ({
         setIsOpen={setIsEditBudgetOpen}
         title="Edit Budget"
       >
-        <div>Edit Budget Form</div>
         <EditBudgetForm
           category={category}
           id={id}
@@ -80,8 +81,14 @@ const BudgetActions = ({
       <OptionsMenu
         deleteLabel="Delete Budget"
         editLabel="Edit Budget"
-        onDelete={() => setIsDeleteBudgetOpen(true)}
-        onEdit={() => setIsEditBudgetOpen(true)}
+        onDelete={() => {
+          setIsDeleteBudgetOpen(true);
+          setIsEditBudgetOpen(false);
+        }}
+        onEdit={() => {
+          setIsEditBudgetOpen(true);
+          setIsDeleteBudgetOpen(false);
+        }}
       />
     </>
   );

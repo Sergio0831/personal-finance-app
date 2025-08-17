@@ -1,9 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { Fragment } from 'react';
-import { CaretRight } from '@/assets/icons';
+import { ViewAllLink } from '@/components/custom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
   DataList,
@@ -39,13 +38,7 @@ const LatestSpending = ({
       <CardHeader>
         <div className="flex w-full items-center justify-between">
           <h3 className="text-preset-3">{title}</h3>
-          <Link
-            className="flex items-center gap-x-3 text-muted text-preset-4 transition-colors hover:text-foreground focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-ring/60"
-            href={href}
-          >
-            See All
-            <CaretRight className="size-3" />
-          </Link>
+          <ViewAllLink href={href} label="See All" />
         </div>
       </CardHeader>
       <CardContent>

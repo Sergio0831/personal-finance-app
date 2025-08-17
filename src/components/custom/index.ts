@@ -6,3 +6,4 @@ export { default as Progress } from './Progress';
 export { default as Modal } from './ResponsiveModal';
 export { default as SelectWithLabel } from './SelectWithLabel';
 export { default as ThemeSelectWithLabel } from './ThemeSelectWithLabel';
+export { default as ViewAllLink } from './ViewAllLink';

@@ -1,7 +1,9 @@
-export function formatAmount(amount: number): string {
+export function formatAmount(amount: number, showDecimals = true): string {
   const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
+    minimumFractionDigits: showDecimals ? 2 : 0,
+    maximumFractionDigits: 2,
   }).format(Math.abs(amount));
 
   return formatted;

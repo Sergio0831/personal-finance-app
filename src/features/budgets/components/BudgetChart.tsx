@@ -107,14 +107,14 @@ const BudgetChart = ({ budgets }: BudgetChartProps) => {
                         x={viewBox.cx}
                         y={viewBox.cy}
                       >
-                        {formatAmount(totalSpent)}
+                        {formatAmount(totalSpent, false)}
                       </tspan>
                       <tspan
                         className="fill-muted-foreground"
                         x={viewBox.cx}
                         y={(viewBox.cy || 0) + 24}
                       >
-                        of {formatAmount(totalLimit)} limit
+                        of {formatAmount(totalLimit, false)} limit
                       </tspan>
                     </text>
                   );

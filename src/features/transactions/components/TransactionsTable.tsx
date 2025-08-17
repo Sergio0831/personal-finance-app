@@ -11,7 +11,12 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useState } from 'react';
-
+import {
+  TableFilter,
+  TableFilterByCategory,
+  TablePagination,
+  TableSorting,
+} from '@/components/table';
 import {
   Card,
   CardContent,
@@ -19,10 +24,6 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
-import TableFilter from '../../../components/table/TableFilter';
-import TableFilterByCategory from '../../../components/table/TableFilterByCategory';
-import TablePagination from '../../../components/table/TablePagination';
-import TableSorting from '../../../components/table/TableSorting';
 import type { Transaction } from './Columns';
 import TransactionTableSkeleton from './TransactionTableSkeleton';
 
@@ -57,7 +58,7 @@ const TransactionsTable = ({
   });
 
   return (
-    <Card className="mb-13 grid w-full gap-y-6 overflow-x-auto sm:mb-18 md:mb-0">
+    <Card className="grid w-full gap-y-6 overflow-x-auto">
       {isLoading ? (
         <TransactionTableSkeleton />
       ) : (

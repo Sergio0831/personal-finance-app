@@ -242,6 +242,11 @@ export type GetAllBudgetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAllBudgetsQuery = { __typename?: 'Query', budgets: Array<{ __typename?: 'Budget', id: string, category: Category, maximum: number, theme: string, lastTransactions: Array<{ __typename?: 'LastTransaction', id: string, avatar: string, name: string, amount: number, date: any }> }> };
 
+export type GetOverviewQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOverviewQuery = { __typename?: 'Query', pots: Array<{ __typename?: 'Pot', id: string, name: string, total: number, theme: string }>, recentTransactions: Array<{ __typename?: 'Transaction', id: string, avatar: string, name: string, amount: number, date: any }>, budgets: Array<{ __typename?: 'Budget', id: string, category: Category, maximum: number, theme: string, lastTransactions: Array<{ __typename?: 'LastTransaction', id: string, avatar: string, name: string, amount: number, date: any }> }>, recurringBills: { __typename?: 'RecurringBills', paidBills: { __typename?: 'AmountSummary', total: number }, dueSoon: { __typename?: 'AmountSummary', total: number }, totalUpcoming: { __typename?: 'AmountSummary', total: number } } };
+
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -580,6 +585,79 @@ export type GetAllBudgetsQueryHookResult = ReturnType<typeof useGetAllBudgetsQue
 export type GetAllBudgetsLazyQueryHookResult = ReturnType<typeof useGetAllBudgetsLazyQuery>;
 export type GetAllBudgetsSuspenseQueryHookResult = ReturnType<typeof useGetAllBudgetsSuspenseQuery>;
 export type GetAllBudgetsQueryResult = Apollo.QueryResult<GetAllBudgetsQuery, GetAllBudgetsQueryVariables>;
+export const GetOverviewDocument = gql`
+    query GetOverview {
+  pots {
+    id
+    name
+    total
+    theme
+  }
+  recentTransactions {
+    id
+    avatar
+    name
+    amount
+    date
+  }
+  budgets {
+    id
+    category
+    maximum
+    theme
+    lastTransactions {
+      id
+      avatar
+      name
+      amount
+      date
+    }
+  }
+  recurringBills {
+    paidBills {
+      total
+    }
+    dueSoon {
+      total
+    }
+    totalUpcoming {
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOverviewQuery__
+ *
+ * To run a query within a React component, call `useGetOverviewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOverviewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOverviewQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetOverviewQuery(baseOptions?: Apollo.QueryHookOptions<GetOverviewQuery, GetOverviewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOverviewQuery, GetOverviewQueryVariables>(GetOverviewDocument, options);
+      }
+export function useGetOverviewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOverviewQuery, GetOverviewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOverviewQuery, GetOverviewQueryVariables>(GetOverviewDocument, options);
+        }
+export function useGetOverviewSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOverviewQuery, GetOverviewQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOverviewQuery, GetOverviewQueryVariables>(GetOverviewDocument, options);
+        }
+export type GetOverviewQueryHookResult = ReturnType<typeof useGetOverviewQuery>;
+export type GetOverviewLazyQueryHookResult = ReturnType<typeof useGetOverviewLazyQuery>;
+export type GetOverviewSuspenseQueryHookResult = ReturnType<typeof useGetOverviewSuspenseQuery>;
+export type GetOverviewQueryResult = Apollo.QueryResult<GetOverviewQuery, GetOverviewQueryVariables>;
 export const GetAllPotsDocument = gql`
     query GetAllPots {
   pots {

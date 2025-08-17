@@ -73,6 +73,8 @@
 	--font-primary: var(--font-public-sans);
 
 	--color-white: var(--white);
+	--color-yellow: var(--yellow);
+	--color-cyan: var(--cyan);
 	--color-beige-500: var(--beige-500);
 	--color-gray-900: var(--gray-900);
 	--color-gray-500: var(--gray-500);
@@ -136,3 +138,5 @@
 		@apply text-foreground bg-background font-primary h-dvh;
 	}
 }
+
+

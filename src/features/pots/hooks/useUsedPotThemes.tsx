@@ -7,6 +7,6 @@ import { useUsedThemes } from '@/hooks/useUsedThemes';
 export function useUsedPotThemes(): string[] {
   return useUsedThemes<GetAllPotsQuery>(
     GetAllPotsDocument,
-    (data) => data?.pots.map((pot) => pot.theme) ?? []
+    (data) => data?.pots?.map((pot) => pot.theme) ?? []
   );
 }
