@@ -5,7 +5,7 @@ import { Progress } from '@/components/custom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import type { Budget as BudgetType } from '@/graphql/generated/output';
 import { formatAmount } from '@/lib/format';
-import { calculateSpent } from '../utils';
+import calculateSpent from '../utils';
 import BudgetActions from './BudgetActions';
 import BudgetSummary from './BudgetSummary';
 import LatestSpending from './LatestSpending';

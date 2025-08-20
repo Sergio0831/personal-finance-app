@@ -29,10 +29,6 @@ const RecurringBillsView = () => {
     );
   }
 
-  if (loading) {
-    return <RecurringBillsSkeleton />;
-  }
-
   const recurringBills = data?.recurringBills;
 
   return (

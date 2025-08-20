@@ -9,7 +9,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { formatAmount } from '@/lib/format';
-import { calculateSpent } from '../utils';
+import calculateSpent from '../utils';
 import type { BudgetProps } from './Budget';
 
 type BudgetChartProps = {

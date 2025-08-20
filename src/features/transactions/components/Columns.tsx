@@ -1,8 +1,7 @@
 'use client';
 
 import type { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { Category } from '@/generated/prisma';
 import { cn } from '@/lib/clsx';
 import { getTransactionInfo } from '../utils/getTransactionInfo';
@@ -25,16 +24,8 @@ export const columns: ColumnDef<Transaction>[] = [
       return (
         <div className="flex items-center gap-4 @xl:px-4">
           <Avatar>
-            <Image
-              alt={row.original.name}
-              height={40}
-              src={
-                row.original.avatar
-                  ? row.original.avatar
-                  : '/images/avatars/bytewise.jpg'
-              }
-              width={40}
-            />
+            <AvatarImage alt={row.original.name} src={row.original.avatar} />
+            <AvatarFallback>US</AvatarFallback>
           </Avatar>
           <div>
             <span className="font-bold text-preset-4">{row.original.name}</span>

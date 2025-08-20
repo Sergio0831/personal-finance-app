@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/data-list';
 import { Separator } from '@/components/ui/separator';
 import { formatAmount } from '@/lib/format';
-import { calculateSpent } from '../utils';
+import calculateSpent from '../utils';
 import type { BudgetProps } from './Budget';
 
 type SpendingSummaryProps = {

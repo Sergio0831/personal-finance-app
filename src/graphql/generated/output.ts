@@ -245,7 +245,7 @@ export type GetAllBudgetsQuery = { __typename?: 'Query', budgets: Array<{ __type
 export type GetOverviewQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetOverviewQuery = { __typename?: 'Query', pots: Array<{ __typename?: 'Pot', id: string, name: string, total: number, theme: string }>, recentTransactions: Array<{ __typename?: 'Transaction', id: string, avatar: string, name: string, amount: number, date: any }>, budgets: Array<{ __typename?: 'Budget', id: string, category: Category, maximum: number, theme: string, lastTransactions: Array<{ __typename?: 'LastTransaction', id: string, avatar: string, name: string, amount: number, date: any }> }>, recurringBills: { __typename?: 'RecurringBills', paidBills: { __typename?: 'AmountSummary', total: number }, dueSoon: { __typename?: 'AmountSummary', total: number }, totalUpcoming: { __typename?: 'AmountSummary', total: number } } };
+export type GetOverviewQuery = { __typename?: 'Query', pots: Array<{ __typename?: 'Pot', id: string, name: string, total: number, theme: string }>, transactions: Array<{ __typename?: 'Transaction', amount: number }>, recentTransactions: Array<{ __typename?: 'Transaction', id: string, avatar: string, name: string, amount: number, date: any }>, budgets: Array<{ __typename?: 'Budget', id: string, category: Category, maximum: number, theme: string, lastTransactions: Array<{ __typename?: 'LastTransaction', id: string, avatar: string, name: string, amount: number, date: any }> }>, recurringBills: { __typename?: 'RecurringBills', paidBills: { __typename?: 'AmountSummary', total: number }, dueSoon: { __typename?: 'AmountSummary', total: number }, totalUpcoming: { __typename?: 'AmountSummary', total: number } } };
 
 export type GetAllPotsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -592,6 +592,9 @@ export const GetOverviewDocument = gql`
     name
     total
     theme
+  }
+  transactions {
+    amount
   }
   recentTransactions {
     id

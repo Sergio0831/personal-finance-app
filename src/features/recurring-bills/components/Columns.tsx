@@ -1,9 +1,8 @@
 'use client';
 
 import type { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
 import { IconBillDue, IconBillPaid } from '@/assets/icons';
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import { cn } from '@/lib/clsx';
 import { formatAmount } from '@/lib/format';
@@ -29,16 +28,8 @@ export const columns: ColumnDef<RecurringBill>[] = [
         <div>
           <div className="@max-lg:mb-2 flex items-center gap-4 @xl:px-4">
             <Avatar>
-              <Image
-                alt={row.original.name}
-                height={40}
-                src={
-                  row.original.avatar
-                    ? row.original.avatar
-                    : '/images/avatars/bytewise.jpg'
-                }
-                width={40}
-              />
+              <AvatarImage alt={row.original.name} src={row.original.avatar} />
+              <AvatarFallback>US</AvatarFallback>
             </Avatar>
             <span className="font-bold text-preset-4">{row.original.name}</span>
           </div>

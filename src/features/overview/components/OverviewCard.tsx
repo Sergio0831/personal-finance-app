@@ -1,13 +1,14 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { ViewAllLink } from '@/components/custom';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/clsx';
 
 type OverviewCardProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   title: string;
-  href: string;
+  href?: string;
   className?: string;
   contentClassName?: string;
 };
@@ -20,12 +21,12 @@ const OverviewCard = ({
   contentClassName,
 }: OverviewCardProps) => {
   return (
-    <Card className={cn('', className)}>
+    <Card className={cn(className)}>
       <CardTitle className="flex justify-between">
         <h2 className="text-preset-2">{title}</h2>
-        <ViewAllLink href={href} />
+        {href && <ViewAllLink href={href} />}
       </CardTitle>
-      <CardContent className={cn('', contentClassName)}>{children}</CardContent>
+      <CardContent className={cn(contentClassName)}>{children}</CardContent>
     </Card>
   );
 };

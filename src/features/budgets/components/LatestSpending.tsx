@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { Fragment } from 'react';
 import { ViewAllLink } from '@/components/custom';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
   DataList,
@@ -50,13 +50,10 @@ const LatestSpending = ({
               <Fragment key={id}>
                 <DataListItem>
                   <DataListLabel className="flex items-center gap-x-4">
-                    <Image
-                      alt={name}
-                      className="rounded-full"
-                      height={32}
-                      src={avatar}
-                      width={32}
-                    />
+                    <Avatar className="size-8">
+                      <AvatarImage alt={name} src={avatar} />
+                      <AvatarFallback>US</AvatarFallback>
+                    </Avatar>
                     <h4 className="font-bold text-foreground text-preset-5">
                       {name}
                     </h4>

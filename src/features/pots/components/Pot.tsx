@@ -16,7 +16,10 @@ import PotActions from './PotActions';
 import PotHeader from './PotHeader';
 import PotProgress from './PotProgress';
 
-type PotProps = Pick<PotType, 'id' | 'name' | 'theme' | 'target' | 'total'>;
+export type PotProps = Pick<
+  PotType,
+  'id' | 'name' | 'theme' | 'target' | 'total'
+>;
 
 const Pot = ({ id, name, theme, target, total }: PotProps) => {
   const [isAddMoneyOpen, setIsAddMoneyOpen] = useState(false);

@@ -8,6 +8,9 @@ export const GET_OVERVIEW_QUERY = gql`
             total
             theme
         }
+        transactions {
+            amount
+        }
         recentTransactions {
             id
             avatar
