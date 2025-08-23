@@ -13,14 +13,16 @@ const PotsView = () => {
   }
 
   if (error) {
-    <EmptyState
-      description="There was a problem fetching your pots. Please try again later."
-      error={true}
-      title="Error Loading Pots"
-    />;
+    return (
+      <EmptyState
+        description="There was a problem fetching your pots. Please try again later."
+        error
+        title="Error Loading Pots"
+      />
+    );
   }
 
-  if (!data || data?.pots.length === 0) {
+  if (!data?.pots.length) {
     return (
       <EmptyState
         description="Your pots will appear here once you create them."

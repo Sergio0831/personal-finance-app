@@ -14,14 +14,16 @@ const TransactionsView = () => {
   }
 
   if (error) {
-    <EmptyState
-      description="There was a problem fetching your transactions. Please try again later."
-      error={true}
-      title="Error Loading Transactions"
-    />;
+    return (
+      <EmptyState
+        description="There was a problem fetching your transactions. Please try again later."
+        error
+        title="Error Loading Transactions"
+      />
+    );
   }
 
-  if (!data || data?.transactions.length === 0) {
+  if (!data?.transactions.length) {
     return (
       <EmptyState
         description="Your transactions will appear here once you create them."

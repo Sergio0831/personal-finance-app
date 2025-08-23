@@ -12,7 +12,11 @@ const EmptyState = ({
   error = false,
 }: EmptyStateProps) => {
   return (
-    <main className="grid gap-y-4">
+    <section
+      aria-live={error ? 'assertive' : 'polite'}
+      className="grid gap-y-4"
+      role={error ? 'alert' : undefined}
+    >
       <div>
         <h2 className="mb-2 text-preset-2">{title}</h2>
         <p className="text-muted text-preset-4">{description}</p>
@@ -27,7 +31,7 @@ const EmptyState = ({
           Retry
         </Button>
       )}
-    </main>
+    </section>
   );
 };
 

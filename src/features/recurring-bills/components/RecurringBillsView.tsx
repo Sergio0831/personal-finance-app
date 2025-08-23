@@ -23,13 +23,14 @@ const RecurringBillsView = () => {
   }
 
   if (error) {
-    <EmptyState
-      description="There was a problem fetching your recurring bills. Please try again later."
-      error={true}
-      title="Error Loading Recurring Bills"
-    />;
+    return (
+      <EmptyState
+        description="There was a problem fetching your recurring bills. Please try again later."
+        error={true}
+        title="Error Loading Recurring Bills"
+      />
+    );
   }
-
   if (!data?.recurringBills) {
     return (
       <EmptyState

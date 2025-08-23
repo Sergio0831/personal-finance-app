@@ -18,13 +18,14 @@ const OverviewMain = () => {
   }
 
   if (error) {
-    <EmptyState
-      description="There was a problem fetching your data. Please try again later."
-      error={true}
-      title="Error Loading Data"
-    />;
+    return (
+      <EmptyState
+        description="There was a problem fetching your data. Please try again later."
+        error
+        title="Error Loading Data"
+      />
+    );
   }
-
   if (!data) {
     return (
       <EmptyState

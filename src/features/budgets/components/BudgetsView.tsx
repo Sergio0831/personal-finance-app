@@ -23,7 +23,7 @@ const BudgetsView = () => {
     />;
   }
 
-  if (!data || data?.budgets.length === 0) {
+  if (!data?.budgets.length) {
     return (
       <EmptyState
         description="Your budgets will appear here once you create them."
