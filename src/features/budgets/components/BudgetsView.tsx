@@ -1,7 +1,7 @@
 'use client';
 
+import { EmptyState } from '@/components/custom';
 import { Card, CardContent } from '@/components/ui/card';
-
 import { useGetAllBudgetsQuery } from '@/graphql/generated/output';
 import Budget from './Budget';
 import BudgetChart from './BudgetChart';
@@ -9,13 +9,30 @@ import BudgetsSkeleton from './BudgetsSkeleton';
 import SpendingSummary from './SpendingSummary';
 
 const BudgetsView = () => {
-  const { data, loading } = useGetAllBudgetsQuery();
-
-  const budgets = data?.budgets;
+  const { data, loading, error } = useGetAllBudgetsQuery();
 
   if (loading) {
     return <BudgetsSkeleton />;
   }
+
+  if (error) {
+    <EmptyState
+      description="There was a problem fetching your budgets. Please try again later."
+      error={true}
+      title="Error Loading Budgets"
+    />;
+  }
+
+  if (!data || data?.budgets.length === 0) {
+    return (
+      <EmptyState
+        description="Your budgets will appear here once you create them."
+        title="No Budgets Yet"
+      />
+    );
+  }
+
+  const budgets = data.budgets;
 
   return (
     <main className="grid @min-3xl:grid-cols-12 gap-6">

@@ -3,9 +3,9 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 const RecurringBillsSkeleton = () => {
   return (
-    <main className="flex @max-3xl:flex-col gap-6">
+    <main className="grid @min-3xl:grid-cols-12 gap-6">
       {/* Left panel */}
-      <div className="flex basis-2/5 gap-4 max-sm:flex-col md:flex-col">
+      <div className="@min-3xl:col-span-4 flex gap-4 self-start max-sm:flex-col md:flex-col">
         {/* Total Bills Card */}
         <div className="w-full rounded-xl bg-muted/20 p-6 max-sm:flex max-sm:items-center max-sm:gap-x-5">
           <Skeleton className="h-10 w-10 rounded-full bg-gray-300 sm:mb-8" />
@@ -32,8 +32,8 @@ const RecurringBillsSkeleton = () => {
       </div>
 
       {/* Table skeleton */}
-      <Card className="w-full">
-        <div className="w-full space-y-3">
+      <Card className="@min-3xl:col-span-8">
+        <div className="space-y-3">
           {['1', '2', '3', '4', '5', '6', '7', '8'].map((id) => (
             <div
               className="flex h-20 items-center justify-between rounded-md bg-muted/20 px-4 py-3"

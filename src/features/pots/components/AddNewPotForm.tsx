@@ -53,7 +53,9 @@ const AddNewPotForm = ({
         onCompleted: () => {
           form.reset();
           setIsOpen(false);
-          toast.success(`Pot '${formValues.input.name}' created successfully!`);
+          toast.success(
+            `Pot \u2018${formValues.input.name}\u2019 created successfully!`
+          );
         },
         refetchQueries: ['GetAllPots'],
       });

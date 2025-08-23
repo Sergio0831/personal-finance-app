@@ -59,7 +59,9 @@ const EditPotForm = ({
         },
         onCompleted: () => {
           setIsOpen(false);
-          toast.success(`Pot '${formValues.input.name}' updated successfully!`);
+          toast.success(
+            `Pot \u2018${formValues.input.name}\u2019 updated successfully!`
+          );
         },
         refetchQueries: ['GetAllPots'],
       });

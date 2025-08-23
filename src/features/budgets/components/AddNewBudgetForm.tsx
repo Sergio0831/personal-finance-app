@@ -95,7 +95,7 @@ const AddNewBudgetForm = ({
           usedThemeValues={usedTheme}
         />
         <Button className="w-full" disabled={loading} type="submit">
-          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Add Pot'}
+          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Add Budget'}
         </Button>
       </form>
     </Form>

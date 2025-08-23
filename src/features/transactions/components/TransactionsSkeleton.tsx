@@ -1,0 +1,24 @@
+import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const TransactionsSkeleton = () => {
+  return (
+    <Card className="grid w-full gap-y-6">
+      <div className="space-y-3">
+        {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].map((id) => (
+          <div
+            className="flex h-20 items-center justify-between rounded-md bg-muted/20 px-4 py-3"
+            key={`skeleton-row-${id}`}
+          >
+            <Skeleton className="h-10 w-1/3 bg-gray-300" />
+            <Skeleton className="h-10 w-1/5 bg-gray-300" />
+            <Skeleton className="h-10 w-1/6 bg-gray-300" />
+            <Skeleton className="h-10 w-1/6 bg-gray-300" />
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+};
+
+export default TransactionsSkeleton;

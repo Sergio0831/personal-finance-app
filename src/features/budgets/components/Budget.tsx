@@ -38,9 +38,10 @@ const Budget = ({
     <Card className="grid gap-y-5">
       <CardHeader className="items-center justify-between space-y-0">
         <div className="flex items-center gap-x-4">
-          <div
+          <span
             className="size-4 rounded-full"
             style={{ backgroundColor: theme }}
+            title={`Theme color for ${category}`}
           />
           <h2 className="text-preset-2">{category}</h2>
         </div>

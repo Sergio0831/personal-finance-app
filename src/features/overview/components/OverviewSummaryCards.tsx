@@ -17,12 +17,7 @@ const OverviewSummaryCards = ({
   overviewCards,
 }: OverviewSummaryCardsProps) => {
   return (
-    <div
-      className={cn(
-        'col-span-12 mb-8 grid @min-2xl:grid-flow-col gap-6',
-        className
-      )}
-    >
+    <div className={cn('grid gap-6', className)}>
       {overviewCards.map((card, index) => (
         <Card
           className={cn('sm:p-6', index === 0 && 'bg-foreground text-white')}

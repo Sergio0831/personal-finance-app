@@ -1,26 +1,37 @@
 'use client';
 
+import { EmptyState } from '@/components/custom';
 import { useGetOverviewQuery } from '@/graphql/generated/output';
 import getOverviewTotals from '../utils';
 import OverviewBills from './OverviewBills';
 import OverviewBudgets from './OverviewBudgets';
 import OverviewPots from './OverviewPots';
+import OverviewSkeleton from './OverviewSkeleton';
 import OverviewSummaryCards from './OverviewSummaryCards';
 import OverviewTransactions from './OverviewTransactions';
 
 const OverviewMain = () => {
   const { data, loading, error } = useGetOverviewQuery();
 
-  if (error) {
-    return <div>Error loading overview data</div>;
+  if (loading) {
+    return <OverviewSkeleton />;
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (error) {
+    <EmptyState
+      description="There was a problem fetching your data. Please try again later."
+      error={true}
+      title="Error Loading Data"
+    />;
   }
 
   if (!data) {
-    return <div>No data</div>;
+    return (
+      <EmptyState
+        description="Your data will appear here once you create them."
+        title="No Data Yet"
+      />
+    );
   }
 
   const { transactions, recentTransactions, recurringBills, budgets, pots } =

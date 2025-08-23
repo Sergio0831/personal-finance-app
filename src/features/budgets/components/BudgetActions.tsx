@@ -33,7 +33,7 @@ const BudgetActions = ({
     },
     onCompleted: () => {
       setIsDeleteBudgetOpen(false);
-      // toast.success(`Budget '${category}' deleted successfully!`);
+      toast.success(`Budget \u2018${category}\u2019 deleted successfully!`);
     },
     refetchQueries: ['GetAllBudgets'],
     onError: (error) => {
@@ -66,6 +66,7 @@ const BudgetActions = ({
         <Button
           disabled={loading}
           onClick={() => deleteBudgetMutation()}
+          type="button"
           variant="destructive"
         >
           Yes, Confirm Deletion
@@ -73,6 +74,7 @@ const BudgetActions = ({
         <Button
           className="h-min w-full p-0 font-normal text-muted hover:text-foreground"
           onClick={() => setIsDeleteBudgetOpen(false)}
+          type="button"
           variant="ghost"
         >
           No, Go Back

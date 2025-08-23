@@ -1,4 +1,5 @@
 export { default as AmountInputWithLabel } from './AmountInputWithLabel';
+export { default as EmptyState } from './EmptyState';
 export { default as InputWithLabel } from './InputWithLabel';
 export { default as MobileSelectTrigger } from './MobileSelectTrigger';
 export { default as OptionsMenu } from './OptionsMenu';

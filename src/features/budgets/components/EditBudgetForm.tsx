@@ -64,7 +64,7 @@ const EditBudgetForm = ({
         onCompleted: () => {
           setIsOpen(false);
           toast.success(
-            `Budget '${formValues.input.category}' updated successfully!`
+            `Budget \u2018${formValues.input.category}\u2019 updated successfully!`
           );
         },
         refetchQueries: ['GetAllBudgets'],

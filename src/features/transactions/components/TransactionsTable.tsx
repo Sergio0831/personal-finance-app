@@ -25,19 +25,13 @@ import {
 } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
 import type { Transaction } from './Columns';
-import TransactionTableSkeleton from './TransactionTableSkeleton';
 
 interface TransactionsTableProps {
   data: Transaction[];
   columns: ColumnDef<Transaction, unknown>[];
-  isLoading?: boolean;
 }
 
-const TransactionsTable = ({
-  columns,
-  data,
-  isLoading,
-}: TransactionsTableProps) => {
+const TransactionsTable = ({ columns, data }: TransactionsTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -59,25 +53,19 @@ const TransactionsTable = ({
 
   return (
     <Card className="grid w-full gap-y-6 overflow-x-auto">
-      {isLoading ? (
-        <TransactionTableSkeleton />
-      ) : (
-        <>
-          <CardHeader className="justify-between gap-x-6 gap-y-4 space-y-0 sm:items-end">
-            <TableFilter table={table} />
-            <div className="flex items-center justify-end gap-x-6">
-              <TableSorting table={table} />
-              <TableFilterByCategory table={table} />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <DataTable columns={columns} table={table} />
-          </CardContent>
-          <CardFooter className="h-16 items-end justify-between">
-            <TablePagination table={table} />
-          </CardFooter>
-        </>
-      )}
+      <CardHeader className="justify-between gap-x-6 gap-y-4 space-y-0 sm:items-end">
+        <TableFilter table={table} />
+        <div className="flex items-center justify-end gap-x-6">
+          <TableSorting table={table} />
+          <TableFilterByCategory table={table} />
+        </div>
+      </CardHeader>
+      <CardContent>
+        <DataTable columns={columns} table={table} />
+      </CardContent>
+      <CardFooter className="h-16 items-end justify-between">
+        <TablePagination table={table} />
+      </CardFooter>
     </Card>
   );
 };

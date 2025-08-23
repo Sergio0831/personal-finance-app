@@ -27,7 +27,7 @@ const PotActions = ({
     },
     onCompleted: () => {
       setIsDeletePotOpen(false);
-      toast.success(`Pot '${name}' deleted successfully!`);
+      toast.success(`Pot \u2018${name}\u2019 deleted successfully!`);
     },
     refetchQueries: ['GetAllPots'],
     onError: (error) => {
