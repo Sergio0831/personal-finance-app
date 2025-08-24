@@ -3,10 +3,7 @@ import { createYoga } from 'graphql-yoga';
 import { createContext } from '@/graphql/context';
 import { schema } from '@/graphql/schema';
 
-interface NextContext {
-  params: Record<string, string>;
-}
-const { handleRequest } = createYoga<NextContext>({
+const { handleRequest } = createYoga({
   schema,
   context: createContext,
   // While using Next.js file convention for routing, we need to configure Yoga to use the correct endpoint
@@ -18,8 +15,6 @@ const { handleRequest } = createYoga<NextContext>({
   fetchAPI: { Response },
 });
 
-export {
-  handleRequest as GET,
-  handleRequest as POST,
-  handleRequest as OPTIONS,
-};
+export const GET = (req: Request) => handleRequest(req, {});
+export const POST = (req: Request) => handleRequest(req, {});
+export const OPTIONS = (req: Request) => handleRequest(req, {});

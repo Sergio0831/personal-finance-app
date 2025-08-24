@@ -8,7 +8,7 @@ export type GraphQLContext = {
   user: User;
 };
 
-export async function createContext(): Promise<GraphQLContext> {
+export async function createContext() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
